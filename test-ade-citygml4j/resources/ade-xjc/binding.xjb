@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxb:bindings version="2.1" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <jaxb:bindings schemaLocation="CityGML-TestADE.xsd" node="/xs:schema">
+    	<jaxb:bindings generateIsSetMethod="true" underscoreBinding="asCharInWord"/>
+		<jaxb:bindings node="xs:element[@name='buildingUnit']">
+			<jaxb:factoryMethod name="BuildingUnitProperty"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="xs:element[@name='energyPerformanceCertification']">
+			<jaxb:factoryMethod name="EnergyPerformanceCertificationProperty"/>
+        </jaxb:bindings>
+        <jaxb:bindings node=".//xs:element[@name='boundedBy']">
+			<jaxb:property name="boundedBySurface" />
+		</jaxb:bindings>
+    </jaxb:bindings>
+    
+</jaxb:bindings>

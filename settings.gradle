@@ -1,0 +1,2 @@
+include 'test-ade-citydb'
+include 'test-ade-citygml4j'

@@ -1,0 +1,57 @@
+package org.citydb.ade.test.importer;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Types;
+
+import org.citydb.ade.importer.ADEImporter;
+import org.citydb.ade.importer.CityGMLImportHelper;
+import org.citydb.ade.importer.ForeignKeys;
+import org.citydb.ade.test.schema.ADETables;
+import org.citydb.citygml.importer.CityGMLImportException;
+import org.citydb.database.schema.mapping.AbstractObjectType;
+import org.citygml.ade.test.model.IndustrialBuilding;
+
+public class IndustrialBuildingImporter implements ADEImporter {
+	private final CityGMLImportHelper helper;
+	
+	private PreparedStatement ps;
+	private int batchCounter;
+	
+	public IndustrialBuildingImporter(Connection connection, CityGMLImportHelper helper, ImportManager manager) throws SQLException {
+		this.helper = helper;
+		
+		StringBuilder stmt = new StringBuilder("insert into ")
+				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETables.INDUSTRIALBUILDING))).append(" ")
+				.append("(id, remark) ")
+				.append("values (?, ?)");
+		ps = connection.prepareStatement(stmt.toString());
+	}
+	
+	public void doImport(IndustrialBuilding building, long objectId, AbstractObjectType<?> objectType, ForeignKeys foreignKeys) throws CityGMLImportException, SQLException {
+		ps.setLong(1, objectId);
+		
+		if (building.isSetRemark())
+			ps.setString(2, building.getRemark());
+		else
+			ps.setNull(2, Types.VARCHAR);
+		
+		ps.addBatch();
+		if (++batchCounter == helper.getDatabaseAdapter().getMaxBatchSize())
+			helper.executeBatch(objectType);
+	}
+	
+	@Override
+	public void executeBatch() throws CityGMLImportException, SQLException {
+		if (batchCounter > 0) {
+			ps.executeBatch();
+			batchCounter = 0;
+		}
+	}
+	
+	@Override
+	public void close() throws SQLException {
+		ps.close();
+	}
+}
