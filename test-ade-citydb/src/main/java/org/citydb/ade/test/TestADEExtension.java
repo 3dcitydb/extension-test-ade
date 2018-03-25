@@ -2,6 +2,7 @@ package org.citydb.ade.test;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.citydb.ImpExp;
@@ -37,7 +38,7 @@ public class TestADEExtension extends ADEExtension {
 
 	@Override
 	public List<ADEContext> getADEContexts() {
-		return Arrays.asList(new ADEContext[]{context});
+		return Collections.singletonList(context);
 	}
 
 	@Override
