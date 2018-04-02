@@ -1,5 +1,5 @@
 package org.citydb.ade.test.schema;
 
-public enum ADESequences {
+public enum ADESequence {
 	ENERGYPERFORMANC_SEQ;
 }

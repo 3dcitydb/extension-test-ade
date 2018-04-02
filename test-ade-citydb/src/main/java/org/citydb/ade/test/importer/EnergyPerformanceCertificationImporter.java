@@ -7,7 +7,7 @@ import java.sql.Types;
 
 import org.citydb.ade.importer.ADEImporter;
 import org.citydb.ade.importer.CityGMLImportHelper;
-import org.citydb.ade.test.schema.ADESequences;
+import org.citydb.ade.test.schema.ADESequence;
 import org.citydb.ade.test.schema.ADETable;
 import org.citydb.ade.test.schema.SchemaMapper;
 import org.citydb.citygml.importer.CityGMLImportException;
@@ -36,7 +36,7 @@ public class EnergyPerformanceCertificationImporter implements ADEImporter {
 	}
 	
 	public void doImport(EnergyPerformanceCertification energyCertification, long parentId) throws CityGMLImportException, SQLException {
-		long objectId = helper.getNextSequenceValue(schemaMapper.getSequenceName(ADESequences.ENERGYPERFORMANC_SEQ));		
+		long objectId = helper.getNextSequenceValue(schemaMapper.getSequenceName(ADESequence.ENERGYPERFORMANC_SEQ));
 		ps.setLong(1, objectId);
 		
 		if (parentId != 0)

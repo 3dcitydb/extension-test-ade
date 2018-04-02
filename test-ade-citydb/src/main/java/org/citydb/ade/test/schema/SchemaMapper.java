@@ -5,13 +5,13 @@ import java.util.Map.Entry;
 
 public class SchemaMapper {	
 	private EnumMap<ADETable, String> tableNames = new EnumMap<>(ADETable.class);
-	private EnumMap<ADESequences, String> sequenceNames = new EnumMap<>(ADESequences.class);
+	private EnumMap<ADESequence, String> sequenceNames = new EnumMap<>(ADESequence.class);
 
 	public void populateSchemaNames(String prefix) {
 		for (ADETable table : ADETable.values())
 			tableNames.put(table, prefix + "_" + table.toString().toLowerCase());
 
-		for (ADESequences sequence : ADESequences.values())
+		for (ADESequence sequence : ADESequence.values())
 			sequenceNames.put(sequence, prefix + "_" + sequence.toString().toLowerCase());
 	}
 
@@ -30,7 +30,7 @@ public class SchemaMapper {
 		return null;
 	}
 
-	public String getSequenceName(ADESequences sequence) {
+	public String getSequenceName(ADESequence sequence) {
 		return sequenceNames.get(sequence);
 	}
 
