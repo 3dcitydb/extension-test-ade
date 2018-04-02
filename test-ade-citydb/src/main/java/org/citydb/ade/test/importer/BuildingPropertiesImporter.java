@@ -9,7 +9,7 @@ import org.citydb.ade.importer.ADEImporter;
 import org.citydb.ade.importer.ADEPropertyCollection;
 import org.citydb.ade.importer.CityGMLImportHelper;
 import org.citydb.ade.importer.ForeignKeys;
-import org.citydb.ade.test.schema.ADETables;
+import org.citydb.ade.test.schema.ADETable;
 import org.citydb.ade.test.schema.SchemaMapper;
 import org.citydb.citygml.importer.CityGMLImportException;
 import org.citydb.citygml.importer.util.AttributeValueJoiner;
@@ -35,7 +35,7 @@ public class BuildingPropertiesImporter implements ADEImporter {
 		this.schemaMapper = manager.getSchemaMapper();
 
 		StringBuilder stmt = new StringBuilder("insert into ")
-				.append(helper.getTableNameWithSchema(schemaMapper.getTableName(ADETables.BUILDING))).append(" ")
+				.append(helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.BUILDING))).append(" ")
 				.append("(id, ownername, energyperforma_certification, energyperform_certificatio_1, floorarea, floorarea_uom) ")
 				.append("values (?, ?, ?, ?, ?, ?)");
 		ps = connection.prepareStatement(stmt.toString());
@@ -74,7 +74,7 @@ public class BuildingPropertiesImporter implements ADEImporter {
 
 		ps.addBatch();
 		if (++batchCounter == helper.getDatabaseAdapter().getMaxBatchSize())
-			helper.executeBatch(schemaMapper.getTableName(ADETables.BUILDING));
+			helper.executeBatch(schemaMapper.getTableName(ADETable.BUILDING));
 
 		if (properties.contains(BuildingUnitPropertyElement.class)) {
 			for (BuildingUnitPropertyElement propertyElement : properties.getAll(BuildingUnitPropertyElement.class)) {

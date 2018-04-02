@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import org.citydb.ade.importer.ADEImporter;
 import org.citydb.ade.importer.CityGMLImportHelper;
-import org.citydb.ade.test.schema.ADETables;
+import org.citydb.ade.test.schema.ADETable;
 import org.citydb.ade.test.schema.SchemaMapper;
 import org.citydb.citygml.importer.CityGMLImportException;
 
@@ -22,7 +22,7 @@ public class BuildingUnitToAddressImporter implements ADEImporter {
 		this.schemaMapper = manager.getSchemaMapper();
 		
 		StringBuilder stmt = new StringBuilder("insert into ")
-				.append(helper.getTableNameWithSchema(schemaMapper.getTableName(ADETables.BUILDINGU_TO_ADDRESS))).append(" ")
+				.append(helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.BUILDINGU_TO_ADDRESS))).append(" ")
 				.append("(buildingunit_id, address_id) ")
 				.append("values (?, ?)");
 		ps = connection.prepareStatement(stmt.toString());
@@ -34,7 +34,7 @@ public class BuildingUnitToAddressImporter implements ADEImporter {
 		
 		ps.addBatch();
 		if (++batchCounter == helper.getDatabaseAdapter().getMaxBatchSize())
-			helper.executeBatch(schemaMapper.getTableName(ADETables.BUILDINGU_TO_ADDRESS));
+			helper.executeBatch(schemaMapper.getTableName(ADETable.BUILDINGU_TO_ADDRESS));
 	}
 
 	@Override

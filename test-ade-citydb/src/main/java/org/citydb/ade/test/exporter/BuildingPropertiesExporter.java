@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import org.citydb.ade.exporter.ADEExporter;
 import org.citydb.ade.exporter.CityGMLExportHelper;
-import org.citydb.ade.test.schema.ADETables;
+import org.citydb.ade.test.schema.ADETable;
 import org.citydb.citygml.exporter.CityGMLExportException;
 import org.citydb.citygml.exporter.util.AttributeValueSplitter;
 import org.citydb.citygml.exporter.util.AttributeValueSplitter.SplitValue;
@@ -31,7 +31,7 @@ public class BuildingPropertiesExporter implements ADEExporter {
 
 	public BuildingPropertiesExporter(Connection connection, CityGMLExportHelper helper, ExportManager manager) throws CityGMLExportException, SQLException {
 		StringBuilder stmt = new StringBuilder("select ownername, floorarea, floorarea_uom, energyperforma_certification, energyperform_certificatio_1 from ")
-				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETables.BUILDING))).append(" ")
+				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.BUILDING))).append(" ")
 				.append("where id = ?");
 		ps = connection.prepareStatement(stmt.toString());
 

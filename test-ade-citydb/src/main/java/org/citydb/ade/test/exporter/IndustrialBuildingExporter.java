@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import org.citydb.ade.exporter.ADEExporter;
 import org.citydb.ade.exporter.CityGMLExportHelper;
-import org.citydb.ade.test.schema.ADETables;
+import org.citydb.ade.test.schema.ADETable;
 import org.citydb.citygml.exporter.CityGMLExportException;
 import org.citydb.database.schema.mapping.AbstractType;
 import org.citydb.query.filter.projection.ProjectionFilter;
@@ -18,7 +18,7 @@ public class IndustrialBuildingExporter implements ADEExporter {
 
 	public IndustrialBuildingExporter(Connection connection, CityGMLExportHelper helper, ExportManager manager) throws SQLException {
 		StringBuilder stmt = new StringBuilder("select remark from ")
-				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETables.INDUSTRIALBUILDING))).append(" ")
+				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.INDUSTRIALBUILDING))).append(" ")
 				.append("where id = ?");
 		ps = connection.prepareStatement(stmt.toString());
 	}

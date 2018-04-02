@@ -8,7 +8,7 @@ import java.sql.Types;
 import org.citydb.ade.importer.ADEImporter;
 import org.citydb.ade.importer.CityGMLImportHelper;
 import org.citydb.ade.importer.ForeignKeys;
-import org.citydb.ade.test.schema.ADETables;
+import org.citydb.ade.test.schema.ADETable;
 import org.citydb.citygml.importer.CityGMLImportException;
 import org.citydb.database.schema.mapping.AbstractObjectType;
 import org.citygml.ade.test.model.AbstractFacilities;
@@ -23,7 +23,7 @@ public class FacilitiesImporter implements ADEImporter {
 		this.helper = helper;
 		
 		StringBuilder stmt = new StringBuilder("insert into ")
-				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETables.FACILITIES))).append(" ")
+				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.FACILITIES))).append(" ")
 				.append("(id, objectclass_id, buildingunit_equippedwith_id, totalvalue, totalvalue_uom) ")
 				.append("values (?, ?, ?, ?, ?)");
 		ps = connection.prepareStatement(stmt.toString());

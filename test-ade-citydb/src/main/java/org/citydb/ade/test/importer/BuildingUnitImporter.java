@@ -8,7 +8,7 @@ import java.sql.Types;
 import org.citydb.ade.importer.ADEImporter;
 import org.citydb.ade.importer.CityGMLImportHelper;
 import org.citydb.ade.importer.ForeignKeys;
-import org.citydb.ade.test.schema.ADETables;
+import org.citydb.ade.test.schema.ADETable;
 import org.citydb.ade.test.schema.SchemaMapper;
 import org.citydb.config.geometry.GeometryObject;
 import org.citydb.citygml.importer.CityGMLImportException;
@@ -44,7 +44,7 @@ public class BuildingUnitImporter implements ADEImporter {
 		this.schemaMapper = manager.getSchemaMapper();
 
 		StringBuilder stmt = new StringBuilder("insert into ")
-				.append(helper.getTableNameWithSchema(schemaMapper.getTableName(ADETables.BUILDINGUNIT))).append(" ")
+				.append(helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.BUILDINGUNIT))).append(" ")
 				.append("(id, objectclass_id, building_buildingunit_id, buildingunit_parent_id, buildingunit_root_id, class, class_codespace, usage, usage_codespace, function, function_codespace, ")
 				.append("lod2multicurve, lod3multicurve, lod4multicurve, lod1multisurface_id, lod2multisurface_id, lod3multisurface_id, lod4multisurface_id, ")
 				.append("lod1solid_id, lod2solid_id, lod3solid_id, lod4solid_id) ")
@@ -231,7 +231,7 @@ public class BuildingUnitImporter implements ADEImporter {
 				} else {
 					String href = property.getHref();
 					if (href != null && href.length() != 0)
-						helper.propagateObjectXlink(schemaMapper.getTableName(ADETables.BUILDINGU_TO_ADDRESS), objectId, "buildingunit_id", href, "address_id");
+						helper.propagateObjectXlink(schemaMapper.getTableName(ADETable.BUILDINGU_TO_ADDRESS), objectId, "buildingunit_id", href, "address_id");
 				}
 			}
 		}

@@ -13,7 +13,7 @@ import java.util.Map.Entry;
 
 import org.citydb.ade.exporter.ADEExporter;
 import org.citydb.ade.exporter.CityGMLExportHelper;
-import org.citydb.ade.test.schema.ADETables;
+import org.citydb.ade.test.schema.ADETable;
 import org.citydb.config.geometry.GeometryObject;
 import org.citydb.citygml.exporter.CityGMLExportException;
 import org.citydb.citygml.exporter.database.content.GMLConverter;
@@ -63,7 +63,7 @@ public class BuildingUnitExporter implements ADEExporter {
 				.append(helper.getGeometryColumn("lod4multicurve")).append(", ")
 				.append("lod1multisurface_id, lod2multisurface_id, lod3multisurface_id, lod4multisurface_id, ")
 				.append("lod1solid_id, lod2solid_id, lod3solid_id, lod4solid_id from ")
-				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETables.BUILDINGUNIT))).append(" ")
+				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.BUILDINGUNIT))).append(" ")
 				.append("where building_buildingunit_id = ?");
 		ps = connection.prepareStatement(stmt.toString());
 
