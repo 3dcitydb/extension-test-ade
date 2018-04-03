@@ -76,7 +76,7 @@ public class ImportManager implements ADEImportManager {
 			if (importer != null)
 				importer.executeBatch();
 		} else
-			throw new CityGMLImportException("The table " + tableName + " not managed by the ADE extension for '" + adeExtension.getMetadata().getIdentifier() + "'.");
+			throw new CityGMLImportException("The table " + tableName + " is not managed by the ADE extension for '" + adeExtension.getMetadata().getIdentifier() + "'.");
 	}
 
 	@Override
