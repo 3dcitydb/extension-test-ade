@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import org.citydb.ade.importer.ADEImporter;
 import org.citydb.ade.importer.CityGMLImportHelper;
-import org.citydb.ade.test.schema.ADETables;
+import org.citydb.ade.test.schema.ADETable;
 import org.citydb.ade.test.schema.SchemaMapper;
 import org.citydb.citygml.importer.CityGMLImportException;
 import org.citydb.database.schema.mapping.AbstractObjectType;
@@ -27,7 +27,7 @@ public class OtherConstructionImporter implements ADEImporter {
 		this.schemaMapper = manager.getSchemaMapper();
 		
 		StringBuilder stmt = new StringBuilder("insert into ")
-				.append(helper.getTableNameWithSchema(schemaMapper.getTableName(ADETables.OTHERCONSTRUCTION))).append(" ")
+				.append(helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.OTHERCONSTRUCTION))).append(" ")
 				.append("(id) ")
 				.append("values (?)");
 		ps = connection.prepareStatement(stmt.toString());
@@ -52,7 +52,7 @@ public class OtherConstructionImporter implements ADEImporter {
 				} else {
 					String href = property.getHref();
 					if (href != null && href.length() != 0)
-						helper.propagateObjectXlink(schemaMapper.getTableName(ADETables.OTHER_TO_THEMA_SURFA), objectId, "otherconstruction_id", href, "thematic_surface_id");
+						helper.propagateObjectXlink(schemaMapper.getTableName(ADETable.OTHER_TO_THEMA_SURFA), objectId, "otherconstruction_id", href, "thematic_surface_id");
 				}
 			}
 		}

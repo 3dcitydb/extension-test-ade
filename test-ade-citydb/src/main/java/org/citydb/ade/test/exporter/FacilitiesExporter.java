@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import org.citydb.ade.exporter.ADEExporter;
 import org.citydb.ade.exporter.CityGMLExportHelper;
-import org.citydb.ade.test.schema.ADETables;
+import org.citydb.ade.test.schema.ADETable;
 import org.citydb.citygml.exporter.CityGMLExportException;
 import org.citygml.ade.test.model.AbstractBuildingUnit;
 import org.citygml.ade.test.model.AbstractFacilities;
@@ -23,7 +23,7 @@ public class FacilitiesExporter implements ADEExporter {
 		this.helper = helper;
 		
 		StringBuilder stmt = new StringBuilder("select id, objectclass_id, totalvalue, totalvalue_uom from ")
-				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETables.FACILITIES))).append(" ")
+				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.FACILITIES))).append(" ")
 				.append("where buildingunit_equippedwith_id = ?");
 		ps = connection.prepareStatement(stmt.toString());
 	}

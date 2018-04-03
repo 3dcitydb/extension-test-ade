@@ -12,7 +12,7 @@ import org.citydb.ade.test.importer.IndustrialBuildingRoofSurfaceImporter;
 import org.citydb.ade.test.importer.OtherConstructionImporter;
 import org.citydb.ade.test.importer.OtherConstructionToThematicSurfaceImporter;
 
-public enum ADETables {
+public enum ADETable {
 	INDUSTRIALBUILDING(IndustrialBuildingImporter.class),
 	INDUSTRIALBUILDINGPA(IndustrialBuildingPartImporter.class),
 	INDUSTRIALBUILDINGRO(IndustrialBuildingRoofSurfaceImporter.class),
@@ -26,7 +26,7 @@ public enum ADETables {
 	
 	private Class<? extends ADEImporter> importerClass;
 	
-	private ADETables(Class<? extends ADEImporter> importerClass) {
+	private ADETable(Class<? extends ADEImporter> importerClass) {
 		this.importerClass = importerClass;
 	}
 	

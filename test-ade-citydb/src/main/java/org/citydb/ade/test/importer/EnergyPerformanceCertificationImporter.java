@@ -7,8 +7,8 @@ import java.sql.Types;
 
 import org.citydb.ade.importer.ADEImporter;
 import org.citydb.ade.importer.CityGMLImportHelper;
-import org.citydb.ade.test.schema.ADESequences;
-import org.citydb.ade.test.schema.ADETables;
+import org.citydb.ade.test.schema.ADESequence;
+import org.citydb.ade.test.schema.ADETable;
 import org.citydb.ade.test.schema.SchemaMapper;
 import org.citydb.citygml.importer.CityGMLImportException;
 import org.citydb.citygml.importer.util.AttributeValueJoiner;
@@ -27,7 +27,7 @@ public class EnergyPerformanceCertificationImporter implements ADEImporter {
 		this.schemaMapper = manager.getSchemaMapper();
 		
 		StringBuilder stmt = new StringBuilder("insert into ")
-				.append(helper.getTableNameWithSchema(schemaMapper.getTableName(ADETables.ENERGYPERFORMANCECER))).append(" ")
+				.append(helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.ENERGYPERFORMANCECER))).append(" ")
 				.append("(id, buildingunit_energyperfor_id, certificationname, certificationid) ")
 				.append("values (?, ?, ?, ?)");
 		ps = connection.prepareStatement(stmt.toString());
@@ -36,7 +36,7 @@ public class EnergyPerformanceCertificationImporter implements ADEImporter {
 	}
 	
 	public void doImport(EnergyPerformanceCertification energyCertification, long parentId) throws CityGMLImportException, SQLException {
-		long objectId = helper.getNextSequenceValue(schemaMapper.getSequenceName(ADESequences.ENERGYPERFORMANC_SEQ));		
+		long objectId = helper.getNextSequenceValue(schemaMapper.getSequenceName(ADESequence.ENERGYPERFORMANC_SEQ));
 		ps.setLong(1, objectId);
 		
 		if (parentId != 0)
@@ -53,7 +53,7 @@ public class EnergyPerformanceCertificationImporter implements ADEImporter {
 		
 		ps.addBatch();
 		if (++batchCounter == helper.getDatabaseAdapter().getMaxBatchSize())
-			helper.executeBatch(schemaMapper.getTableName(ADETables.ENERGYPERFORMANCECER));
+			helper.executeBatch(schemaMapper.getTableName(ADETable.ENERGYPERFORMANCECER));
 	}
 
 

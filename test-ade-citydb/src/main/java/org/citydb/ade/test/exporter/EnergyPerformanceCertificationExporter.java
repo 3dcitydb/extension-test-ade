@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import org.citydb.ade.exporter.ADEExporter;
 import org.citydb.ade.exporter.CityGMLExportHelper;
-import org.citydb.ade.test.schema.ADETables;
+import org.citydb.ade.test.schema.ADETable;
 import org.citydb.citygml.exporter.CityGMLExportException;
 import org.citydb.citygml.exporter.util.AttributeValueSplitter;
 import org.citydb.citygml.exporter.util.AttributeValueSplitter.SplitValue;
@@ -22,7 +22,7 @@ public class EnergyPerformanceCertificationExporter implements ADEExporter {
 
 	public EnergyPerformanceCertificationExporter(Connection connection, CityGMLExportHelper helper, ExportManager manager) throws SQLException {
 		StringBuilder stmt = new StringBuilder("select certificationname, certificationid from ")
-				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETables.ENERGYPERFORMANCECER))).append(" ")
+				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.ENERGYPERFORMANCECER))).append(" ")
 				.append("where buildingunit_energyperfor_id = ?");
 		ps = connection.prepareStatement(stmt.toString());
 

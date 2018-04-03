@@ -8,7 +8,7 @@ import java.util.Map;
 import org.citydb.ade.exporter.ADEExportManager;
 import org.citydb.ade.exporter.ADEExporter;
 import org.citydb.ade.exporter.CityGMLExportHelper;
-import org.citydb.ade.test.schema.ADETables;
+import org.citydb.ade.test.schema.ADETable;
 import org.citydb.ade.test.schema.SchemaMapper;
 import org.citydb.citygml.exporter.CityGMLExportException;
 import org.citydb.database.schema.mapping.AbstractObjectType;
@@ -54,7 +54,7 @@ public class ExportManager implements ADEExportManager {
 	
 	@Override
 	public void exportGenericApplicationProperties(String adeHookTable, AbstractFeature parent, long parentId, FeatureType parentType, ProjectionFilter projectionFilter) throws CityGMLExportException, SQLException {
-		if (adeHookTable.equals(schemaMapper.getTableName(ADETables.BUILDING)) && parent instanceof AbstractBuilding)
+		if (adeHookTable.equals(schemaMapper.getTableName(ADETable.BUILDING)) && parent instanceof AbstractBuilding)
 			getExporter(BuildingPropertiesExporter.class).doExport((AbstractBuilding)parent, parentId, parentType, projectionFilter);
 	}
 
