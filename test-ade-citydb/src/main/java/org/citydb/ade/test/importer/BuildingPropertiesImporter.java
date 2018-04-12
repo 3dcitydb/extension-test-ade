@@ -47,7 +47,7 @@ public class BuildingPropertiesImporter implements ADEImporter {
 		ps.setLong(1, parentId);
 
 		OwnerNameProperty ownerName = properties.getFirst(OwnerNameProperty.class);
-		if (ownerName != null && ownerName.getValue() != null)
+		if (ownerName != null && ownerName.isSetValue())
 			ps.setString(2, ownerName.getValue());
 		else
 			ps.setNull(2, Types.VARCHAR);
