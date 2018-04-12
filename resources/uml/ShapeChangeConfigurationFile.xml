@@ -11,7 +11,7 @@
     <parameter name="inputFile" value="CityGML-TestADE.eap"/>
     <parameter name="appSchemaName" value="TestADE"/>
     <parameter name="checkingConstraints" value="disabled"/>
-	<parameter name="representTaggedValues" value="topLevel"/>
+	<parameter name="representTaggedValues" value="topLevel,relationType,maxOccurs"/>
     <xi:include href="http://shapechange.net/resources/config/StandardAliases.xml"/>
     <stereotypeAliases>
       <StereotypeAlias wellknown="" alias="Property"/>

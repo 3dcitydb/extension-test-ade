@@ -3,10 +3,34 @@
   <import namespace="http://www.opengis.net/citygml/building/2.0" schemaLocation="http://schemas.opengis.net/citygml/building/2.0/building.xsd"/>
   <import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <element name="ownerName" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding" type="string"/>
-  <element name="floorArea" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding" type="gml:AreaType"/>
-  <element name="energyPerformanceCertification" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding" type="TestADE:EnergyPerformanceCertificationPropertyType"/>
-  <element name="buildingUnit" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding" type="TestADE:_AbstractBuildingUnitPropertyType"/>
+  <element name="ownerName" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding" type="string">
+    <annotation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="maxOccurs">1</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <element name="floorArea" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding" type="gml:AreaType">
+    <annotation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="maxOccurs">1</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <element name="energyPerformanceCertification" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding" type="TestADE:EnergyPerformanceCertificationPropertyType">
+    <annotation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="maxOccurs">1</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <element name="buildingUnit" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding" type="TestADE:_AbstractBuildingUnitPropertyType">
+    <annotation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="relationType">composition</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
   <element name="BuildingUnit" substitutionGroup="TestADE:_AbstractBuildingUnit" type="TestADE:BuildingUnitType"/>
   <complexType name="BuildingUnitType">
     <complexContent>
@@ -156,7 +180,13 @@
     <complexContent>
       <extension base="core:AbstractSiteType">
         <sequence>
-          <element maxOccurs="unbounded" minOccurs="0" name="boundedBy" type="bldg:BoundarySurfacePropertyType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="boundedBy" type="bldg:BoundarySurfacePropertyType">
+            <annotation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="relationType">composition</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
         </sequence>
       </extension>
     </complexContent>
@@ -187,9 +217,27 @@
           <element minOccurs="0" name="lod2Solid" type="gml:SolidPropertyType"/>
           <element minOccurs="0" name="lod3Solid" type="gml:SolidPropertyType"/>
           <element minOccurs="0" name="lod4Solid" type="gml:SolidPropertyType"/>
-          <element maxOccurs="unbounded" minOccurs="0" name="address" type="core:AddressPropertyType"/>
-          <element maxOccurs="unbounded" minOccurs="0" name="equippedWith" type="TestADE:FacilitiesPropertyType"/>
-          <element maxOccurs="unbounded" minOccurs="0" name="consistsOf" type="TestADE:BuildingUnitPartPropertyType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="address" type="core:AddressPropertyType">
+            <annotation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="relationType">aggregation</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="equippedWith" type="TestADE:FacilitiesPropertyType">
+            <annotation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="relationType">composition</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="consistsOf" type="TestADE:BuildingUnitPartPropertyType">
+            <annotation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="relationType">composition</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
         </sequence>
       </extension>
     </complexContent>
