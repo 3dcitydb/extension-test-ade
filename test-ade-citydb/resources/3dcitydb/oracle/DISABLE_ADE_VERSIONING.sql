@@ -1,6 +1,6 @@
--- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2017-11-07 07:58:55 
+-- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2018-04-12 14:10:36 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 -- *********************************  Disable Versioning  *********************************** 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
-exec DBMS_WM.DisableVersioning('test_BuildingU_to_address,test_BuildingUnit,test_EnergyPerformanceCer,test_Facilities,test_IndustrialBuilding,test_IndustrialBuildingPa,test_IndustrialBuildingRo,test_OtherConstruction,test_Other_to_thema_surfa,test_building,',true, true);
+exec DBMS_WM.DisableVersioning('test_building,test_buildingu_to_address,test_buildingunit,test_energyperformancecer,test_facilities,test_industrialbuilding,test_industrialbuildingpa,test_industrialbuildingro,test_other_to_thema_surfa,test_otherconstruction,',true, true);
