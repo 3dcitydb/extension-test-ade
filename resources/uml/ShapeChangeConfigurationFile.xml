@@ -25,8 +25,13 @@
 
   <targets>
     <TargetXmlSchema class="de.interactive_instruments.ShapeChange.Target.XmlSchema.XmlSchema" mode="enabled">
-      <targetParameter name="outputDirectory" value="output"/>
-      <targetParameter name="defaultEncodingRule" value="citygml-ade"/>
+	  <targetParameter name="outputDirectory" value="output" />
+	  <targetParameter name="defaultEncodingRule" value="custom" />
+	  <rules>
+	    <EncodingRule extends="citygml-ade" name="custom">
+		  <rule name="rule-xsd-all-tagged-values" />
+		</EncodingRule>
+      </rules>
       <xi:include href="http://shapechange.net/resources/config/StandardRules.xml"/>
       <xi:include href="http://shapechange.net/resources/config/StandardNamespaces-v31.xml"/>
       <xi:include href="http://shapechange.net/resources/config/StandardMapEntries-v31.xml"/>
@@ -56,14 +61,5 @@
         <XsdMapEntry type="DoubleBetween0and1" xsdEncodingRules="iso19136_2007" xmlType="core:doubleBetween0and1" xmlPropertyType="core:doubleBetween0and1" xmlTypeType="complex" xmlTypeContent="simple"/>
       </xsdMapEntries>
     </TargetXmlSchema>
-    <Target class="de.interactive_instruments.ShapeChange.Target.Codelists.CodelistDictionaries" mode="enabled">
-      <targetParameter name="outputDirectory" value="output"/>
-	  <rules>
-		<EncodingRule name="citygml-ade">
-		  <rule name="rule-xsd-all-tagged-values"/>	  
-		</EncodingRule>	
-	  </rules>
-    </Target>
   </targets>
-
 </ShapeChangeConfiguration>
