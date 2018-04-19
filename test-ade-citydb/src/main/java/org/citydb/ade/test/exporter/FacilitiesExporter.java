@@ -40,7 +40,7 @@ public class FacilitiesExporter implements ADEExporter {
 				long facilitiesId = rs.getLong(1);
 				int objectClassId = rs.getInt(2);
 				
-				AbstractFacilities facilities = helper.createObjectStub(facilitiesId, objectClassId, AbstractFacilities.class);
+				AbstractFacilities facilities = helper.createObject(facilitiesId, objectClassId, AbstractFacilities.class);
 				if (facilities == null) {
 					helper.logOrThrowErrorMessage("Failed to instantiate " + helper.getObjectSignature(objectClassId, facilitiesId) + " as facilities object.");
 					continue;
