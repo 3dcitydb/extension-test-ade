@@ -84,7 +84,7 @@ public class BuildingUnitExporter implements ADEExporter {
 				long buildingUnitId = rs.getLong(1);
 				int objectClassId = rs.getInt(2);
 
-				AbstractBuildingUnit buildingUnit = helper.createObjectStub(buildingUnitId, objectClassId, AbstractBuildingUnit.class);
+				AbstractBuildingUnit buildingUnit = helper.createObject(buildingUnitId, objectClassId, AbstractBuildingUnit.class);
 				if (buildingUnit == null) {
 					helper.logOrThrowErrorMessage("Failed to instantiate " + helper.getObjectSignature(objectClassId, buildingUnitId) + " as building unit object.");
 					continue;
