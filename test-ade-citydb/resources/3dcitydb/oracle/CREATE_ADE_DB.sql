@@ -1,6 +1,6 @@
--- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2018-04-12 14:10:36 
+-- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2018-06-05 16:43:56 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
--- ***********************************  Create tables ************************************* 
+-- *********************************** Create tables ************************************** 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 -- -------------------------------------------------------------------- 
 -- test_building 
@@ -8,11 +8,11 @@
 CREATE TABLE test_building
 (
     id INTEGER NOT NULL,
-    ownername VARCHAR2(1000),
-    floorarea_uom VARCHAR2(1000),
-    floorarea NUMBER,
-    energyperforma_certification VARCHAR2(1000),
     energyperform_certificatio_1 VARCHAR2(1000),
+    energyperforma_certification VARCHAR2(1000),
+    floorarea NUMBER,
+    floorarea_uom VARCHAR2(1000),
+    ownername VARCHAR2(1000),
     PRIMARY KEY (id)
 );
 
@@ -21,9 +21,9 @@ CREATE TABLE test_building
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_buildingu_to_address
 (
-    buildingunit_id INTEGER NOT NULL,
     address_id INTEGER NOT NULL,
-    PRIMARY KEY (buildingunit_id, address_id)
+    buildingunit_id INTEGER NOT NULL,
+    PRIMARY KEY (address_id, buildingunit_id)
 );
 
 -- -------------------------------------------------------------------- 
@@ -32,27 +32,27 @@ CREATE TABLE test_buildingu_to_address
 CREATE TABLE test_buildingunit
 (
     id INTEGER NOT NULL,
-    objectclass_id INTEGER,
+    building_buildingunit_id INTEGER,
     buildingunit_parent_id INTEGER,
     buildingunit_root_id INTEGER,
-    building_buildingunit_id INTEGER,
-    class_codespace VARCHAR2(1000),
     class VARCHAR2(1000),
-    usage_codespace VARCHAR2(1000),
-    usage VARCHAR2(1000),
-    function_codespace VARCHAR2(1000),
+    class_codespace VARCHAR2(1000),
     function VARCHAR2(1000),
-    lod2multicurve MDSYS.SDO_GEOMETRY,
-    lod3multicurve MDSYS.SDO_GEOMETRY,
-    lod4multicurve MDSYS.SDO_GEOMETRY,
+    function_codespace VARCHAR2(1000),
     lod1multisurface_id INTEGER,
-    lod2multisurface_id INTEGER,
-    lod3multisurface_id INTEGER,
-    lod4multisurface_id INTEGER,
     lod1solid_id INTEGER,
+    lod2multicurve MDSYS.SDO_GEOMETRY,
+    lod2multisurface_id INTEGER,
     lod2solid_id INTEGER,
+    lod3multicurve MDSYS.SDO_GEOMETRY,
+    lod3multisurface_id INTEGER,
     lod3solid_id INTEGER,
+    lod4multicurve MDSYS.SDO_GEOMETRY,
+    lod4multisurface_id INTEGER,
     lod4solid_id INTEGER,
+    objectclass_id INTEGER,
+    usage VARCHAR2(1000),
+    usage_codespace VARCHAR2(1000),
     PRIMARY KEY (id)
 );
 
@@ -63,8 +63,8 @@ CREATE TABLE test_energyperformancecer
 (
     id INTEGER NOT NULL,
     buildingunit_energyperfor_id INTEGER,
-    certificationname VARCHAR2(1000),
     certificationid VARCHAR2(1000),
+    certificationname VARCHAR2(1000),
     PRIMARY KEY (id)
 );
 
@@ -74,10 +74,10 @@ CREATE TABLE test_energyperformancecer
 CREATE TABLE test_facilities
 (
     id INTEGER NOT NULL,
-    objectclass_id INTEGER,
     buildingunit_equippedwith_id INTEGER,
-    totalvalue_uom VARCHAR2(1000),
+    objectclass_id INTEGER,
     totalvalue NUMBER,
+    totalvalue_uom VARCHAR2(1000),
     PRIMARY KEY (id)
 );
 
@@ -131,7 +131,7 @@ CREATE TABLE test_otherconstruction
 );
 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
--- *********************************  Create foreign keys  ******************************** 
+-- *********************************** Create foreign keys ******************************** 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 -- -------------------------------------------------------------------- 
 -- test_building 
@@ -244,7 +244,7 @@ ALTER TABLE test_otherconstruction ADD CONSTRAINT test_otherconstruction_fk FORE
 REFERENCES cityobject (id);
 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
--- *********************************  Create Indexes  ************************************* 
+-- *********************************** Create Indexes ************************************* 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
 SET SERVEROUTPUT ON
@@ -262,15 +262,24 @@ select :SRID mc from dual;
 prompt Used SRID for spatial indexes: &SRSNO; 
 
 -- -------------------------------------------------------------------- 
+-- test_buildingu_to_address 
+-- -------------------------------------------------------------------- 
+CREATE INDEX test_buildi_to_addres_fk2x ON test_buildingu_to_address (address_id);
+
+CREATE INDEX test_buildi_to_addres_fk1x ON test_buildingu_to_address (buildingunit_id);
+
+-- -------------------------------------------------------------------- 
 -- test_buildingunit 
 -- -------------------------------------------------------------------- 
-CREATE INDEX test_building_objectcl_fkx ON test_buildingunit (objectclass_id);
+CREATE INDEX test_build_build_build_fkx ON test_buildingunit (building_buildingunit_id);
 
 CREATE INDEX test_buildingun_parent_fkx ON test_buildingunit (buildingunit_parent_id);
 
 CREATE INDEX test_buildingunit_root_fkx ON test_buildingunit (buildingunit_root_id);
 
-CREATE INDEX test_build_build_build_fkx ON test_buildingunit (building_buildingunit_id);
+CREATE INDEX test_building_lod1mult_fkx ON test_buildingunit (lod1multisurface_id);
+
+CREATE INDEX test_building_lod1soli_fkx ON test_buildingunit (lod1solid_id);
 
 DELETE FROM USER_SDO_GEOM_METADATA WHERE TABLE_NAME='TEST_BUILDINGUNIT' AND COLUMN_NAME='LOD2MULTICURVE';
 INSERT INTO USER_SDO_GEOM_METADATA (TABLE_NAME, COLUMN_NAME, DIMINFO, SRID)
@@ -278,11 +287,19 @@ VALUES ('TEST_BUILDINGUNIT','LOD2MULTICURVE',
 MDSYS.SDO_DIM_ARRAY(MDSYS.SDO_DIM_ELEMENT('X', 0.000, 10000000.000, 0.0005), MDSYS.SDO_DIM_ELEMENT('Y', 0.000, 10000000.000, 0.0005),MDSYS.SDO_DIM_ELEMENT('Z', -1000, 10000, 0.0005)), &SRSNO);
 CREATE INDEX test_building_lod2mult_spx ON test_buildingunit (lod2multicurve) INDEXTYPE IS MDSYS.SPATIAL_INDEX;
 
+CREATE INDEX test_building_lod2mult_fkx ON test_buildingunit (lod2multisurface_id);
+
+CREATE INDEX test_building_lod2soli_fkx ON test_buildingunit (lod2solid_id);
+
 DELETE FROM USER_SDO_GEOM_METADATA WHERE TABLE_NAME='TEST_BUILDINGUNIT' AND COLUMN_NAME='LOD3MULTICURVE';
 INSERT INTO USER_SDO_GEOM_METADATA (TABLE_NAME, COLUMN_NAME, DIMINFO, SRID)
 VALUES ('TEST_BUILDINGUNIT','LOD3MULTICURVE',
 MDSYS.SDO_DIM_ARRAY(MDSYS.SDO_DIM_ELEMENT('X', 0.000, 10000000.000, 0.0005), MDSYS.SDO_DIM_ELEMENT('Y', 0.000, 10000000.000, 0.0005),MDSYS.SDO_DIM_ELEMENT('Z', -1000, 10000, 0.0005)), &SRSNO);
 CREATE INDEX test_building_lod3mult_spx ON test_buildingunit (lod3multicurve) INDEXTYPE IS MDSYS.SPATIAL_INDEX;
+
+CREATE INDEX test_building_lod3mult_fkx ON test_buildingunit (lod3multisurface_id);
+
+CREATE INDEX test_building_lod3soli_fkx ON test_buildingunit (lod3solid_id);
 
 DELETE FROM USER_SDO_GEOM_METADATA WHERE TABLE_NAME='TEST_BUILDINGUNIT' AND COLUMN_NAME='LOD4MULTICURVE';
 INSERT INTO USER_SDO_GEOM_METADATA (TABLE_NAME, COLUMN_NAME, DIMINFO, SRID)
@@ -290,21 +307,11 @@ VALUES ('TEST_BUILDINGUNIT','LOD4MULTICURVE',
 MDSYS.SDO_DIM_ARRAY(MDSYS.SDO_DIM_ELEMENT('X', 0.000, 10000000.000, 0.0005), MDSYS.SDO_DIM_ELEMENT('Y', 0.000, 10000000.000, 0.0005),MDSYS.SDO_DIM_ELEMENT('Z', -1000, 10000, 0.0005)), &SRSNO);
 CREATE INDEX test_building_lod4mult_spx ON test_buildingunit (lod4multicurve) INDEXTYPE IS MDSYS.SPATIAL_INDEX;
 
-CREATE INDEX test_building_lod1mult_fkx ON test_buildingunit (lod1multisurface_id);
-
-CREATE INDEX test_building_lod2mult_fkx ON test_buildingunit (lod2multisurface_id);
-
-CREATE INDEX test_building_lod3mult_fkx ON test_buildingunit (lod3multisurface_id);
-
 CREATE INDEX test_building_lod4mult_fkx ON test_buildingunit (lod4multisurface_id);
 
-CREATE INDEX test_building_lod1soli_fkx ON test_buildingunit (lod1solid_id);
-
-CREATE INDEX test_building_lod2soli_fkx ON test_buildingunit (lod2solid_id);
-
-CREATE INDEX test_building_lod3soli_fkx ON test_buildingunit (lod3solid_id);
-
 CREATE INDEX test_building_lod4soli_fkx ON test_buildingunit (lod4solid_id);
+
+CREATE INDEX test_building_objectcl_fkx ON test_buildingunit (objectclass_id);
 
 -- -------------------------------------------------------------------- 
 -- test_energyperformancecer 
@@ -314,12 +321,19 @@ CREATE INDEX test_energ_build_energ_fkx ON test_energyperformancecer (buildingun
 -- -------------------------------------------------------------------- 
 -- test_facilities 
 -- -------------------------------------------------------------------- 
-CREATE INDEX test_faciliti_objectcl_fkx ON test_facilities (objectclass_id);
-
 CREATE INDEX test_facil_build_equip_fkx ON test_facilities (buildingunit_equippedwith_id);
 
+CREATE INDEX test_faciliti_objectcl_fkx ON test_facilities (objectclass_id);
+
+-- -------------------------------------------------------------------- 
+-- test_other_to_thema_surfa 
+-- -------------------------------------------------------------------- 
+CREATE INDEX test_othe_to_them_surf_fk1 ON test_other_to_thema_surfa (otherconstruction_id);
+
+CREATE INDEX test_othe_to_them_surf_fk2 ON test_other_to_thema_surfa (thematic_surface_id);
+
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
--- *********************************  Create Sequences  *********************************** 
+-- *********************************** Create Sequences *********************************** 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
 CREATE SEQUENCE test_energyperformanc_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 CACHE 10000;

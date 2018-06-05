@@ -1,6 +1,6 @@
--- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2018-04-12 14:10:36 
+-- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2018-06-05 16:43:56 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
--- ***********************************  Create tables ************************************* 
+-- *********************************** Create tables ************************************** 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 -- -------------------------------------------------------------------- 
 -- test_building 
@@ -8,11 +8,11 @@
 CREATE TABLE test_building
 (
     id INTEGER NOT NULL,
-    ownername VARCHAR(1000),
-    floorarea_uom VARCHAR(1000),
-    floorarea NUMERIC,
-    energyperforma_certification VARCHAR(1000),
     energyperform_certificatio_1 VARCHAR(1000),
+    energyperforma_certification VARCHAR(1000),
+    floorarea NUMERIC,
+    floorarea_uom VARCHAR(1000),
+    ownername VARCHAR(1000),
     PRIMARY KEY (id)
 );
 
@@ -21,9 +21,9 @@ CREATE TABLE test_building
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_buildingu_to_address
 (
-    buildingunit_id INTEGER NOT NULL,
     address_id INTEGER NOT NULL,
-    PRIMARY KEY (buildingunit_id, address_id)
+    buildingunit_id INTEGER NOT NULL,
+    PRIMARY KEY (address_id, buildingunit_id)
 );
 
 -- -------------------------------------------------------------------- 
@@ -32,27 +32,27 @@ CREATE TABLE test_buildingu_to_address
 CREATE TABLE test_buildingunit
 (
     id INTEGER NOT NULL,
-    objectclass_id INTEGER,
+    building_buildingunit_id INTEGER,
     buildingunit_parent_id INTEGER,
     buildingunit_root_id INTEGER,
-    building_buildingunit_id INTEGER,
-    class_codespace VARCHAR(1000),
     class VARCHAR(1000),
-    usage_codespace VARCHAR(1000),
-    usage VARCHAR(1000),
-    function_codespace VARCHAR(1000),
+    class_codespace VARCHAR(1000),
     function VARCHAR(1000),
-    lod2multicurve geometry(GEOMETRYZ),
-    lod3multicurve geometry(GEOMETRYZ),
-    lod4multicurve geometry(GEOMETRYZ),
+    function_codespace VARCHAR(1000),
     lod1multisurface_id INTEGER,
-    lod2multisurface_id INTEGER,
-    lod3multisurface_id INTEGER,
-    lod4multisurface_id INTEGER,
     lod1solid_id INTEGER,
+    lod2multicurve geometry(GEOMETRYZ),
+    lod2multisurface_id INTEGER,
     lod2solid_id INTEGER,
+    lod3multicurve geometry(GEOMETRYZ),
+    lod3multisurface_id INTEGER,
     lod3solid_id INTEGER,
+    lod4multicurve geometry(GEOMETRYZ),
+    lod4multisurface_id INTEGER,
     lod4solid_id INTEGER,
+    objectclass_id INTEGER,
+    usage VARCHAR(1000),
+    usage_codespace VARCHAR(1000),
     PRIMARY KEY (id)
 );
 
@@ -63,8 +63,8 @@ CREATE TABLE test_energyperformancecer
 (
     id INTEGER NOT NULL,
     buildingunit_energyperfor_id INTEGER,
-    certificationname VARCHAR(1000),
     certificationid VARCHAR(1000),
+    certificationname VARCHAR(1000),
     PRIMARY KEY (id)
 );
 
@@ -74,10 +74,10 @@ CREATE TABLE test_energyperformancecer
 CREATE TABLE test_facilities
 (
     id INTEGER NOT NULL,
-    objectclass_id INTEGER,
     buildingunit_equippedwith_id INTEGER,
-    totalvalue_uom VARCHAR(1000),
+    objectclass_id INTEGER,
     totalvalue NUMERIC,
+    totalvalue_uom VARCHAR(1000),
     PRIMARY KEY (id)
 );
 
@@ -131,7 +131,7 @@ CREATE TABLE test_otherconstruction
 );
 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
--- *********************************  Create foreign keys  ******************************** 
+-- *********************************** Create foreign keys ******************************** 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 -- -------------------------------------------------------------------- 
 -- test_building 
@@ -244,15 +244,30 @@ ALTER TABLE test_otherconstruction ADD CONSTRAINT test_otherconstruction_fk FORE
 REFERENCES cityobject (id);
 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
--- *********************************  Create Indexes  ************************************* 
+-- *********************************** Create Indexes ************************************* 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+-- -------------------------------------------------------------------- 
+-- test_buildingu_to_address 
+-- -------------------------------------------------------------------- 
+CREATE INDEX test_buildi_to_addres_fk2x ON test_buildingu_to_address
+    USING btree
+    (
+      address_id ASC NULLS LAST
+    )   WITH (FILLFACTOR = 90);
+
+CREATE INDEX test_buildi_to_addres_fk1x ON test_buildingu_to_address
+    USING btree
+    (
+      buildingunit_id ASC NULLS LAST
+    )   WITH (FILLFACTOR = 90);
+
 -- -------------------------------------------------------------------- 
 -- test_buildingunit 
 -- -------------------------------------------------------------------- 
-CREATE INDEX test_building_objectcl_fkx ON test_buildingunit
+CREATE INDEX test_build_build_build_fkx ON test_buildingunit
     USING btree
     (
-      objectclass_id ASC NULLS LAST
+      building_buildingunit_id ASC NULLS LAST
     )   WITH (FILLFACTOR = 90);
 
 CREATE INDEX test_buildingun_parent_fkx ON test_buildingunit
@@ -267,52 +282,10 @@ CREATE INDEX test_buildingunit_root_fkx ON test_buildingunit
       buildingunit_root_id ASC NULLS LAST
     )   WITH (FILLFACTOR = 90);
 
-CREATE INDEX test_build_build_build_fkx ON test_buildingunit
-    USING btree
-    (
-      building_buildingunit_id ASC NULLS LAST
-    )   WITH (FILLFACTOR = 90);
-
-CREATE INDEX test_building_lod2mult_spx ON test_buildingunit
-    USING gist
-    (
-      lod2multicurve
-    );
-
-CREATE INDEX test_building_lod3mult_spx ON test_buildingunit
-    USING gist
-    (
-      lod3multicurve
-    );
-
-CREATE INDEX test_building_lod4mult_spx ON test_buildingunit
-    USING gist
-    (
-      lod4multicurve
-    );
-
 CREATE INDEX test_building_lod1mult_fkx ON test_buildingunit
     USING btree
     (
       lod1multisurface_id ASC NULLS LAST
-    )   WITH (FILLFACTOR = 90);
-
-CREATE INDEX test_building_lod2mult_fkx ON test_buildingunit
-    USING btree
-    (
-      lod2multisurface_id ASC NULLS LAST
-    )   WITH (FILLFACTOR = 90);
-
-CREATE INDEX test_building_lod3mult_fkx ON test_buildingunit
-    USING btree
-    (
-      lod3multisurface_id ASC NULLS LAST
-    )   WITH (FILLFACTOR = 90);
-
-CREATE INDEX test_building_lod4mult_fkx ON test_buildingunit
-    USING btree
-    (
-      lod4multisurface_id ASC NULLS LAST
     )   WITH (FILLFACTOR = 90);
 
 CREATE INDEX test_building_lod1soli_fkx ON test_buildingunit
@@ -321,10 +294,34 @@ CREATE INDEX test_building_lod1soli_fkx ON test_buildingunit
       lod1solid_id ASC NULLS LAST
     )   WITH (FILLFACTOR = 90);
 
+CREATE INDEX test_building_lod2mult_spx ON test_buildingunit
+    USING gist
+    (
+      lod2multicurve
+    );
+
+CREATE INDEX test_building_lod2mult_fkx ON test_buildingunit
+    USING btree
+    (
+      lod2multisurface_id ASC NULLS LAST
+    )   WITH (FILLFACTOR = 90);
+
 CREATE INDEX test_building_lod2soli_fkx ON test_buildingunit
     USING btree
     (
       lod2solid_id ASC NULLS LAST
+    )   WITH (FILLFACTOR = 90);
+
+CREATE INDEX test_building_lod3mult_spx ON test_buildingunit
+    USING gist
+    (
+      lod3multicurve
+    );
+
+CREATE INDEX test_building_lod3mult_fkx ON test_buildingunit
+    USING btree
+    (
+      lod3multisurface_id ASC NULLS LAST
     )   WITH (FILLFACTOR = 90);
 
 CREATE INDEX test_building_lod3soli_fkx ON test_buildingunit
@@ -333,10 +330,28 @@ CREATE INDEX test_building_lod3soli_fkx ON test_buildingunit
       lod3solid_id ASC NULLS LAST
     )   WITH (FILLFACTOR = 90);
 
+CREATE INDEX test_building_lod4mult_spx ON test_buildingunit
+    USING gist
+    (
+      lod4multicurve
+    );
+
+CREATE INDEX test_building_lod4mult_fkx ON test_buildingunit
+    USING btree
+    (
+      lod4multisurface_id ASC NULLS LAST
+    )   WITH (FILLFACTOR = 90);
+
 CREATE INDEX test_building_lod4soli_fkx ON test_buildingunit
     USING btree
     (
       lod4solid_id ASC NULLS LAST
+    )   WITH (FILLFACTOR = 90);
+
+CREATE INDEX test_building_objectcl_fkx ON test_buildingunit
+    USING btree
+    (
+      objectclass_id ASC NULLS LAST
     )   WITH (FILLFACTOR = 90);
 
 -- -------------------------------------------------------------------- 
@@ -351,20 +366,35 @@ CREATE INDEX test_energ_build_energ_fkx ON test_energyperformancecer
 -- -------------------------------------------------------------------- 
 -- test_facilities 
 -- -------------------------------------------------------------------- 
-CREATE INDEX test_faciliti_objectcl_fkx ON test_facilities
-    USING btree
-    (
-      objectclass_id ASC NULLS LAST
-    )   WITH (FILLFACTOR = 90);
-
 CREATE INDEX test_facil_build_equip_fkx ON test_facilities
     USING btree
     (
       buildingunit_equippedwith_id ASC NULLS LAST
     )   WITH (FILLFACTOR = 90);
 
+CREATE INDEX test_faciliti_objectcl_fkx ON test_facilities
+    USING btree
+    (
+      objectclass_id ASC NULLS LAST
+    )   WITH (FILLFACTOR = 90);
+
+-- -------------------------------------------------------------------- 
+-- test_other_to_thema_surfa 
+-- -------------------------------------------------------------------- 
+CREATE INDEX test_othe_to_them_surf_fk1 ON test_other_to_thema_surfa
+    USING btree
+    (
+      otherconstruction_id ASC NULLS LAST
+    )   WITH (FILLFACTOR = 90);
+
+CREATE INDEX test_othe_to_them_surf_fk2 ON test_other_to_thema_surfa
+    USING btree
+    (
+      thematic_surface_id ASC NULLS LAST
+    )   WITH (FILLFACTOR = 90);
+
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
--- *********************************  Create Sequences  *********************************** 
+-- *********************************** Create Sequences *********************************** 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
 CREATE SEQUENCE test_energyperformanc_seq
