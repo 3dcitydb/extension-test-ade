@@ -1,6 +1,10 @@
 # extension-test-ade
 ---
-The ‘TestADE’ is an artificial CityGML ADE (Application Domain Extension) which has been primarily designed for demonstrating how to employ the citygml4j and 3DCityDB software APIs to work with the realworld CityGML ADEs. This ADE includes a couple of feature and data types  originated from the existing CityGML ADEs e.g. Energy ADE and UtilityNetwork ADE. Please note that compared to the original ADE models, some classes of this TestADE have been simplified by omitting some attributes and properties in order to make this artificial ADE light-weight for software tests purpose.
+The _TestADE_ is an artificial CityGML ADE (Application Domain Extension) which is intended to be used for testing the ADE support of the 3D City Database and to demonstrate developers how to implement the ADE-specific APIs of the citygml4j library and of the Importer/Exporter for real-word ADEs.
+
+The TestADE has been deliberately designed to reflect the most relevant UML modelling techniques that may be used for CityGML ADEs such as subtyping or property injection. Its implementation of the citygml4j and Importer/Exporter APIs can therefore serve as template for implementing other ADEs. 
+
+Most feature and data types of the TestADE have been copied from existing CityGML ADEs such as the EnergyADE and UtilityNetworkADE. Please note that compared to the original ADE models, the classes of the TestADE have been simplified by omitting attributes and associations in order to make this artificial ADE light-weight for software tests.
 
 UML Data Model
 -------
