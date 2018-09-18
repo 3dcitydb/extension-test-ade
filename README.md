@@ -1,7 +1,7 @@
 TestADE extension
 =================
 
-The _TestADE_ is an artificial CityGML ADE (Application Domain Extension) for testing and 
+The _TestADE_ is an artificial CityGML Application Domain Extension (ADE) for testing and 
 demonstrating the ADE support of the 3D City Database that has been introduced with version 4.0. It has been designed to cover 
 the most relevant UML modelling elements and techniques that occur in real-world CityGML ADEs such as subtyping or 
 property injection.
