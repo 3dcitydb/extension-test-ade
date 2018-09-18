@@ -6,7 +6,7 @@ demonstrating the ADE support of the 3D City Database that has been introduced w
 the most relevant UML modelling elements and techniques that occur in real-world CityGML ADEs such as subtyping or 
 property injection.
 
-This repository provides a reference implementation of an **ADE extension** that is required by the Importer/Exporter tool to import and export TestADE datasets. The reference implementation shows developers how to implement the ADE-specific APIs of [citygml4j](https://github.com/citygml4j/citygml4j) (see `test-ade-citygml4j` module) and of the Importer/Exporter (see `test-ade-citydb` module). Since the TestADE reflects commonly used ADE modelling elements, the provided code may serve as template for implementing ADE extensions for real-world ADEs.
+This repository provides a reference implementation of an **ADE extension** that is required by the Importer/Exporter tool to import and export TestADE datasets. The reference implementation shows developers how to implement the ADE-specific APIs of [citygml4j](https://github.com/citygml4j/citygml4j) (see `test-ade-citygml4j` module) and of the Importer/Exporter (see `test-ade-citydb` module). Since the TestADE reflects commonly used ADE modelling elements, the provided code may serve as template for implementing ADE extensions for other ADEs.
 
 General steps for supporting an ADE with the 3DCityDB
 -----------------------------------------------------
