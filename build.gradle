@@ -2,9 +2,11 @@ plugins {
     id 'distribution'
 }
 
-subprojects {
+allprojects {
     version '1.0'
+}
 
+subprojects {
     apply plugin: 'java'
 
     sourceCompatibility = 1.8
