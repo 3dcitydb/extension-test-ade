@@ -18,9 +18,6 @@ subprojects {
         maven {
             url 'http://download.osgeo.org/webdav/geotools'
         }
-        maven {
-            url 'https://maven.imagej.net/content/repositories/thirdparty'
-        }
         jcenter()
     }
 }
