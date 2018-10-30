@@ -1,14 +1,12 @@
 package org.citygml.ade.test.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.citygml.ade.test.model.module.TestADEModule;
 import org.citygml4j.builder.copy.CopyBuilder;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
 import org.citygml4j.model.common.association.Associable;
 import org.citygml4j.model.common.base.ModelObject;
-import org.citygml4j.model.module.ade.ADEModule;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EnergyPerformanceCertification implements Associable, ADEModelObject {
 	private List<String> certificationName;
@@ -87,11 +85,6 @@ public class EnergyPerformanceCertification implements Associable, ADEModelObjec
 		
 		copy.unsetParent();
 		return copy;
-	}
-	
-	@Override
-	public ADEModule getADEModule() {
-		return TestADEModule.v1_0;
 	}
 
 }

@@ -1,6 +1,5 @@
 package org.citygml.ade.test.model;
 
-import org.citygml.ade.test.model.module.TestADEModule;
 import org.citygml4j.builder.copy.CopyBuilder;
 import org.citygml4j.model.citygml.CityGMLClass;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
@@ -9,7 +8,6 @@ import org.citygml4j.model.common.visitor.FeatureFunctor;
 import org.citygml4j.model.common.visitor.FeatureVisitor;
 import org.citygml4j.model.common.visitor.GMLFunctor;
 import org.citygml4j.model.common.visitor.GMLVisitor;
-import org.citygml4j.model.module.ade.ADEModule;
 
 public class IndustrialBuilding extends AbstractBuilding implements ADEModelObject {
 	private String remark;
@@ -64,11 +62,6 @@ public class IndustrialBuilding extends AbstractBuilding implements ADEModelObje
 	@Override
 	public CityGMLClass getCityGMLClass() {
 		return CityGMLClass.ADE_COMPONENT;
-	}
-	
-	@Override
-	public ADEModule getADEModule() {
-		return TestADEModule.v1_0;
 	}
 
 }

@@ -1,6 +1,5 @@
 package org.citygml.ade.test.model;
 
-import org.citygml.ade.test.model.module.TestADEModule;
 import org.citygml4j.builder.copy.CopyBuilder;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
 import org.citygml4j.model.common.visitor.FeatureFunctor;
@@ -9,7 +8,6 @@ import org.citygml4j.model.common.visitor.GMLFunctor;
 import org.citygml4j.model.common.visitor.GMLVisitor;
 import org.citygml4j.model.gml.basicTypes.Measure;
 import org.citygml4j.model.gml.feature.AbstractFeature;
-import org.citygml4j.model.module.ade.ADEModule;
 
 public abstract class AbstractFacilities extends AbstractFeature implements ADEModelObject {
 	private Measure totalValue;
@@ -64,10 +62,5 @@ public abstract class AbstractFacilities extends AbstractFeature implements ADEM
 	@Override
 	public <T> T accept(GMLFunctor<T> visitor) {
 		return visitor.apply((ADEModelObject)this);
-	}
-	
-	@Override
-	public ADEModule getADEModule() {
-		return TestADEModule.v1_0;
 	}
 }

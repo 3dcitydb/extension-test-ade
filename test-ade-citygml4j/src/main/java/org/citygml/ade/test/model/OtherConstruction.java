@@ -1,8 +1,5 @@
 package org.citygml.ade.test.model;
 
-import java.util.List;
-
-import org.citygml.ade.test.model.module.TestADEModule;
 import org.citygml4j.builder.copy.CopyBuilder;
 import org.citygml4j.model.citygml.CityGMLClass;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
@@ -14,8 +11,9 @@ import org.citygml4j.model.common.visitor.FeatureVisitor;
 import org.citygml4j.model.common.visitor.GMLFunctor;
 import org.citygml4j.model.common.visitor.GMLVisitor;
 import org.citygml4j.model.gml.feature.BoundingShape;
-import org.citygml4j.model.module.ade.ADEModule;
 import org.citygml4j.util.bbox.BoundingBoxOptions;
+
+import java.util.List;
 
 public class OtherConstruction extends AbstractSite implements ADEModelObject {
 	private List<BoundarySurfaceProperty> boundedBySurface;
@@ -118,11 +116,6 @@ public class OtherConstruction extends AbstractSite implements ADEModelObject {
 	@Override
 	public CityGMLClass getCityGMLClass() {
 		return CityGMLClass.ADE_COMPONENT;
-	}
-	
-	@Override
-	public ADEModule getADEModule() {
-		return TestADEModule.v1_0;
 	}
 
 }

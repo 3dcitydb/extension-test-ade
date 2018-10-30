@@ -1,8 +1,5 @@
 package org.citygml.ade.test.model;
 
-import java.util.List;
-
-import org.citygml.ade.test.model.module.TestADEModule;
 import org.citygml4j.builder.copy.CopyBuilder;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
 import org.citygml4j.model.citygml.core.AbstractCityObject;
@@ -20,8 +17,9 @@ import org.citygml4j.model.gml.geometry.GeometryProperty;
 import org.citygml4j.model.gml.geometry.aggregates.MultiCurveProperty;
 import org.citygml4j.model.gml.geometry.aggregates.MultiSurfaceProperty;
 import org.citygml4j.model.gml.geometry.primitives.SolidProperty;
-import org.citygml4j.model.module.ade.ADEModule;
 import org.citygml4j.util.bbox.BoundingBoxOptions;
+
+import java.util.List;
 
 public abstract class AbstractBuildingUnit extends AbstractCityObject implements ADEModelObject {
 	private Code clazz;
@@ -662,11 +660,6 @@ public abstract class AbstractBuildingUnit extends AbstractCityObject implements
 	@Override
 	public <T> T accept(GMLFunctor<T> visitor) {
 		return visitor.apply((ADEModelObject)this);
-	}
-
-	@Override
-	public ADEModule getADEModule() {
-		return TestADEModule.v1_0;
 	}
 
 }

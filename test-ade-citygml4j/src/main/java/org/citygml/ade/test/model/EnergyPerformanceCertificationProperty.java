@@ -1,10 +1,8 @@
 package org.citygml.ade.test.model;
 
-import org.citygml.ade.test.model.module.TestADEModule;
 import org.citygml4j.builder.copy.CopyBuilder;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
 import org.citygml4j.model.gml.base.AssociationByRep;
-import org.citygml4j.model.module.ade.ADEModule;
 
 public class EnergyPerformanceCertificationProperty extends AssociationByRep<EnergyPerformanceCertification> implements ADEModelObject {
 
@@ -45,11 +43,6 @@ public class EnergyPerformanceCertificationProperty extends AssociationByRep<Ene
 	public Object copyTo(Object target, CopyBuilder copyBuilder) {
 		EnergyPerformanceCertificationProperty copy = (target == null) ? new EnergyPerformanceCertificationProperty() : (EnergyPerformanceCertificationProperty)target;
 		return super.copyTo(copy, copyBuilder);
-	}
-	
-	@Override
-	public ADEModule getADEModule() {
-		return TestADEModule.v1_0;
 	}
 
 }

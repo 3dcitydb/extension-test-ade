@@ -1,9 +1,5 @@
 package org.citygml.ade.test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import org.citygml.ade.test.bind.TestADEMarshaller;
 import org.citygml.ade.test.bind.TestADEUnmarshaller;
 import org.citygml.ade.test.model.module.TestADEModule;
@@ -21,13 +17,17 @@ import org.citygml4j.util.walker.FeatureWalker;
 import org.citygml4j.util.walker.GMLFunctionWalker;
 import org.citygml4j.util.walker.GMLWalker;
 
+import java.util.Collections;
+import java.util.List;
+
 public class TestADEContext implements ADEContext {
+	private final List<ADEModule> modules = Collections.singletonList(TestADEModule.v1_0);
 	private final TestADEMarshaller marshaller = new TestADEMarshaller();
 	private final TestADEUnmarshaller unmarshaller = new TestADEUnmarshaller();
 	
 	@Override
 	public List<ADEModule> getADEModules() {
-		return Arrays.asList(new ADEModule[]{TestADEModule.v1_0});
+		return modules;
 	}
 
 	@Override
