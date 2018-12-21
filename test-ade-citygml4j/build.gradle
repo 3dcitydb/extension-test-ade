@@ -5,5 +5,5 @@ sourceSets {
 }
 
 dependencies {
-    compile 'org.citygml4j:citygml4j:2.7.0'
+    compile 'org.citygml4j:citygml4j:2.8.1'
 }
