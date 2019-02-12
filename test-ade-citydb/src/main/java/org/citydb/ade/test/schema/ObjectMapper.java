@@ -1,8 +1,5 @@
 package org.citydb.ade.test.schema;
 
-import java.util.HashMap;
-import java.util.Map.Entry;
-
 import org.citydb.ade.ADEExtensionException;
 import org.citydb.ade.ADEObjectMapper;
 import org.citydb.database.schema.mapping.AbstractObjectType;
@@ -20,8 +17,13 @@ import org.citygml.ade.test.model.OtherConstruction;
 import org.citygml4j.model.gml.base.AbstractGML;
 import org.citygml4j.model.module.citygml.CityGMLVersion;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 public class ObjectMapper implements ADEObjectMapper {
-	private HashMap<Class<? extends AbstractGML>, Integer> objectClassIds = new HashMap<>();
+	private Map<Class<? extends AbstractGML>, Integer> objectClassIds = new HashMap<>();
 
 	public void populateObjectClassIds(SchemaMapping schemaMapping) throws ADEExtensionException {
 		for (AbstractObjectType<?> type : schemaMapping.getAbstractObjectTypes()) {
@@ -68,8 +70,8 @@ public class ObjectMapper implements ADEObjectMapper {
 			for (Entry<Class<? extends AbstractGML>, Integer> entry : objectClassIds.entrySet()) {
 				if (entry.getValue() == objectClassId) {
 					try {
-						return entry.getKey().newInstance();
-					} catch (InstantiationException | IllegalAccessException e) {
+						return entry.getKey().getDeclaredConstructor().newInstance();
+					} catch (Exception e) {
 						// 
 					}
 				}
@@ -82,7 +84,7 @@ public class ObjectMapper implements ADEObjectMapper {
 	@Override
 	public int getObjectClassId(Class<? extends AbstractGML> adeObjectClass) {
 		Integer objectClassId = objectClassIds.get(adeObjectClass);
-		return objectClassId != null ? objectClassId.intValue() : 0;
+		return objectClassId != null ? objectClassId : 0;
 	}
 
 }
