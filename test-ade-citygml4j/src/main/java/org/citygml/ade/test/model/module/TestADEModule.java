@@ -17,8 +17,10 @@ import org.citygml4j.model.module.citygml.CityGMLVersion;
 
 import javax.xml.namespace.QName;
 import java.net.URL;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -55,6 +57,11 @@ public class TestADEModule extends ADEModule {
 	@Override
 	public URL getSchemaResource() {
 		return TestADEContext.class.getResource("/org/citygml/ade/test/schema/CityGML-TestADE.xsd");
+	}
+
+	@Override
+	public List<String> getJAXBPackageNames() {
+		return Collections.singletonList("org.citygml.ade.test._1");
 	}
 
 	@Override

@@ -22,9 +22,7 @@ import java.util.List;
 
 public class TestADEContext implements ADEContext {
 	private final List<ADEModule> modules = Collections.singletonList(TestADEModule.v1_0);
-	private final TestADEMarshaller marshaller = new TestADEMarshaller();
-	private final TestADEUnmarshaller unmarshaller = new TestADEUnmarshaller();
-	
+
 	@Override
 	public List<ADEModule> getADEModules() {
 		return modules;
@@ -36,18 +34,13 @@ public class TestADEContext implements ADEContext {
 	}
 
 	@Override
-	public List<String> getJAXBPackageNames() {
-		return Collections.singletonList("org.citygml.ade.test._1");
+	public ADEMarshaller createADEMarshaller() {
+		return new TestADEMarshaller();
 	}
 
 	@Override
-	public ADEMarshaller getADEMarshaller() {
-		return marshaller;
-	}
-
-	@Override
-	public ADEUnmarshaller getADEUnmarshaller() {
-		return unmarshaller;
+	public ADEUnmarshaller createADEUnmarshaller() {
+		return new TestADEUnmarshaller();
 	}
 
 	@Override
