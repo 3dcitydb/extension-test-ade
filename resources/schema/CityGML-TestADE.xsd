@@ -21,6 +21,7 @@
     <annotation>
       <appinfo>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="maxOccurs">1</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="minOccurs">1</taggedValue>        
       </appinfo>
     </annotation>
   </element>

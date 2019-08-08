@@ -127,7 +127,7 @@
                 <attribute column="floorarea_uom" type="string" path="@uom" schema="test"/>
                 <attribute column="floorarea" type="double" path="." schema="test"/>
             </complexAttribute>
-            <complexProperty maxOccurs="1" path="energyPerformanceCertification" schema="test">
+            <complexProperty minOccurs="1" maxOccurs="1" path="energyPerformanceCertification" schema="test">
                 <type path="EnergyPerformanceCertification" schema="test">
                     <attribute column="energyperforma_certification" type="string" minOccurs="1" path="certificationName" schema="test"/>
                     <attribute column="energyperform_certificatio_1" type="string" minOccurs="1" maxOccurs="1" path="certificationid" schema="test"/>
