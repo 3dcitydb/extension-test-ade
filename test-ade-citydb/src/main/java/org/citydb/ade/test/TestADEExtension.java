@@ -10,17 +10,22 @@ import org.citydb.ade.ADEExtensionException;
 import org.citydb.ade.ADEObjectMapper;
 import org.citydb.ade.exporter.ADEExportManager;
 import org.citydb.ade.importer.ADEImportManager;
+import org.citydb.ade.test.balloon.BalloonManager;
 import org.citydb.ade.test.exporter.ExportManager;
 import org.citydb.ade.test.importer.ImportManager;
+import org.citydb.ade.test.kmlExporter.KMLExportManager;
+import org.citydb.ade.test.schema.ADETableMapper;
 import org.citydb.ade.test.schema.ObjectMapper;
 import org.citydb.ade.test.schema.SchemaMapper;
 import org.citydb.database.schema.mapping.SchemaMapping;
+import org.citydb.modules.kml.ade.*;
 import org.citygml.ade.test.TestADEContext;
 import org.citygml4j.model.citygml.ade.binding.ADEContext;
 
-public class TestADEExtension extends ADEExtension {
+public class TestADEExtension extends ADEExtension implements ADEKmlExportExtension {
 	private final ObjectMapper objectMapper = new ObjectMapper();
 	private final SchemaMapper schemaMapper = new SchemaMapper();
+	private final ADETableMapper tableMapper = new ADETableMapper();
 	private final TestADEContext context = new TestADEContext();
 
 	public static void main(String[] args) throws Exception {
@@ -33,6 +38,7 @@ public class TestADEExtension extends ADEExtension {
 	public void init(SchemaMapping schemaMapping) throws ADEExtensionException {
 		objectMapper.populateObjectClassIds(schemaMapping);
 		schemaMapper.populateSchemaNames(schemaMapping.getMetadata().getDBPrefix().toLowerCase());
+		tableMapper.populateTableColumns(schemaMapper);
 	}
 
 	@Override
@@ -58,5 +64,15 @@ public class TestADEExtension extends ADEExtension {
 	public SchemaMapper getSchemaMapper() {
 		return schemaMapper;
 	}
-	
+
+	@Override
+	public ADEKmlExportManager createADEKmlExportManager() {
+		return new KMLExportManager(this);
+	}
+
+	@Override
+	public ADEBalloonManager createBalloonManager() {
+		return new BalloonManager(this, tableMapper);
+	}
+
 }
