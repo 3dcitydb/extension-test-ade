@@ -1,27 +1,14 @@
 package org.citygml.ade.test.model.module;
 
 import org.citygml.ade.test.TestADEContext;
-import org.citygml.ade.test.model.AbstractBuildingUnit;
-import org.citygml.ade.test.model.AbstractFacilities;
-import org.citygml.ade.test.model.BuildingUnit;
-import org.citygml.ade.test.model.BuildingUnitPart;
-import org.citygml.ade.test.model.DHWFacilities;
-import org.citygml.ade.test.model.IndustrialBuilding;
-import org.citygml.ade.test.model.IndustrialBuildingPart;
-import org.citygml.ade.test.model.IndustrialBuildingRoofSurface;
-import org.citygml.ade.test.model.LightingFacilities;
-import org.citygml.ade.test.model.OtherConstruction;
+import org.citygml.ade.test.model.*;
 import org.citygml4j.model.gml.feature.AbstractFeature;
 import org.citygml4j.model.module.ade.ADEModule;
 import org.citygml4j.model.module.citygml.CityGMLVersion;
 
 import javax.xml.namespace.QName;
 import java.net.URL;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 public class TestADEModule extends ADEModule {

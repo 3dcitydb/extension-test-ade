@@ -1,8 +1,7 @@
 package org.citydb.ade.test.balloon;
 
-import org.citydb.ade.ADEExtension;
-import org.citydb.ade.ADEObjectMapper;
 import org.citydb.ade.test.schema.ADETableMapper;
+import org.citydb.ade.test.schema.SchemaMapper;
 import org.citydb.modules.kml.ade.ADEBalloonException;
 import org.citydb.modules.kml.ade.ADEBalloonHandler;
 import org.citydb.modules.kml.ade.ADEBalloonManager;
@@ -18,15 +17,13 @@ import java.util.Map;
 import java.util.Set;
 
 public class BalloonManager implements ADEBalloonManager {
-	private final ADEExtension extension;
-	private final ADEObjectMapper objectMapper;
 	private final ADETableMapper tableMapper;
+	private final SchemaMapper schemaMapper;
 	private final Map<Class<? extends ADEBalloonHandler>, ADEBalloonHandler> balloonHandlers;
 
-	public BalloonManager (ADEExtension extension, ADETableMapper tableMapper) {
-		this.extension = extension;
-		this.objectMapper = extension.getADEObjectMapper();
+	public BalloonManager (ADETableMapper tableMapper, SchemaMapper schemaMapper) {
 		this.tableMapper = tableMapper;
+		this.schemaMapper = schemaMapper;
 		this.balloonHandlers = new HashMap<>();
 	}
 
@@ -44,6 +41,10 @@ public class BalloonManager implements ADEBalloonManager {
 		}
 
 		return balloonHandler;
+	}
+
+	public SchemaMapper getSchemaMapper() {
+		return schemaMapper;
 	}
 
 	private <T extends ADEBalloonHandler> T getBalloonHandler(Class<T> type) throws ADEBalloonException {

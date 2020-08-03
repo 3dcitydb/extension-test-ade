@@ -1,7 +1,5 @@
 package org.citydb.ade.test.exporter;
 
-import java.sql.SQLException;
-
 import org.citydb.ade.exporter.ADEExporter;
 import org.citydb.ade.exporter.CityGMLExportHelper;
 import org.citydb.citygml.exporter.CityGMLExportException;
@@ -12,6 +10,8 @@ import org.citygml.ade.test.model.OtherConstruction;
 import org.citygml.ade.test.model.module.TestADEModule;
 import org.citygml4j.model.citygml.building.AbstractBoundarySurface;
 import org.citygml4j.model.citygml.building.BoundarySurfaceProperty;
+
+import java.sql.SQLException;
 
 public class OtherConstructionExporter implements ADEExporter {
 	private final CityGMLExportHelper helper;

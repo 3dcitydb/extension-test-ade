@@ -1,10 +1,5 @@
 package org.citydb.ade.test.exporter;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import org.citydb.ade.exporter.ADEExporter;
 import org.citydb.ade.exporter.CityGMLExportHelper;
 import org.citydb.ade.test.schema.ADETable;
@@ -13,6 +8,11 @@ import org.citygml.ade.test.model.AbstractBuildingUnit;
 import org.citygml.ade.test.model.AbstractFacilities;
 import org.citygml.ade.test.model.FacilitiesProperty;
 import org.citygml4j.model.gml.basicTypes.Measure;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class FacilitiesExporter implements ADEExporter {
 	private final CityGMLExportHelper helper;

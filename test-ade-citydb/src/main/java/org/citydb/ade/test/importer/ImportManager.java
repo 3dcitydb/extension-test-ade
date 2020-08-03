@@ -1,30 +1,21 @@
 package org.citydb.ade.test.importer;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.citydb.ade.ADEExtension;
-import org.citydb.ade.importer.ADEImportManager;
-import org.citydb.ade.importer.ADEImporter;
-import org.citydb.ade.importer.ADEPropertyCollection;
-import org.citydb.ade.importer.CityGMLImportHelper;
-import org.citydb.ade.importer.ForeignKeys;
+import org.citydb.ade.importer.*;
 import org.citydb.ade.test.schema.ADETable;
 import org.citydb.ade.test.schema.SchemaMapper;
 import org.citydb.citygml.importer.CityGMLImportException;
 import org.citydb.database.schema.mapping.AbstractObjectType;
 import org.citydb.database.schema.mapping.FeatureType;
-import org.citygml.ade.test.model.AbstractBuildingUnit;
-import org.citygml.ade.test.model.AbstractFacilities;
-import org.citygml.ade.test.model.IndustrialBuilding;
-import org.citygml.ade.test.model.IndustrialBuildingPart;
-import org.citygml.ade.test.model.IndustrialBuildingRoofSurface;
-import org.citygml.ade.test.model.OtherConstruction;
+import org.citygml.ade.test.model.*;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
 import org.citygml4j.model.citygml.building.AbstractBuilding;
 import org.citygml4j.model.gml.feature.AbstractFeature;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ImportManager implements ADEImportManager {
 	private final ADEExtension adeExtension;

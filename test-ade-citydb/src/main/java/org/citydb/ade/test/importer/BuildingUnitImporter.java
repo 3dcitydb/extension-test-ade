@@ -1,31 +1,26 @@
 package org.citydb.ade.test.importer;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Types;
-
 import org.citydb.ade.importer.ADEImporter;
 import org.citydb.ade.importer.CityGMLImportHelper;
 import org.citydb.ade.importer.ForeignKeys;
 import org.citydb.ade.test.schema.ADETable;
 import org.citydb.ade.test.schema.SchemaMapper;
-import org.citydb.config.geometry.GeometryObject;
 import org.citydb.citygml.importer.CityGMLImportException;
 import org.citydb.citygml.importer.util.AttributeValueJoiner;
+import org.citydb.config.geometry.GeometryObject;
 import org.citydb.database.schema.mapping.AbstractObjectType;
-import org.citygml.ade.test.model.AbstractBuildingUnit;
-import org.citygml.ade.test.model.AbstractFacilities;
-import org.citygml.ade.test.model.BuildingUnitPart;
-import org.citygml.ade.test.model.BuildingUnitPartProperty;
-import org.citygml.ade.test.model.EnergyPerformanceCertificationProperty;
-import org.citygml.ade.test.model.FacilitiesProperty;
+import org.citygml.ade.test.model.*;
 import org.citygml4j.model.citygml.core.Address;
 import org.citygml4j.model.citygml.core.AddressProperty;
 import org.citygml4j.model.gml.basicTypes.Code;
 import org.citygml4j.model.gml.geometry.aggregates.MultiCurveProperty;
 import org.citygml4j.model.gml.geometry.aggregates.MultiSurfaceProperty;
 import org.citygml4j.model.gml.geometry.primitives.SolidProperty;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Types;
 
 public class BuildingUnitImporter implements ADEImporter {
 	private final Connection connection;
@@ -161,7 +156,7 @@ public class BuildingUnitImporter implements ADEImporter {
 				} else {
 					String href = multiSurfaceProperty.getHref();
 					if (href != null && href.length() != 0)
-						helper.propagateSurfaceGeometryXlink(href, objectType, objectId, "lod" + (i + 1) + "multisurface_id");
+						helper.propagateSurfaceGeometryXlink(href, objectType.getTable(), objectId, "lod" + (i + 1) + "multisurface_id");
 				}
 			}
 
@@ -197,7 +192,7 @@ public class BuildingUnitImporter implements ADEImporter {
 				} else {
 					String href = solidProperty.getHref();
 					if (href != null && href.length() != 0)
-						helper.propagateSurfaceGeometryXlink(href, objectType, objectId, "lod" + (i + 1) + "solid_id");
+						helper.propagateSurfaceGeometryXlink(href, objectType.getTable(), objectId, "lod" + (i + 1) + "solid_id");
 				}
 			}
 

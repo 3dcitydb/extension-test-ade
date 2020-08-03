@@ -1,10 +1,5 @@
 package org.citydb.ade.test.exporter;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import org.citydb.ade.exporter.ADEExporter;
 import org.citydb.ade.exporter.CityGMLExportHelper;
 import org.citydb.ade.test.schema.ADETable;
@@ -14,6 +9,11 @@ import org.citydb.citygml.exporter.util.AttributeValueSplitter.SplitValue;
 import org.citygml.ade.test.model.AbstractBuildingUnit;
 import org.citygml.ade.test.model.EnergyPerformanceCertification;
 import org.citygml.ade.test.model.EnergyPerformanceCertificationProperty;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class EnergyPerformanceCertificationExporter implements ADEExporter {
 	private PreparedStatement ps;

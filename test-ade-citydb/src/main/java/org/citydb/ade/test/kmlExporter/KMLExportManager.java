@@ -1,7 +1,6 @@
 package org.citydb.ade.test.kmlExporter;
 
-import org.citydb.ade.ADEExtension;
-import org.citydb.ade.ADEObjectMapper;
+import org.citydb.ade.test.schema.SchemaMapper;
 import org.citydb.modules.kml.ade.ADEKmlExportException;
 import org.citydb.modules.kml.ade.ADEKmlExportHelper;
 import org.citydb.modules.kml.ade.ADEKmlExportManager;
@@ -17,13 +16,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class KMLExportManager implements ADEKmlExportManager {
-	private final ADEObjectMapper objectMapper;
+	private final SchemaMapper schemaMapper;
 	private final Map<Class<? extends ADEKmlExporter>, ADEKmlExporter> exporters;
 	private ADEKmlExportHelper helper;
 
-	public KMLExportManager(ADEExtension extension) {
+	public KMLExportManager(SchemaMapper schemaMapper) {
+		this.schemaMapper = schemaMapper;
 		exporters = new HashMap<>();
-		objectMapper = extension.getADEObjectMapper();
 	}
 
 	@Override
@@ -47,16 +46,20 @@ public class KMLExportManager implements ADEKmlExportManager {
 		return exporter;
 	}
 
+	public SchemaMapper getSchemaMapper() {
+		return schemaMapper;
+	}
+
 	private <T extends ADEKmlExporter> T getKmlExporter(Class<T> type) throws ADEKmlExportException {
 		ADEKmlExporter exporter = exporters.get(type);
 
 		if (exporter == null) {
 			if (type == BuildingKmlExporter.class) {
-				exporter = new BuildingKmlExporter(helper);
+				exporter = new BuildingKmlExporter(helper, this);
 			} else if (type == OtherConstructionKmlExporter.class) {
-				exporter = new OtherConstructionKmlExporter(helper);
+				exporter = new OtherConstructionKmlExporter(helper, this);
 			} else if (type == IndustrialBuildingKmlExporter.class) {
-				exporter = new IndustrialBuildingKmlExporter(helper);
+				exporter = new IndustrialBuildingKmlExporter(helper, this);
 			}
 
 			if (exporter == null)

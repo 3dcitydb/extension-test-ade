@@ -1,9 +1,5 @@
 package org.citydb.ade.test.importer;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 import org.citydb.ade.importer.ADEImporter;
 import org.citydb.ade.importer.CityGMLImportHelper;
 import org.citydb.ade.test.schema.ADETable;
@@ -13,6 +9,10 @@ import org.citydb.database.schema.mapping.AbstractObjectType;
 import org.citygml.ade.test.model.OtherConstruction;
 import org.citygml4j.model.citygml.building.AbstractBoundarySurface;
 import org.citygml4j.model.citygml.building.BoundarySurfaceProperty;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class OtherConstructionImporter implements ADEImporter {
 	private final CityGMLImportHelper helper;

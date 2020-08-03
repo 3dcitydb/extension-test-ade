@@ -1,20 +1,6 @@
 package org.citygml.ade.test.walker;
 
-import java.util.ArrayList;
-
-import org.citygml.ade.test.model.AbstractBuildingUnit;
-import org.citygml.ade.test.model.AbstractFacilities;
-import org.citygml.ade.test.model.BuildingUnit;
-import org.citygml.ade.test.model.BuildingUnitPart;
-import org.citygml.ade.test.model.BuildingUnitPartProperty;
-import org.citygml.ade.test.model.BuildingUnitPropertyElement;
-import org.citygml.ade.test.model.DHWFacilities;
-import org.citygml.ade.test.model.FacilitiesProperty;
-import org.citygml.ade.test.model.IndustrialBuilding;
-import org.citygml.ade.test.model.IndustrialBuildingPart;
-import org.citygml.ade.test.model.IndustrialBuildingRoofSurface;
-import org.citygml.ade.test.model.LightingFacilities;
-import org.citygml.ade.test.model.OtherConstruction;
+import org.citygml.ade.test.model.*;
 import org.citygml4j.model.citygml.ade.binding.ADEWalker;
 import org.citygml4j.model.citygml.building.AbstractBuilding;
 import org.citygml4j.model.citygml.building.BoundarySurfaceProperty;
@@ -26,6 +12,8 @@ import org.citygml4j.model.citygml.core.AddressProperty;
 import org.citygml4j.model.gml.feature.AbstractFeature;
 import org.citygml4j.model.gml.feature.FeatureProperty;
 import org.citygml4j.util.walker.GMLFunctionWalker;
+
+import java.util.ArrayList;
 
 public class TestADEGMLFunctionWalker<T> implements ADEWalker<GMLFunctionWalker<T>> {
 	private GMLFunctionWalker<T> walker;
