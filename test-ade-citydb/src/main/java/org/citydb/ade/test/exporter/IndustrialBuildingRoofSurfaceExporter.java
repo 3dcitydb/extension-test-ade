@@ -1,10 +1,5 @@
 package org.citydb.ade.test.exporter;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import org.citydb.ade.exporter.ADEExporter;
 import org.citydb.ade.exporter.CityGMLExportHelper;
 import org.citydb.ade.test.schema.ADETable;
@@ -12,6 +7,11 @@ import org.citydb.citygml.exporter.CityGMLExportException;
 import org.citydb.database.schema.mapping.AbstractType;
 import org.citydb.query.filter.projection.ProjectionFilter;
 import org.citygml.ade.test.model.IndustrialBuildingRoofSurface;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class IndustrialBuildingRoofSurfaceExporter implements ADEExporter {
 	private PreparedStatement ps;

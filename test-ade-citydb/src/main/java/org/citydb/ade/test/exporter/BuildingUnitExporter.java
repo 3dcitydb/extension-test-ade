@@ -1,36 +1,20 @@
 package org.citydb.ade.test.exporter;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.citydb.ade.exporter.ADEExporter;
 import org.citydb.ade.exporter.CityGMLExportHelper;
 import org.citydb.ade.test.schema.ADETable;
-import org.citydb.config.geometry.GeometryObject;
 import org.citydb.citygml.exporter.CityGMLExportException;
 import org.citydb.citygml.exporter.database.content.GMLConverter;
 import org.citydb.citygml.exporter.database.content.SurfaceGeometry;
 import org.citydb.citygml.exporter.util.AttributeValueSplitter;
 import org.citydb.citygml.exporter.util.AttributeValueSplitter.SplitValue;
+import org.citydb.config.geometry.GeometryObject;
 import org.citydb.database.schema.mapping.FeatureProperty;
 import org.citydb.database.schema.mapping.FeatureType;
 import org.citydb.query.filter.lod.LodFilter;
 import org.citydb.query.filter.lod.LodIterator;
 import org.citydb.query.filter.projection.ProjectionFilter;
-import org.citygml.ade.test.model.AbstractBuildingUnit;
-import org.citygml.ade.test.model.BuildingUnit;
-import org.citygml.ade.test.model.BuildingUnitPart;
-import org.citygml.ade.test.model.BuildingUnitPartProperty;
-import org.citygml.ade.test.model.BuildingUnitProperty;
-import org.citygml.ade.test.model.BuildingUnitPropertyElement;
+import org.citygml.ade.test.model.*;
 import org.citygml.ade.test.model.module.TestADEModule;
 import org.citygml4j.model.citygml.building.AbstractBuilding;
 import org.citygml4j.model.citygml.core.Address;
@@ -42,6 +26,13 @@ import org.citygml4j.model.gml.geometry.aggregates.MultiSurface;
 import org.citygml4j.model.gml.geometry.aggregates.MultiSurfaceProperty;
 import org.citygml4j.model.gml.geometry.primitives.AbstractSolid;
 import org.citygml4j.model.gml.geometry.primitives.SolidProperty;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class BuildingUnitExporter implements ADEExporter {
 	private final CityGMLExportHelper helper;

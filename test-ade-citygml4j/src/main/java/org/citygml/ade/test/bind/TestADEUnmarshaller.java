@@ -1,41 +1,11 @@
 package org.citygml.ade.test.bind;
 
-import javax.xml.bind.JAXBElement;
-
-import org.citygml.ade.test._1.BuildingUnitPartPropertyType;
-import org.citygml.ade.test._1.BuildingUnitPartType;
-import org.citygml.ade.test._1.BuildingUnitType;
-import org.citygml.ade.test._1.DHWFacilitiesType;
-import org.citygml.ade.test._1.EnergyPerformanceCertificationPropertyType;
-import org.citygml.ade.test._1.EnergyPerformanceCertificationType;
-import org.citygml.ade.test._1.FacilitiesPropertyType;
-import org.citygml.ade.test._1.FacilitiesType;
-import org.citygml.ade.test._1.IndustrialBuildingPartType;
-import org.citygml.ade.test._1.IndustrialBuildingRoofSurfaceType;
-import org.citygml.ade.test._1.IndustrialBuildingType;
-import org.citygml.ade.test._1.LightingFacilitiesType;
-import org.citygml.ade.test._1.OtherConstructionType;
-import org.citygml.ade.test._1._AbstractBuildingUnitPropertyType;
-import org.citygml.ade.test._1._AbstractBuildingUnitType;
-import org.citygml.ade.test.model.AbstractBuildingUnit;
-import org.citygml.ade.test.model.AbstractFacilities;
-import org.citygml.ade.test.model.BuildingUnit;
-import org.citygml.ade.test.model.BuildingUnitPart;
-import org.citygml.ade.test.model.BuildingUnitPartProperty;
-import org.citygml.ade.test.model.BuildingUnitProperty;
-import org.citygml.ade.test.model.BuildingUnitPropertyElement;
-import org.citygml.ade.test.model.DHWFacilities;
-import org.citygml.ade.test.model.EnergyPerformanceCertification;
-import org.citygml.ade.test.model.EnergyPerformanceCertificationProperty;
-import org.citygml.ade.test.model.EnergyPerformanceCertificationPropertyElement;
-import org.citygml.ade.test.model.FacilitiesProperty;
-import org.citygml.ade.test.model.FloorAreaProperty;
-import org.citygml.ade.test.model.IndustrialBuilding;
-import org.citygml.ade.test.model.IndustrialBuildingPart;
-import org.citygml.ade.test.model.IndustrialBuildingRoofSurface;
-import org.citygml.ade.test.model.LightingFacilities;
-import org.citygml.ade.test.model.OtherConstruction;
-import org.citygml.ade.test.model.OwnerNameProperty;
+import net.opengis.citygml._2.AddressPropertyType;
+import net.opengis.citygml.building._2.BoundarySurfacePropertyType;
+import net.opengis.gml.AreaType;
+import net.opengis.gml.CodeType;
+import org.citygml.ade.test._1.*;
+import org.citygml.ade.test.model.*;
 import org.citygml4j.builder.jaxb.unmarshal.citygml.ade.ADEUnmarshallerHelper;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
 import org.citygml4j.model.citygml.ade.binding.ADEUnmarshaller;
@@ -46,10 +16,7 @@ import org.citygml4j.model.gml.xlink.XLinkType;
 import org.citygml4j.util.mapper.CheckedTypeMapper;
 import org.citygml4j.xml.io.reader.MissingADESchemaException;
 
-import net.opengis.citygml._2.AddressPropertyType;
-import net.opengis.citygml.building._2.BoundarySurfacePropertyType;
-import net.opengis.gml.AreaType;
-import net.opengis.gml.CodeType;
+import javax.xml.bind.JAXBElement;
 
 public class TestADEUnmarshaller implements ADEUnmarshaller {
 	private final CheckedTypeMapper<ADEModelObject> typeMapper;

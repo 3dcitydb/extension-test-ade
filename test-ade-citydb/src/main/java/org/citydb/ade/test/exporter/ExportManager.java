@@ -1,10 +1,5 @@
 package org.citydb.ade.test.exporter;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.citydb.ade.exporter.ADEExportManager;
 import org.citydb.ade.exporter.ADEExporter;
 import org.citydb.ade.exporter.CityGMLExportHelper;
@@ -21,6 +16,11 @@ import org.citygml.ade.test.model.OtherConstruction;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
 import org.citygml4j.model.citygml.building.AbstractBuilding;
 import org.citygml4j.model.gml.feature.AbstractFeature;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ExportManager implements ADEExportManager {
 	private final Map<Class<? extends ADEExporter>, ADEExporter> exporters;

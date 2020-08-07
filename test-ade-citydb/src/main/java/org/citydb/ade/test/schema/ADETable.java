@@ -1,16 +1,7 @@
 package org.citydb.ade.test.schema;
 
 import org.citydb.ade.importer.ADEImporter;
-import org.citydb.ade.test.importer.BuildingPropertiesImporter;
-import org.citydb.ade.test.importer.BuildingUnitImporter;
-import org.citydb.ade.test.importer.BuildingUnitToAddressImporter;
-import org.citydb.ade.test.importer.EnergyPerformanceCertificationImporter;
-import org.citydb.ade.test.importer.FacilitiesImporter;
-import org.citydb.ade.test.importer.IndustrialBuildingImporter;
-import org.citydb.ade.test.importer.IndustrialBuildingPartImporter;
-import org.citydb.ade.test.importer.IndustrialBuildingRoofSurfaceImporter;
-import org.citydb.ade.test.importer.OtherConstructionImporter;
-import org.citydb.ade.test.importer.OtherConstructionToThematicSurfaceImporter;
+import org.citydb.ade.test.importer.*;
 
 public enum ADETable {
 	INDUSTRIALBUILDING(IndustrialBuildingImporter.class),

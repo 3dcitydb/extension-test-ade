@@ -1,10 +1,5 @@
 package org.citydb.ade.test.importer;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Types;
-
 import org.citydb.ade.importer.ADEImporter;
 import org.citydb.ade.importer.CityGMLImportHelper;
 import org.citydb.ade.importer.ForeignKeys;
@@ -12,6 +7,11 @@ import org.citydb.ade.test.schema.ADETable;
 import org.citydb.citygml.importer.CityGMLImportException;
 import org.citydb.database.schema.mapping.AbstractObjectType;
 import org.citygml.ade.test.model.AbstractFacilities;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Types;
 
 public class FacilitiesImporter implements ADEImporter {
 	private final CityGMLImportHelper helper;

@@ -1,42 +1,7 @@
 package org.citygml.ade.test.bind;
 
-import javax.xml.bind.JAXBElement;
-
-import org.citygml.ade.test._1.BuildingUnitPartPropertyType;
-import org.citygml.ade.test._1.BuildingUnitPartType;
-import org.citygml.ade.test._1.BuildingUnitType;
-import org.citygml.ade.test._1.DHWFacilitiesType;
-import org.citygml.ade.test._1.EnergyPerformanceCertificationPropertyType;
-import org.citygml.ade.test._1.EnergyPerformanceCertificationType;
-import org.citygml.ade.test._1.FacilitiesPropertyType;
-import org.citygml.ade.test._1.FacilitiesType;
-import org.citygml.ade.test._1.IndustrialBuildingPartType;
-import org.citygml.ade.test._1.IndustrialBuildingRoofSurfaceType;
-import org.citygml.ade.test._1.IndustrialBuildingType;
-import org.citygml.ade.test._1.LightingFacilitiesType;
-import org.citygml.ade.test._1.ObjectFactory;
-import org.citygml.ade.test._1.OtherConstructionType;
-import org.citygml.ade.test._1._AbstractBuildingUnitPropertyType;
-import org.citygml.ade.test._1._AbstractBuildingUnitType;
-import org.citygml.ade.test.model.AbstractBuildingUnit;
-import org.citygml.ade.test.model.AbstractFacilities;
-import org.citygml.ade.test.model.BuildingUnit;
-import org.citygml.ade.test.model.BuildingUnitPart;
-import org.citygml.ade.test.model.BuildingUnitPartProperty;
-import org.citygml.ade.test.model.BuildingUnitProperty;
-import org.citygml.ade.test.model.BuildingUnitPropertyElement;
-import org.citygml.ade.test.model.DHWFacilities;
-import org.citygml.ade.test.model.EnergyPerformanceCertification;
-import org.citygml.ade.test.model.EnergyPerformanceCertificationProperty;
-import org.citygml.ade.test.model.EnergyPerformanceCertificationPropertyElement;
-import org.citygml.ade.test.model.FacilitiesProperty;
-import org.citygml.ade.test.model.FloorAreaProperty;
-import org.citygml.ade.test.model.IndustrialBuilding;
-import org.citygml.ade.test.model.IndustrialBuildingPart;
-import org.citygml.ade.test.model.IndustrialBuildingRoofSurface;
-import org.citygml.ade.test.model.LightingFacilities;
-import org.citygml.ade.test.model.OtherConstruction;
-import org.citygml.ade.test.model.OwnerNameProperty;
+import org.citygml.ade.test._1.*;
+import org.citygml.ade.test.model.*;
 import org.citygml4j.builder.jaxb.marshal.citygml.ade.ADEMarshallerHelper;
 import org.citygml4j.model.citygml.ade.binding.ADEMarshaller;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
@@ -47,6 +12,8 @@ import org.citygml4j.util.mapper.TypeMapper;
 import org.w3._1999.xlink.ActuateType;
 import org.w3._1999.xlink.ShowType;
 import org.w3._1999.xlink.TypeType;
+
+import javax.xml.bind.JAXBElement;
 
 public class TestADEMarshaller implements ADEMarshaller {
 	private final ObjectFactory factory = new ObjectFactory();

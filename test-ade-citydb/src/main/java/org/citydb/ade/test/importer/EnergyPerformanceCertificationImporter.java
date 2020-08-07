@@ -1,10 +1,5 @@
 package org.citydb.ade.test.importer;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Types;
-
 import org.citydb.ade.importer.ADEImporter;
 import org.citydb.ade.importer.CityGMLImportHelper;
 import org.citydb.ade.test.schema.ADESequence;
@@ -13,6 +8,11 @@ import org.citydb.ade.test.schema.SchemaMapper;
 import org.citydb.citygml.importer.CityGMLImportException;
 import org.citydb.citygml.importer.util.AttributeValueJoiner;
 import org.citygml.ade.test.model.EnergyPerformanceCertification;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Types;
 
 public class EnergyPerformanceCertificationImporter implements ADEImporter {
 	private final CityGMLImportHelper helper;
