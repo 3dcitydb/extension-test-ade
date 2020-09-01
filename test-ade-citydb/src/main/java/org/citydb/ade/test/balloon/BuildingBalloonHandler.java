@@ -1,6 +1,6 @@
 package org.citydb.ade.test.balloon;
 
-import org.citydb.modules.kml.ade.ADEBalloonHandler;
+import org.citydb.ade.kmlExporter.ADEBalloonHandler;
 
 public class BuildingBalloonHandler implements ADEBalloonHandler {
 

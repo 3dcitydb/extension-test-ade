@@ -2,5 +2,5 @@ group 'org.citydb.ade'
 
 dependencies {
     compile project(':test-ade-citygml4j')
-    compile 'org.citydb:impexp-client:4.3.0-b20200807.1607'
+    compile 'org.citydb:impexp-client:4.3.0-b20200901.1515'
 }

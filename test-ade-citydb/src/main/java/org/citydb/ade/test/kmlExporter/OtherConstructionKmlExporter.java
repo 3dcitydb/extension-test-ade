@@ -1,18 +1,15 @@
 package org.citydb.ade.test.kmlExporter;
 
-import org.citydb.ade.test.schema.SchemaMapper;
-import org.citydb.modules.kml.ade.ADEKmlExportHelper;
-import org.citydb.modules.kml.ade.ADEKmlExporter;
+import org.citydb.ade.kmlExporter.ADEKmlExportHelper;
+import org.citydb.ade.kmlExporter.ADEKmlExporter;
 
 public class OtherConstructionKmlExporter implements ADEKmlExporter {
 	private ADEKmlExportHelper helper;
 	private final String schema;
-	private final SchemaMapper schemaMapper;
 
-	public OtherConstructionKmlExporter(ADEKmlExportHelper helper, KMLExportManager manager) {
+	public OtherConstructionKmlExporter(ADEKmlExportHelper helper) {
 		this.helper = helper;
 		this.schema = helper.getDatabaseAdapter().getConnectionDetails().getSchema();
-		this.schemaMapper = manager.getSchemaMapper();
 	}
 
 	@Override
@@ -23,7 +20,7 @@ public class OtherConstructionKmlExporter implements ADEKmlExporter {
 	@Override
 	public String getSurfaceGeometryQuery(int lod) {
 		return new StringBuilder("select sg.geometry, ")
-				.append(helper.getSQLQueries().getImplicitGeometryNullColumns())
+				.append(helper.getSQLQueryHelper().getImplicitGeometryNullColumns())
 				.append("from ").append(schema).append(".surface_geometry sg ")
 				.append("where sg.root_id in (")
 				.append("select ts.lod").append(lod).append("_multi_surface_id from thematic_surface ts ")

@@ -1,10 +1,10 @@
 package org.citydb.ade.test.kmlExporter;
 
+import org.citydb.ade.kmlExporter.ADEKmlExportException;
+import org.citydb.ade.kmlExporter.ADEKmlExportHelper;
+import org.citydb.ade.kmlExporter.ADEKmlExportManager;
+import org.citydb.ade.kmlExporter.ADEKmlExporter;
 import org.citydb.ade.test.schema.SchemaMapper;
-import org.citydb.modules.kml.ade.ADEKmlExportException;
-import org.citydb.modules.kml.ade.ADEKmlExportHelper;
-import org.citydb.modules.kml.ade.ADEKmlExportManager;
-import org.citydb.modules.kml.ade.ADEKmlExporter;
 import org.citydb.util.Util;
 import org.citygml.ade.test.model.IndustrialBuilding;
 import org.citygml.ade.test.model.OtherConstruction;
@@ -55,11 +55,11 @@ public class KMLExportManager implements ADEKmlExportManager {
 
 		if (exporter == null) {
 			if (type == BuildingKmlExporter.class) {
-				exporter = new BuildingKmlExporter(helper, this);
+				exporter = new BuildingKmlExporter(helper);
 			} else if (type == OtherConstructionKmlExporter.class) {
-				exporter = new OtherConstructionKmlExporter(helper, this);
+				exporter = new OtherConstructionKmlExporter(helper);
 			} else if (type == IndustrialBuildingKmlExporter.class) {
-				exporter = new IndustrialBuildingKmlExporter(helper, this);
+				exporter = new IndustrialBuildingKmlExporter(helper);
 			}
 
 			if (exporter == null)

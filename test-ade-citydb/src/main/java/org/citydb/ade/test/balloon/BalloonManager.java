@@ -1,10 +1,10 @@
 package org.citydb.ade.test.balloon;
 
+import org.citydb.ade.kmlExporter.ADEBalloonException;
+import org.citydb.ade.kmlExporter.ADEBalloonHandler;
+import org.citydb.ade.kmlExporter.ADEBalloonManager;
 import org.citydb.ade.test.schema.ADETableMapper;
 import org.citydb.ade.test.schema.SchemaMapper;
-import org.citydb.modules.kml.ade.ADEBalloonException;
-import org.citydb.modules.kml.ade.ADEBalloonHandler;
-import org.citydb.modules.kml.ade.ADEBalloonManager;
 import org.citydb.util.Util;
 import org.citygml.ade.test.model.IndustrialBuilding;
 import org.citygml.ade.test.model.OtherConstruction;
