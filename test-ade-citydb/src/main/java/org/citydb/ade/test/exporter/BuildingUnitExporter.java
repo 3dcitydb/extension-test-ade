@@ -5,7 +5,7 @@ import org.citydb.ade.exporter.CityGMLExportHelper;
 import org.citydb.ade.test.schema.ADETable;
 import org.citydb.citygml.exporter.CityGMLExportException;
 import org.citydb.citygml.exporter.database.content.GMLConverter;
-import org.citydb.citygml.exporter.database.content.SurfaceGeometry;
+import org.citydb.citygml.exporter.database.content.SurfaceGeometryExporter;
 import org.citydb.citygml.exporter.util.AttributeValueSplitter;
 import org.citydb.citygml.exporter.util.AttributeValueSplitter.SplitValue;
 import org.citydb.config.geometry.GeometryObject;
@@ -14,24 +14,27 @@ import org.citydb.database.schema.mapping.FeatureType;
 import org.citydb.query.filter.lod.LodFilter;
 import org.citydb.query.filter.lod.LodIterator;
 import org.citydb.query.filter.projection.ProjectionFilter;
-import org.citygml.ade.test.model.*;
+import org.citygml.ade.test.model.AbstractBuildingUnit;
+import org.citygml.ade.test.model.BuildingUnit;
+import org.citygml.ade.test.model.BuildingUnitPart;
+import org.citygml.ade.test.model.BuildingUnitPartProperty;
+import org.citygml.ade.test.model.BuildingUnitProperty;
+import org.citygml.ade.test.model.BuildingUnitPropertyElement;
 import org.citygml.ade.test.model.module.TestADEModule;
 import org.citygml4j.model.citygml.building.AbstractBuilding;
 import org.citygml4j.model.citygml.core.Address;
 import org.citygml4j.model.citygml.core.AddressProperty;
-import org.citygml4j.model.gml.GMLClass;
 import org.citygml4j.model.gml.basicTypes.Code;
 import org.citygml4j.model.gml.geometry.aggregates.MultiCurveProperty;
-import org.citygml4j.model.gml.geometry.aggregates.MultiSurface;
-import org.citygml4j.model.gml.geometry.aggregates.MultiSurfaceProperty;
-import org.citygml4j.model.gml.geometry.primitives.AbstractSolid;
-import org.citygml4j.model.gml.geometry.primitives.SolidProperty;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 public class BuildingUnitExporter implements ADEExporter {
@@ -40,6 +43,7 @@ public class BuildingUnitExporter implements ADEExporter {
 	private PreparedStatement ps;
 	private FacilitiesExporter facilitiesExporter;
 	private EnergyPerformanceCertificationExporter energyCertificationExporter;
+	private SurfaceGeometryExporter surfaceGeometryExporter;
 	private GMLConverter gmlConverter;
 	private AttributeValueSplitter valueSplitter;
 	private LodFilter lodFilter;
@@ -60,6 +64,7 @@ public class BuildingUnitExporter implements ADEExporter {
 
 		facilitiesExporter = manager.getExporter(FacilitiesExporter.class);
 		energyCertificationExporter = manager.getExporter(EnergyPerformanceCertificationExporter.class);
+		surfaceGeometryExporter = helper.getSurfaceGeometryExporter();
 		gmlConverter = helper.getGMLConverter();
 		valueSplitter = helper.getAttributeValueSplitter();
 		lodFilter = helper.getLodFilter();
@@ -164,28 +169,19 @@ public class BuildingUnitExporter implements ADEExporter {
 					if (rs.wasNull())
 						continue;
 
-					SurfaceGeometry geometry = helper.exportSurfaceGeometry(surfaceGeometryId);
-					if (geometry != null && geometry.getType() == GMLClass.MULTI_SURFACE) {
-						MultiSurfaceProperty multiSurfaceProperty = new MultiSurfaceProperty();
-						if (geometry.isSetGeometry())
-							multiSurfaceProperty.setMultiSurface((MultiSurface)geometry.getGeometry());
-						else
-							multiSurfaceProperty.setHref(geometry.getReference());
-
-						switch (lod) {
+					switch (lod) {
 						case 1:
-							buildingUnit.setLod1MultiSurface(multiSurfaceProperty);
+							surfaceGeometryExporter.addBatch(surfaceGeometryId, buildingUnit::setLod1MultiSurface);
 							break;
 						case 2:
-							buildingUnit.setLod2MultiSurface(multiSurfaceProperty);
+							surfaceGeometryExporter.addBatch(surfaceGeometryId, buildingUnit::setLod2MultiSurface);
 							break;
 						case 3:
-							buildingUnit.setLod3MultiSurface(multiSurfaceProperty);
+							surfaceGeometryExporter.addBatch(surfaceGeometryId, buildingUnit::setLod3MultiSurface);
 							break;
 						case 4:
-							buildingUnit.setLod4MultiSurface(multiSurfaceProperty);
+							surfaceGeometryExporter.addBatch(surfaceGeometryId, buildingUnit::setLod4MultiSurface);
 							break;
-						}
 					}
 				}
 
@@ -200,28 +196,19 @@ public class BuildingUnitExporter implements ADEExporter {
 					if (rs.wasNull())
 						continue;
 
-					SurfaceGeometry geometry = helper.exportSurfaceGeometry(surfaceGeometryId);
-					if (geometry != null && (geometry.getType() == GMLClass.SOLID || geometry.getType() == GMLClass.COMPOSITE_SOLID)) {
-						SolidProperty solidProperty = new SolidProperty();
-						if (geometry.isSetGeometry())
-							solidProperty.setSolid((AbstractSolid)geometry.getGeometry());
-						else
-							solidProperty.setHref(geometry.getReference());
-
-						switch (lod) {
+					switch (lod) {
 						case 1:
-							buildingUnit.setLod1Solid(solidProperty);
+							surfaceGeometryExporter.addBatch(surfaceGeometryId, buildingUnit::setLod1Solid);
 							break;
 						case 2:
-							buildingUnit.setLod2Solid(solidProperty);
+							surfaceGeometryExporter.addBatch(surfaceGeometryId, buildingUnit::setLod2Solid);
 							break;
 						case 3:
-							buildingUnit.setLod3Solid(solidProperty);
+							surfaceGeometryExporter.addBatch(surfaceGeometryId, buildingUnit::setLod3Solid);
 							break;
 						case 4:
-							buildingUnit.setLod4Solid(solidProperty);
+							surfaceGeometryExporter.addBatch(surfaceGeometryId, buildingUnit::setLod4Solid);
 							break;
-						}
 					}
 				}
 
@@ -246,14 +233,6 @@ public class BuildingUnitExporter implements ADEExporter {
 					}
 
 					parentBuildingUnit.addConsistsOf(new BuildingUnitPartProperty((BuildingUnitPart)buildingUnit));
-				}
-			}
-
-			// check whether lod filter is satisfied
-			if (!lodFilter.preservesGeometry()) {
-				for (Iterator<AbstractBuildingUnit> iter = result.iterator(); iter.hasNext(); ) {
-					if (!helper.satisfiesLodFilter(iter.next()))
-						iter.remove();
 				}
 			}
 
