@@ -4,7 +4,16 @@ import org.citydb.ade.ADEExtensionException;
 import org.citydb.ade.ADEObjectMapper;
 import org.citydb.database.schema.mapping.AbstractObjectType;
 import org.citydb.database.schema.mapping.SchemaMapping;
-import org.citygml.ade.test.model.*;
+import org.citygml.ade.test.model.AbstractBuildingUnit;
+import org.citygml.ade.test.model.AbstractFacilities;
+import org.citygml.ade.test.model.BuildingUnit;
+import org.citygml.ade.test.model.BuildingUnitPart;
+import org.citygml.ade.test.model.DHWFacilities;
+import org.citygml.ade.test.model.IndustrialBuilding;
+import org.citygml.ade.test.model.IndustrialBuildingPart;
+import org.citygml.ade.test.model.IndustrialBuildingRoofSurface;
+import org.citygml.ade.test.model.LightingFacilities;
+import org.citygml.ade.test.model.OtherConstruction;
 import org.citygml4j.model.gml.base.AbstractGML;
 import org.citygml4j.model.module.citygml.CityGMLVersion;
 
@@ -13,7 +22,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class ObjectMapper implements ADEObjectMapper {
-	private Map<Class<? extends AbstractGML>, Integer> objectClassIds = new HashMap<>();
+	private final Map<Class<? extends AbstractGML>, Integer> objectClassIds = new HashMap<>();
 
 	public void populateObjectClassIds(SchemaMapping schemaMapping) throws ADEExtensionException {
 		for (AbstractObjectType<?> type : schemaMapping.getAbstractObjectTypes()) {

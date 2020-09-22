@@ -13,19 +13,18 @@ import java.sql.SQLException;
 public class BuildingUnitToAddressImporter implements ADEImporter {
 	private final CityGMLImportHelper helper;
 	private final SchemaMapper schemaMapper;
-	
-	private PreparedStatement ps;
+	private final PreparedStatement ps;
+
 	private int batchCounter;
 	
 	public BuildingUnitToAddressImporter(Connection connection, CityGMLImportHelper helper, ImportManager manager) throws SQLException {
 		this.helper = helper;
 		this.schemaMapper = manager.getSchemaMapper();
-		
-		StringBuilder stmt = new StringBuilder("insert into ")
-				.append(helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.BUILDINGU_TO_ADDRESS))).append(" ")
-				.append("(buildingunit_id, address_id) ")
-				.append("values (?, ?)");
-		ps = connection.prepareStatement(stmt.toString());
+
+		ps = connection.prepareStatement("insert into " +
+				helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.BUILDINGU_TO_ADDRESS)) + " " +
+				"(buildingunit_id, address_id) " +
+				"values (?, ?)");
 	}
 	
 	public void doImport(long buildingUnitId, long addressId) throws CityGMLImportException, SQLException {

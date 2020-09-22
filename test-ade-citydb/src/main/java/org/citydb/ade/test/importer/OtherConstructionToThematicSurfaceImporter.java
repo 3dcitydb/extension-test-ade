@@ -13,19 +13,18 @@ import java.sql.SQLException;
 public class OtherConstructionToThematicSurfaceImporter implements ADEImporter {
 	private final CityGMLImportHelper helper;
 	private final SchemaMapper schemaMapper;
-	
-	private PreparedStatement ps;
+	private final PreparedStatement ps;
+
 	private int batchCounter;
 	
 	public OtherConstructionToThematicSurfaceImporter(Connection connection, CityGMLImportHelper helper, ImportManager manager) throws SQLException {
 		this.helper = helper;
 		this.schemaMapper = manager.getSchemaMapper();
-		
-		StringBuilder stmt = new StringBuilder("insert into ")
-				.append(helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.OTHER_TO_THEMA_SURFA))).append(" ")
-				.append("(otherconstruction_id, thematic_surface_id) ")
-				.append("values (?, ?)");
-		ps = connection.prepareStatement(stmt.toString());
+
+		ps = connection.prepareStatement("insert into " +
+				helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.OTHER_TO_THEMA_SURFA)) + " " +
+				"(otherconstruction_id, thematic_surface_id) " +
+				"values (?, ?)");
 	}
 	
 	public void doImport(long otherConstructionId, long boundarySurfaceId) throws CityGMLImportException, SQLException {

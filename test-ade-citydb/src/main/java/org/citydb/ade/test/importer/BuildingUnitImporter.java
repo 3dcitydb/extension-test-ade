@@ -9,7 +9,12 @@ import org.citydb.citygml.importer.CityGMLImportException;
 import org.citydb.citygml.importer.util.AttributeValueJoiner;
 import org.citydb.config.geometry.GeometryObject;
 import org.citydb.database.schema.mapping.AbstractObjectType;
-import org.citygml.ade.test.model.*;
+import org.citygml.ade.test.model.AbstractBuildingUnit;
+import org.citygml.ade.test.model.AbstractFacilities;
+import org.citygml.ade.test.model.BuildingUnitPart;
+import org.citygml.ade.test.model.BuildingUnitPartProperty;
+import org.citygml.ade.test.model.EnergyPerformanceCertificationProperty;
+import org.citygml.ade.test.model.FacilitiesProperty;
 import org.citygml4j.model.citygml.core.Address;
 import org.citygml4j.model.citygml.core.AddressProperty;
 import org.citygml4j.model.gml.basicTypes.Code;
@@ -26,11 +31,11 @@ public class BuildingUnitImporter implements ADEImporter {
 	private final Connection connection;
 	private final CityGMLImportHelper helper;
 	private final SchemaMapper schemaMapper;
-	
-	private EnergyPerformanceCertificationImporter energyImporter;
-	private BuildingUnitToAddressImporter addressImporter;
-	private AttributeValueJoiner valueJoiner;
-	private PreparedStatement ps;
+	private final EnergyPerformanceCertificationImporter energyImporter;
+	private final BuildingUnitToAddressImporter addressImporter;
+	private final AttributeValueJoiner valueJoiner;
+	private final PreparedStatement ps;
+
 	private int batchCounter;
 
 	public BuildingUnitImporter(Connection connection, CityGMLImportHelper helper, ImportManager manager) throws CityGMLImportException, SQLException {
@@ -38,13 +43,14 @@ public class BuildingUnitImporter implements ADEImporter {
 		this.helper = helper;
 		this.schemaMapper = manager.getSchemaMapper();
 
-		StringBuilder stmt = new StringBuilder("insert into ")
-				.append(helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.BUILDINGUNIT))).append(" ")
-				.append("(id, objectclass_id, building_buildingunit_id, buildingunit_parent_id, buildingunit_root_id, class, class_codespace, usage, usage_codespace, function, function_codespace, ")
-				.append("lod2multicurve, lod3multicurve, lod4multicurve, lod1multisurface_id, lod2multisurface_id, lod3multisurface_id, lod4multisurface_id, ")
-				.append("lod1solid_id, lod2solid_id, lod3solid_id, lod4solid_id) ")
-				.append("values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-		ps = connection.prepareStatement(stmt.toString());
+		ps = connection.prepareStatement("insert into " +
+				helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.BUILDINGUNIT)) + " " +
+				"(id, objectclass_id, building_buildingunit_id, buildingunit_parent_id, buildingunit_root_id, class, " +
+				"class_codespace, usage, usage_codespace, function, function_codespace, " +
+				"lod2multicurve, lod3multicurve, lod4multicurve, " +
+				"lod1multisurface_id, lod2multisurface_id, lod3multisurface_id, lod4multisurface_id, " +
+				"lod1solid_id, lod2solid_id, lod3solid_id, lod4solid_id) " +
+				"values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 		energyImporter = manager.getImporter(EnergyPerformanceCertificationImporter.class);
 		addressImporter = manager.getImporter(BuildingUnitToAddressImporter.class);

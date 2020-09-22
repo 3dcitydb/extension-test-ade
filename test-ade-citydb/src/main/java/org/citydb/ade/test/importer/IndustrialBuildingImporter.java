@@ -15,18 +15,17 @@ import java.sql.Types;
 
 public class IndustrialBuildingImporter implements ADEImporter {
 	private final CityGMLImportHelper helper;
-	
-	private PreparedStatement ps;
+	private final PreparedStatement ps;
+
 	private int batchCounter;
 	
 	public IndustrialBuildingImporter(Connection connection, CityGMLImportHelper helper, ImportManager manager) throws SQLException {
 		this.helper = helper;
-		
-		StringBuilder stmt = new StringBuilder("insert into ")
-				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.INDUSTRIALBUILDING))).append(" ")
-				.append("(id, remark) ")
-				.append("values (?, ?)");
-		ps = connection.prepareStatement(stmt.toString());
+
+		ps = connection.prepareStatement("insert into " +
+				helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.INDUSTRIALBUILDING)) + " " +
+				"(id, remark) " +
+				"values (?, ?)");
 	}
 	
 	public void doImport(IndustrialBuilding building, long objectId, AbstractObjectType<?> objectType, ForeignKeys foreignKeys) throws CityGMLImportException, SQLException {

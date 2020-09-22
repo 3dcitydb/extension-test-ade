@@ -17,20 +17,19 @@ import java.sql.SQLException;
 public class OtherConstructionImporter implements ADEImporter {
 	private final CityGMLImportHelper helper;
 	private final SchemaMapper schemaMapper;
-	
-	private OtherConstructionToThematicSurfaceImporter boundarySurfaceImporter;
-	private PreparedStatement ps;
+	private final OtherConstructionToThematicSurfaceImporter boundarySurfaceImporter;
+	private final PreparedStatement ps;
+
 	private int batchCounter;
 	
 	public OtherConstructionImporter(Connection connection, CityGMLImportHelper helper, ImportManager manager) throws CityGMLImportException, SQLException {
 		this.helper = helper;
 		this.schemaMapper = manager.getSchemaMapper();
-		
-		StringBuilder stmt = new StringBuilder("insert into ")
-				.append(helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.OTHERCONSTRUCTION))).append(" ")
-				.append("(id) ")
-				.append("values (?)");
-		ps = connection.prepareStatement(stmt.toString());
+
+		ps = connection.prepareStatement("insert into " +
+				helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.OTHERCONSTRUCTION)) + " " +
+				"(id) " +
+				"values (?)");
 		
 		boundarySurfaceImporter = manager.getImporter(OtherConstructionToThematicSurfaceImporter.class);
 	}

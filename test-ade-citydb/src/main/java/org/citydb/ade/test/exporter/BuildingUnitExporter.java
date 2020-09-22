@@ -39,28 +39,26 @@ import java.util.Map.Entry;
 
 public class BuildingUnitExporter implements ADEExporter {
 	private final CityGMLExportHelper helper;
-
-	private PreparedStatement ps;
-	private FacilitiesExporter facilitiesExporter;
-	private EnergyPerformanceCertificationExporter energyCertificationExporter;
-	private SurfaceGeometryExporter surfaceGeometryExporter;
-	private GMLConverter gmlConverter;
-	private AttributeValueSplitter valueSplitter;
-	private LodFilter lodFilter;
+	private final PreparedStatement ps;
+	private final FacilitiesExporter facilitiesExporter;
+	private final EnergyPerformanceCertificationExporter energyCertificationExporter;
+	private final SurfaceGeometryExporter surfaceGeometryExporter;
+	private final GMLConverter gmlConverter;
+	private final AttributeValueSplitter valueSplitter;
+	private final LodFilter lodFilter;
 
 	public BuildingUnitExporter(Connection connection, CityGMLExportHelper helper, ExportManager manager) throws CityGMLExportException, SQLException {
 		this.helper = helper;
 
-		StringBuilder stmt = new StringBuilder("select id, objectclass_id, buildingunit_parent_id, class, class_codespace, ")
-				.append("usage, usage_codespace, function, function_codespace, ") 
-				.append(helper.getGeometryColumn("lod2multicurve")).append(", ")
-				.append(helper.getGeometryColumn("lod3multicurve")).append(", ")
-				.append(helper.getGeometryColumn("lod4multicurve")).append(", ")
-				.append("lod1multisurface_id, lod2multisurface_id, lod3multisurface_id, lod4multisurface_id, ")
-				.append("lod1solid_id, lod2solid_id, lod3solid_id, lod4solid_id from ")
-				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.BUILDINGUNIT))).append(" ")
-				.append("where building_buildingunit_id = ?");
-		ps = connection.prepareStatement(stmt.toString());
+		ps = connection.prepareStatement("select id, objectclass_id, buildingunit_parent_id, class, class_codespace, " +
+				"usage, usage_codespace, function, function_codespace, " +
+				helper.getGeometryColumn("lod2multicurve") + ", " +
+				helper.getGeometryColumn("lod3multicurve") + ", " +
+				helper.getGeometryColumn("lod4multicurve") + ", " +
+				"lod1multisurface_id, lod2multisurface_id, lod3multisurface_id, lod4multisurface_id, " +
+				"lod1solid_id, lod2solid_id, lod3solid_id, lod4solid_id from " +
+				helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.BUILDINGUNIT)) + " " +
+				"where building_buildingunit_id = ?");
 
 		facilitiesExporter = manager.getExporter(FacilitiesExporter.class);
 		energyCertificationExporter = manager.getExporter(EnergyPerformanceCertificationExporter.class);
@@ -132,10 +130,10 @@ public class BuildingUnitExporter implements ADEExporter {
 				while (lodIterator.hasNext()) {
 					int lod = lodIterator.next();
 
-					if (!projectionFilter.containsProperty(new StringBuilder("lod").append(lod).append("MultiCurve").toString()))
+					if (!projectionFilter.containsProperty("lod" + lod + "MultiCurve"))
 						continue;
 
-					Object multiCurveObj = rs.getObject(new StringBuilder("lod").append(lod).append("multicurve").toString());
+					Object multiCurveObj = rs.getObject("lod" + lod + "multicurve");
 					if (rs.wasNull())
 						continue;
 
@@ -162,10 +160,10 @@ public class BuildingUnitExporter implements ADEExporter {
 				while (lodIterator.hasNext()) {
 					int lod = lodIterator.next();
 
-					if (!projectionFilter.containsProperty(new StringBuilder("lod").append(lod).append("MultiSurface").toString()))
+					if (!projectionFilter.containsProperty("lod" + lod + "MultiSurface"))
 						continue;
 
-					long surfaceGeometryId = rs.getLong(new StringBuilder("lod").append(lod).append("multisurface_id").toString());
+					long surfaceGeometryId = rs.getLong("lod" + lod + "multisurface_id");
 					if (rs.wasNull())
 						continue;
 
@@ -189,10 +187,10 @@ public class BuildingUnitExporter implements ADEExporter {
 				while (lodIterator.hasNext()) {
 					int lod = lodIterator.next();
 
-					if (!projectionFilter.containsProperty(new StringBuilder("lod").append(lod).append("Solid").toString()))
+					if (!projectionFilter.containsProperty("lod" + lod + "Solid"))
 						continue;
 
-					long surfaceGeometryId = rs.getLong(new StringBuilder("lod").append(lod).append("solid_id").toString());
+					long surfaceGeometryId = rs.getLong("lod" + lod + "solid_id");
 					if (rs.wasNull())
 						continue;
 

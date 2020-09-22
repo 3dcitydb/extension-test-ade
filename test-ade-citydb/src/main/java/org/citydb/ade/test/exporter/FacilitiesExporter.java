@@ -16,16 +16,14 @@ import java.sql.SQLException;
 
 public class FacilitiesExporter implements ADEExporter {
 	private final CityGMLExportHelper helper;
-	
-	private PreparedStatement ps;
+	private final PreparedStatement ps;
 
 	public FacilitiesExporter(Connection connection, CityGMLExportHelper helper, ExportManager manager) throws SQLException {
 		this.helper = helper;
-		
-		StringBuilder stmt = new StringBuilder("select id, objectclass_id, totalvalue, totalvalue_uom from ")
-				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.FACILITIES))).append(" ")
-				.append("where buildingunit_equippedwith_id = ?");
-		ps = connection.prepareStatement(stmt.toString());
+
+		ps = connection.prepareStatement("select id, objectclass_id, totalvalue, totalvalue_uom from " +
+				helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.FACILITIES)) + " " +
+				"where buildingunit_equippedwith_id = ?");
 	}
 
 	public void doExport(AbstractBuildingUnit parent, long parentId) throws CityGMLExportException, SQLException {

@@ -14,19 +14,18 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 public class IndustrialBuildingRoofSurfaceImporter implements ADEImporter {
-	private final CityGMLImportHelper helper;	
-	
-	private PreparedStatement ps;
+	private final CityGMLImportHelper helper;
+	private final PreparedStatement ps;
+
 	private int batchCounter;
 	
 	public IndustrialBuildingRoofSurfaceImporter(Connection connection, CityGMLImportHelper helper, ImportManager manager) throws SQLException {
 		this.helper = helper;
-		
-		StringBuilder stmt = new StringBuilder("insert into ")
-				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.INDUSTRIALBUILDINGRO))).append(" ")
-				.append("(id, remark) ")
-				.append("values (?, ?)");
-		ps = connection.prepareStatement(stmt.toString());
+
+		ps = connection.prepareStatement("insert into " +
+				helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.INDUSTRIALBUILDINGRO)) + " " +
+				"(id, remark) " +
+				"values (?, ?)");
 	}
 	
 	public void doImport(IndustrialBuildingRoofSurface roofSurface, long objectId, AbstractObjectType<?> objectType, ForeignKeys foreignKeys) throws CityGMLImportException, SQLException {

@@ -14,13 +14,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class IndustrialBuildingRoofSurfaceExporter implements ADEExporter {
-	private PreparedStatement ps;
+	private final PreparedStatement ps;
 
 	public IndustrialBuildingRoofSurfaceExporter(Connection connection, CityGMLExportHelper helper, ExportManager manager) throws SQLException {
-		StringBuilder stmt = new StringBuilder("select remark from ")
-				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.INDUSTRIALBUILDINGRO))).append(" ")
-				.append("where id = ?");
-		ps = connection.prepareStatement(stmt.toString());
+		ps = connection.prepareStatement("select remark from " +
+				helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.INDUSTRIALBUILDINGRO)) + " " +
+				"where id = ?");
 	}
 
 	public void doExport(IndustrialBuildingRoofSurface roofSurface, long objectId, AbstractType<?> objectType, ProjectionFilter projectionFilter) throws CityGMLExportException, SQLException {

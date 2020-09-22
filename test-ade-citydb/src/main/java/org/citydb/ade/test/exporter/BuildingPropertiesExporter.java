@@ -9,7 +9,11 @@ import org.citydb.citygml.exporter.util.AttributeValueSplitter.SplitValue;
 import org.citydb.database.schema.mapping.FeatureType;
 import org.citydb.query.filter.lod.LodFilter;
 import org.citydb.query.filter.projection.ProjectionFilter;
-import org.citygml.ade.test.model.*;
+import org.citygml.ade.test.model.EnergyPerformanceCertification;
+import org.citygml.ade.test.model.EnergyPerformanceCertificationProperty;
+import org.citygml.ade.test.model.EnergyPerformanceCertificationPropertyElement;
+import org.citygml.ade.test.model.FloorAreaProperty;
+import org.citygml.ade.test.model.OwnerNameProperty;
 import org.citygml.ade.test.model.module.TestADEModule;
 import org.citygml4j.model.citygml.building.AbstractBuilding;
 import org.citygml4j.model.gml.measures.Area;
@@ -20,16 +24,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class BuildingPropertiesExporter implements ADEExporter {
-	private PreparedStatement ps;
-	private BuildingUnitExporter buildingUnitExporter;
-	private AttributeValueSplitter valueSplitter;
-	private LodFilter lodFilter;
+	private final PreparedStatement ps;
+	private final BuildingUnitExporter buildingUnitExporter;
+	private final AttributeValueSplitter valueSplitter;
+	private final LodFilter lodFilter;
 
 	public BuildingPropertiesExporter(Connection connection, CityGMLExportHelper helper, ExportManager manager) throws CityGMLExportException, SQLException {
-		StringBuilder stmt = new StringBuilder("select ownername, floorarea, floorarea_uom, energyperforma_certification, energyperform_certificatio_1 from ")
-				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.BUILDING))).append(" ")
-				.append("where id = ?");
-		ps = connection.prepareStatement(stmt.toString());
+		ps = connection.prepareStatement("select ownername, floorarea, floorarea_uom, energyperforma_certification, energyperform_certificatio_1 from " +
+				helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.BUILDING)) + " " +
+				"where id = ?");
 
 		buildingUnitExporter = manager.getExporter(BuildingUnitExporter.class);
 		valueSplitter = helper.getAttributeValueSplitter();

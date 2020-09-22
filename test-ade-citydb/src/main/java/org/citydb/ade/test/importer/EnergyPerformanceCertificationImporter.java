@@ -17,20 +17,19 @@ import java.sql.Types;
 public class EnergyPerformanceCertificationImporter implements ADEImporter {
 	private final CityGMLImportHelper helper;
 	private final SchemaMapper schemaMapper;
-	
-	private AttributeValueJoiner valueJoiner;
-	private PreparedStatement ps;
+	private final AttributeValueJoiner valueJoiner;
+	private final PreparedStatement ps;
+
 	private int batchCounter;
 	
 	public EnergyPerformanceCertificationImporter(Connection connection, CityGMLImportHelper helper, ImportManager manager) throws SQLException {
 		this.helper = helper;
 		this.schemaMapper = manager.getSchemaMapper();
-		
-		StringBuilder stmt = new StringBuilder("insert into ")
-				.append(helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.ENERGYPERFORMANCECER))).append(" ")
-				.append("(id, buildingunit_energyperfor_id, certificationname, certificationid) ")
-				.append("values (?, ?, ?, ?)");
-		ps = connection.prepareStatement(stmt.toString());
+
+		ps = connection.prepareStatement("insert into " +
+				helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.ENERGYPERFORMANCECER)) + " " +
+				"(id, buildingunit_energyperfor_id, certificationname, certificationid) " +
+				"values (?, ?, ?, ?)");
 		
 		valueJoiner = helper.getAttributeValueJoiner();
 	}

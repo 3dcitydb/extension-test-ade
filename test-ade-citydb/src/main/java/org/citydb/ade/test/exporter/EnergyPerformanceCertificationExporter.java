@@ -16,15 +16,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class EnergyPerformanceCertificationExporter implements ADEExporter {
-	private PreparedStatement ps;
-
-	private AttributeValueSplitter valueSplitter;
+	private final PreparedStatement ps;
+	private final AttributeValueSplitter valueSplitter;
 
 	public EnergyPerformanceCertificationExporter(Connection connection, CityGMLExportHelper helper, ExportManager manager) throws SQLException {
-		StringBuilder stmt = new StringBuilder("select certificationname, certificationid from ")
-				.append(helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.ENERGYPERFORMANCECER))).append(" ")
-				.append("where buildingunit_energyperfor_id = ?");
-		ps = connection.prepareStatement(stmt.toString());
+		ps = connection.prepareStatement("select certificationname, certificationid from " +
+				helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.ENERGYPERFORMANCECER)) + " " +
+				"where buildingunit_energyperfor_id = ?");
 
 		valueSplitter = helper.getAttributeValueSplitter();
 	}

@@ -9,7 +9,12 @@ import org.citydb.ade.test.schema.SchemaMapper;
 import org.citydb.citygml.importer.CityGMLImportException;
 import org.citydb.citygml.importer.util.AttributeValueJoiner;
 import org.citydb.database.schema.mapping.FeatureType;
-import org.citygml.ade.test.model.*;
+import org.citygml.ade.test.model.AbstractBuildingUnit;
+import org.citygml.ade.test.model.BuildingUnitPropertyElement;
+import org.citygml.ade.test.model.EnergyPerformanceCertification;
+import org.citygml.ade.test.model.EnergyPerformanceCertificationPropertyElement;
+import org.citygml.ade.test.model.FloorAreaProperty;
+import org.citygml.ade.test.model.OwnerNameProperty;
 import org.citygml4j.model.citygml.building.AbstractBuilding;
 
 import java.sql.Connection;
@@ -20,20 +25,19 @@ import java.sql.Types;
 public class BuildingPropertiesImporter implements ADEImporter {
 	private final CityGMLImportHelper helper;
 	private final SchemaMapper schemaMapper;
+	private final AttributeValueJoiner valueJoiner;
+	private final PreparedStatement ps;
 
-	private AttributeValueJoiner valueJoiner;
-	private PreparedStatement ps;
 	private int batchCounter;
 
 	public BuildingPropertiesImporter(Connection connection, CityGMLImportHelper helper, ImportManager manager) throws CityGMLImportException, SQLException {
 		this.helper = helper;
 		this.schemaMapper = manager.getSchemaMapper();
 
-		StringBuilder stmt = new StringBuilder("insert into ")
-				.append(helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.BUILDING))).append(" ")
-				.append("(id, ownername, energyperforma_certification, energyperform_certificatio_1, floorarea, floorarea_uom) ")
-				.append("values (?, ?, ?, ?, ?, ?)");
-		ps = connection.prepareStatement(stmt.toString());
+		ps = connection.prepareStatement("insert into " +
+				helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.BUILDING)) + " " +
+				"(id, ownername, energyperforma_certification, energyperform_certificatio_1, floorarea, floorarea_uom) " +
+				"values (?, ?, ?, ?, ?, ?)");
 
 		valueJoiner = helper.getAttributeValueJoiner();
 	}
