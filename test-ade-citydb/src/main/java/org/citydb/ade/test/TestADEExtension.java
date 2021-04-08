@@ -1,6 +1,6 @@
 package org.citydb.ade.test;
 
-import org.citydb.ImpExp;
+import org.citydb.ImpExpLauncher;
 import org.citydb.ade.ADEExtension;
 import org.citydb.ade.ADEExtensionException;
 import org.citydb.ade.ADEObjectMapper;
@@ -30,10 +30,12 @@ public class TestADEExtension extends ADEExtension implements ADEKmlExportExtens
 	private final ADETableMapper tableMapper = new ADETableMapper();
 	private final TestADEContext context = new TestADEContext();
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		TestADEExtension adeExtension = new TestADEExtension();
 		adeExtension.setBasePath(Paths.get("resources").toAbsolutePath());
-		new ImpExp().doMain(args, adeExtension);
+		new ImpExpLauncher().withArgs(args)
+				.withADEExtension(adeExtension)
+				.start();
 	}
 	
 	@Override
