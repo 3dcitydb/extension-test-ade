@@ -1,4 +1,5 @@
 plugins {
+    id 'java-library'
     id 'distribution'
 }
 
@@ -9,16 +10,18 @@ allprojects {
 subprojects {
     apply plugin: 'java-library'
 
-    sourceCompatibility = 1.8
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+    }
 
     repositories {
         maven{
-            url 'https://dl.bintray.com/3dcitydb/maven'
+            url 'https://citydb.jfrog.io/artifactory/maven'
         }
         maven {
             url 'https://repo.osgeo.org/repository/release'
         }
-        jcenter()
+        mavenCentral()
     }
 }
 
