@@ -23,22 +23,12 @@ public class TestADEModule extends ADEModule {
 				CityGMLVersion.v2_0_0);
 
 		features = new HashMap<>();
-		features.put("_AbstractBuildingUnit", AbstractBuildingUnit.class);
-		features.put("BuildingUnit", BuildingUnit.class);
-		features.put("BuildingUnitPart", BuildingUnitPart.class);
-		features.put("Facilities", AbstractFacilities.class);
-		features.put("DHWFacilities", DHWFacilities.class);
-		features.put("LightingFacilities", LightingFacilities.class);
-		features.put("IndustrialBuilding", IndustrialBuilding.class);		
-		features.put("IndustrialBuildingPart", IndustrialBuildingPart.class);
-		features.put("IndustrialBuildingRoofSurface", IndustrialBuildingRoofSurface.class);
+		features.put("IndustrialBuilding", IndustrialBuilding.class);
 		features.put("OtherConstruction", OtherConstruction.class);
 
 		featureProperties = new HashSet<>();
 		featureProperties.add("buildingUnit");
 		featureProperties.add("boundedBy");
-		featureProperties.add("equippedWith");
-		featureProperties.add("consistsOf");
 	}
 
 	@Override

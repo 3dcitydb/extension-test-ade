@@ -1,4 +1,4 @@
--- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2018-06-05 16:43:56 
+-- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2021-05-28 14:56:36 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 -- *********************************** Drop foreign keys ********************************** 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
@@ -9,91 +9,10 @@ ALTER TABLE test_building
     DROP CONSTRAINT test_building_fk;
 
 -- -------------------------------------------------------------------- 
--- test_buildingu_to_address 
--- -------------------------------------------------------------------- 
-ALTER TABLE test_buildingu_to_address
-    DROP CONSTRAINT test_buildin_to_addres_fk1;
-
-ALTER TABLE test_buildingu_to_address
-    DROP CONSTRAINT test_buildin_to_addres_fk2;
-
--- -------------------------------------------------------------------- 
--- test_buildingunit 
--- -------------------------------------------------------------------- 
-ALTER TABLE test_buildingunit
-    DROP CONSTRAINT test_buildingu_objectcl_fk;
-
-ALTER TABLE test_buildingunit
-    DROP CONSTRAINT test_buildingunit_fk;
-
-ALTER TABLE test_buildingunit
-    DROP CONSTRAINT test_buildinguni_parent_fk;
-
-ALTER TABLE test_buildingunit
-    DROP CONSTRAINT test_buildingunit_root_fk;
-
-ALTER TABLE test_buildingunit
-    DROP CONSTRAINT test_buildi_build_build_fk;
-
-ALTER TABLE test_buildingunit
-    DROP CONSTRAINT test_buildingu_lod1mult_fk;
-
-ALTER TABLE test_buildingunit
-    DROP CONSTRAINT test_buildingu_lod2mult_fk;
-
-ALTER TABLE test_buildingunit
-    DROP CONSTRAINT test_buildingu_lod3mult_fk;
-
-ALTER TABLE test_buildingunit
-    DROP CONSTRAINT test_buildingu_lod4mult_fk;
-
-ALTER TABLE test_buildingunit
-    DROP CONSTRAINT test_buildingu_lod1soli_fk;
-
-ALTER TABLE test_buildingunit
-    DROP CONSTRAINT test_buildingu_lod2soli_fk;
-
-ALTER TABLE test_buildingunit
-    DROP CONSTRAINT test_buildingu_lod3soli_fk;
-
-ALTER TABLE test_buildingunit
-    DROP CONSTRAINT test_buildingu_lod4soli_fk;
-
--- -------------------------------------------------------------------- 
--- test_energyperformancecer 
--- -------------------------------------------------------------------- 
-ALTER TABLE test_energyperformancecer
-    DROP CONSTRAINT test_energy_build_energ_fk;
-
--- -------------------------------------------------------------------- 
--- test_facilities 
--- -------------------------------------------------------------------- 
-ALTER TABLE test_facilities
-    DROP CONSTRAINT test_facilitie_objectcl_fk;
-
-ALTER TABLE test_facilities
-    DROP CONSTRAINT test_facilities_fk;
-
-ALTER TABLE test_facilities
-    DROP CONSTRAINT test_facili_build_equip_fk;
-
--- -------------------------------------------------------------------- 
 -- test_industrialbuilding 
 -- -------------------------------------------------------------------- 
 ALTER TABLE test_industrialbuilding
     DROP CONSTRAINT test_industrialbuilding_fk;
-
--- -------------------------------------------------------------------- 
--- test_industrialbuildingpa 
--- -------------------------------------------------------------------- 
-ALTER TABLE test_industrialbuildingpa
-    DROP CONSTRAINT test_industrialbuildi_fk_1;
-
--- -------------------------------------------------------------------- 
--- test_industrialbuildingro 
--- -------------------------------------------------------------------- 
-ALTER TABLE test_industrialbuildingro
-    DROP CONSTRAINT test_industrialbuildi_fk_2;
 
 -- -------------------------------------------------------------------- 
 -- test_other_to_thema_surfa 
@@ -119,39 +38,14 @@ ALTER TABLE test_otherconstruction
 DROP TABLE test_building;
 
 -- -------------------------------------------------------------------- 
--- test_buildingu_to_address 
--- -------------------------------------------------------------------- 
-DROP TABLE test_buildingu_to_address;
-
--- -------------------------------------------------------------------- 
--- test_buildingunit 
--- -------------------------------------------------------------------- 
-DROP TABLE test_buildingunit;
-
--- -------------------------------------------------------------------- 
 -- test_energyperformancecer 
 -- -------------------------------------------------------------------- 
 DROP TABLE test_energyperformancecer;
 
 -- -------------------------------------------------------------------- 
--- test_facilities 
--- -------------------------------------------------------------------- 
-DROP TABLE test_facilities;
-
--- -------------------------------------------------------------------- 
 -- test_industrialbuilding 
 -- -------------------------------------------------------------------- 
 DROP TABLE test_industrialbuilding;
-
--- -------------------------------------------------------------------- 
--- test_industrialbuildingpa 
--- -------------------------------------------------------------------- 
-DROP TABLE test_industrialbuildingpa;
-
--- -------------------------------------------------------------------- 
--- test_industrialbuildingro 
--- -------------------------------------------------------------------- 
-DROP TABLE test_industrialbuildingro;
 
 -- -------------------------------------------------------------------- 
 -- test_other_to_thema_surfa 

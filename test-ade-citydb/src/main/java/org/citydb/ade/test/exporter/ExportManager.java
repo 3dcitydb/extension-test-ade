@@ -10,8 +10,6 @@ import org.citydb.database.schema.mapping.AbstractObjectType;
 import org.citydb.database.schema.mapping.FeatureType;
 import org.citydb.query.filter.projection.ProjectionFilter;
 import org.citygml.ade.test.model.IndustrialBuilding;
-import org.citygml.ade.test.model.IndustrialBuildingPart;
-import org.citygml.ade.test.model.IndustrialBuildingRoofSurface;
 import org.citygml.ade.test.model.OtherConstruction;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
 import org.citygml4j.model.citygml.building.AbstractBuilding;
@@ -44,10 +42,6 @@ public class ExportManager implements ADEExportManager {
 	public void exportObject(ADEModelObject object, long objectId, AbstractObjectType<?> objectType, ProjectionFilter projectionFilter) throws CityGMLExportException, SQLException {
 		if (object instanceof IndustrialBuilding)
 			getExporter(IndustrialBuildingExporter.class).doExport((IndustrialBuilding)object, objectId, objectType, projectionFilter);
-		else if (object instanceof IndustrialBuildingPart)
-			getExporter(IndustrialBuildingPartExporter.class).doExport((IndustrialBuildingPart)object, objectId, objectType, projectionFilter);
-		else if (object instanceof IndustrialBuildingRoofSurface)
-			getExporter(IndustrialBuildingRoofSurfaceExporter.class).doExport((IndustrialBuildingRoofSurface)object, objectId, objectType, projectionFilter);
 		else if (object instanceof OtherConstruction)
 			getExporter(OtherConstructionExporter.class).doExport((OtherConstruction)object, objectId, objectType, projectionFilter);
 	}
@@ -74,16 +68,6 @@ public class ExportManager implements ADEExportManager {
 		if (exporter == null) {
 			if (type == IndustrialBuildingExporter.class)
 				exporter = new IndustrialBuildingExporter(connection, helper, this);
-			else if (type == IndustrialBuildingPartExporter.class)
-				exporter = new IndustrialBuildingPartExporter(connection, helper, this);
-			else if (type == IndustrialBuildingRoofSurfaceExporter.class)
-				exporter = new IndustrialBuildingRoofSurfaceExporter(connection, helper, this);
-			else if (type == BuildingUnitExporter.class)
-				exporter = new BuildingUnitExporter(connection, helper, this);
-			else if (type == FacilitiesExporter.class)
-				exporter = new FacilitiesExporter(connection, helper, this);
-			else if (type == EnergyPerformanceCertificationExporter.class)
-				exporter = new EnergyPerformanceCertificationExporter(connection, helper, this);
 			else if (type == OtherConstructionExporter.class)
 				exporter = new OtherConstructionExporter(helper);
 			else if (type == BuildingPropertiesExporter.class)

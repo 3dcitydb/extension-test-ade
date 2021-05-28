@@ -11,11 +11,7 @@ import org.citydb.ade.test.schema.SchemaMapper;
 import org.citydb.citygml.importer.CityGMLImportException;
 import org.citydb.database.schema.mapping.AbstractObjectType;
 import org.citydb.database.schema.mapping.FeatureType;
-import org.citygml.ade.test.model.AbstractBuildingUnit;
-import org.citygml.ade.test.model.AbstractFacilities;
 import org.citygml.ade.test.model.IndustrialBuilding;
-import org.citygml.ade.test.model.IndustrialBuildingPart;
-import org.citygml.ade.test.model.IndustrialBuildingRoofSurface;
 import org.citygml.ade.test.model.OtherConstruction;
 import org.citygml4j.model.citygml.ade.binding.ADEModelObject;
 import org.citygml4j.model.citygml.building.AbstractBuilding;
@@ -50,14 +46,6 @@ public class ImportManager implements ADEImportManager {
 	public void importObject(ADEModelObject object, long objectId, AbstractObjectType<?> objectType, ForeignKeys foreignKeys) throws CityGMLImportException, SQLException {
 		if (object instanceof IndustrialBuilding)
 			getImporter(IndustrialBuildingImporter.class).doImport((IndustrialBuilding)object, objectId, objectType, foreignKeys);
-		else if (object instanceof IndustrialBuildingPart)
-			getImporter(IndustrialBuildingPartImporter.class).doImport((IndustrialBuildingPart)object, objectId, objectType, foreignKeys);
-		else if (object instanceof IndustrialBuildingRoofSurface)
-			getImporter(IndustrialBuildingRoofSurfaceImporter.class).doImport((IndustrialBuildingRoofSurface)object, objectId, objectType, foreignKeys);
-		else if (object instanceof AbstractBuildingUnit)
-			getImporter(BuildingUnitImporter.class).doImport((AbstractBuildingUnit)object, objectId, objectType, foreignKeys);
-		else if (object instanceof AbstractFacilities)
-			getImporter(FacilitiesImporter.class).doImport((AbstractFacilities)object, objectId, objectType, foreignKeys);
 		else if (object instanceof OtherConstruction)
 			getImporter(OtherConstructionImporter.class).doImport((OtherConstruction)object, objectId, objectType);
 	}
@@ -95,22 +83,10 @@ public class ImportManager implements ADEImportManager {
 		if (importer == null) {
 			if (type == IndustrialBuildingImporter.class)
 				importer = new IndustrialBuildingImporter(connection, helper, this);
-			else if (type == IndustrialBuildingPartImporter.class)
-				importer = new IndustrialBuildingPartImporter(connection, helper, this);
-			else if (type == IndustrialBuildingRoofSurfaceImporter.class)
-				importer = new IndustrialBuildingRoofSurfaceImporter(connection, helper, this);
-			else if (type == BuildingUnitImporter.class)
-				importer = new BuildingUnitImporter(connection, helper, this);
-			else if (type == FacilitiesImporter.class)
-				importer = new FacilitiesImporter(connection, helper, this);
-			else if (type == EnergyPerformanceCertificationImporter.class)
-				importer = new EnergyPerformanceCertificationImporter(connection, helper, this);
 			else if (type == OtherConstructionImporter.class)
 				importer = new OtherConstructionImporter(connection, helper, this);
 			else if (type == BuildingPropertiesImporter.class)
 				importer = new BuildingPropertiesImporter(connection, helper, this);
-			else if (type == BuildingUnitToAddressImporter.class)
-				importer = new BuildingUnitToAddressImporter(connection, helper, this);
 			else if (type == OtherConstructionToThematicSurfaceImporter.class)
 				importer = new OtherConstructionToThematicSurfaceImporter(connection, helper, this);
 			

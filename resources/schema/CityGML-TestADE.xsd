@@ -21,59 +21,10 @@
     <annotation>
       <appinfo>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="maxOccurs">1</taggedValue>
-        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="minOccurs">1</taggedValue>        
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="minOccurs">1</taggedValue>
       </appinfo>
     </annotation>
   </element>
-  <element name="buildingUnit" substitutionGroup="bldg:_GenericApplicationPropertyOfAbstractBuilding" type="TestADE:_AbstractBuildingUnitPropertyType">
-    <annotation>
-      <appinfo>
-        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="relationType">composition</taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <element name="BuildingUnit" substitutionGroup="TestADE:_AbstractBuildingUnit" type="TestADE:BuildingUnitType"/>
-  <complexType name="BuildingUnitType">
-    <complexContent>
-      <extension base="TestADE:_AbstractBuildingUnitType">
-        <sequence/>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="BuildingUnitPropertyType">
-    <sequence minOccurs="0">
-      <element ref="TestADE:BuildingUnit"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-  </complexType>
-  <element name="BuildingUnitPart" substitutionGroup="TestADE:_AbstractBuildingUnit" type="TestADE:BuildingUnitPartType"/>
-  <complexType name="BuildingUnitPartType">
-    <complexContent>
-      <extension base="TestADE:_AbstractBuildingUnitType">
-        <sequence/>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="BuildingUnitPartPropertyType">
-    <sequence minOccurs="0">
-      <element ref="TestADE:BuildingUnitPart"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-  </complexType>
-  <element name="DHWFacilities" substitutionGroup="TestADE:Facilities" type="TestADE:DHWFacilitiesType"/>
-  <complexType name="DHWFacilitiesType">
-    <complexContent>
-      <extension base="TestADE:FacilitiesType">
-        <sequence/>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="DHWFacilitiesPropertyType">
-    <sequence minOccurs="0">
-      <element ref="TestADE:DHWFacilities"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-  </complexType>
   <element name="EnergyPerformanceCertification" substitutionGroup="gml:_Object" type="TestADE:EnergyPerformanceCertificationType"/>
   <complexType name="EnergyPerformanceCertificationType">
     <sequence>
@@ -85,22 +36,6 @@
     <sequence>
       <element ref="TestADE:EnergyPerformanceCertification"/>
     </sequence>
-  </complexType>
-  <element abstract="true" name="Facilities" substitutionGroup="gml:_Feature" type="TestADE:FacilitiesType"/>
-  <complexType abstract="true" name="FacilitiesType">
-    <complexContent>
-      <extension base="gml:AbstractFeatureType">
-        <sequence>
-          <element name="totalValue" type="gml:MeasureType"/>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="FacilitiesPropertyType">
-    <sequence minOccurs="0">
-      <element ref="TestADE:Facilities"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
   </complexType>
   <element name="IndustrialBuilding" substitutionGroup="bldg:_AbstractBuilding" type="TestADE:IndustrialBuildingType">
     <annotation>
@@ -121,52 +56,6 @@
   <complexType name="IndustrialBuildingPropertyType">
     <sequence minOccurs="0">
       <element ref="TestADE:IndustrialBuilding"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-  </complexType>
-  <element name="IndustrialBuildingPart" substitutionGroup="bldg:BuildingPart" type="TestADE:IndustrialBuildingPartType"/>
-  <complexType name="IndustrialBuildingPartType">
-    <complexContent>
-      <extension base="bldg:BuildingPartType">
-        <sequence>
-          <element minOccurs="0" name="remark" type="string"/>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="IndustrialBuildingPartPropertyType">
-    <sequence minOccurs="0">
-      <element ref="TestADE:IndustrialBuildingPart"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-  </complexType>
-  <element name="IndustrialBuildingRoofSurface" substitutionGroup="bldg:RoofSurface" type="TestADE:IndustrialBuildingRoofSurfaceType"/>
-  <complexType name="IndustrialBuildingRoofSurfaceType">
-    <complexContent>
-      <extension base="bldg:RoofSurfaceType">
-        <sequence>
-          <element minOccurs="0" name="remark" type="string"/>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="IndustrialBuildingRoofSurfacePropertyType">
-    <sequence minOccurs="0">
-      <element ref="TestADE:IndustrialBuildingRoofSurface"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-  </complexType>
-  <element name="LightingFacilities" substitutionGroup="TestADE:Facilities" type="TestADE:LightingFacilitiesType"/>
-  <complexType name="LightingFacilitiesType">
-    <complexContent>
-      <extension base="TestADE:FacilitiesType">
-        <sequence/>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="LightingFacilitiesPropertyType">
-    <sequence minOccurs="0">
-      <element ref="TestADE:LightingFacilities"/>
     </sequence>
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
   </complexType>
@@ -195,57 +84,6 @@
   <complexType name="OtherConstructionPropertyType">
     <sequence minOccurs="0">
       <element ref="TestADE:OtherConstruction"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-  </complexType>
-  <element abstract="true" name="_AbstractBuildingUnit" substitutionGroup="core:_CityObject" type="TestADE:_AbstractBuildingUnitType"/>
-  <complexType abstract="true" name="_AbstractBuildingUnitType">
-    <complexContent>
-      <extension base="core:AbstractCityObjectType">
-        <sequence>
-          <element minOccurs="0" name="class" type="gml:CodeType"/>
-          <element maxOccurs="unbounded" minOccurs="0" name="usage" type="gml:CodeType"/>
-          <element maxOccurs="unbounded" minOccurs="0" name="function" type="gml:CodeType"/>
-          <element maxOccurs="unbounded" minOccurs="0" name="energyPerformanceCertification" type="TestADE:EnergyPerformanceCertificationPropertyType"/>
-          <element minOccurs="0" name="lod2MultiCurve" type="gml:MultiCurvePropertyType"/>
-          <element minOccurs="0" name="lod3MultiCurve" type="gml:MultiCurvePropertyType"/>
-          <element minOccurs="0" name="lod4MultiCurve" type="gml:MultiCurvePropertyType"/>
-          <element minOccurs="0" name="lod1MultiSurface" type="gml:MultiSurfacePropertyType"/>
-          <element minOccurs="0" name="lod2MultiSurface" type="gml:MultiSurfacePropertyType"/>
-          <element minOccurs="0" name="lod3MultiSurface" type="gml:MultiSurfacePropertyType"/>
-          <element minOccurs="0" name="lod4MultiSurface" type="gml:MultiSurfacePropertyType"/>
-          <element minOccurs="0" name="lod1Solid" type="gml:SolidPropertyType"/>
-          <element minOccurs="0" name="lod2Solid" type="gml:SolidPropertyType"/>
-          <element minOccurs="0" name="lod3Solid" type="gml:SolidPropertyType"/>
-          <element minOccurs="0" name="lod4Solid" type="gml:SolidPropertyType"/>
-          <element maxOccurs="unbounded" minOccurs="0" name="address" type="core:AddressPropertyType">
-            <annotation>
-              <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="relationType">aggregation</taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="equippedWith" type="TestADE:FacilitiesPropertyType">
-            <annotation>
-              <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="relationType">composition</taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="consistsOf" type="TestADE:BuildingUnitPartPropertyType">
-            <annotation>
-              <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="relationType">composition</taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="_AbstractBuildingUnitPropertyType">
-    <sequence minOccurs="0">
-      <element ref="TestADE:_AbstractBuildingUnit"/>
     </sequence>
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
   </complexType>

@@ -3,14 +3,11 @@ package org.citydb.ade.test.importer;
 import org.citydb.ade.importer.ADEImporter;
 import org.citydb.ade.importer.ADEPropertyCollection;
 import org.citydb.ade.importer.CityGMLImportHelper;
-import org.citydb.ade.importer.ForeignKeys;
 import org.citydb.ade.test.schema.ADETable;
 import org.citydb.ade.test.schema.SchemaMapper;
 import org.citydb.citygml.importer.CityGMLImportException;
 import org.citydb.citygml.importer.util.AttributeValueJoiner;
 import org.citydb.database.schema.mapping.FeatureType;
-import org.citygml.ade.test.model.AbstractBuildingUnit;
-import org.citygml.ade.test.model.BuildingUnitPropertyElement;
 import org.citygml.ade.test.model.EnergyPerformanceCertification;
 import org.citygml.ade.test.model.EnergyPerformanceCertificationPropertyElement;
 import org.citygml.ade.test.model.FloorAreaProperty;
@@ -74,20 +71,6 @@ public class BuildingPropertiesImporter implements ADEImporter {
 		ps.addBatch();
 		if (++batchCounter == helper.getDatabaseAdapter().getMaxBatchSize())
 			helper.executeBatch(schemaMapper.getTableName(ADETable.BUILDING));
-
-		if (properties.contains(BuildingUnitPropertyElement.class)) {
-			for (BuildingUnitPropertyElement propertyElement : properties.getAll(BuildingUnitPropertyElement.class)) {
-				AbstractBuildingUnit buildingUnit = propertyElement.getValue().getBuildingUnit();
-				if (buildingUnit != null) {
-					helper.importObject(buildingUnit, ForeignKeys.create().with("buildingId", parentId));
-					propertyElement.getValue().unsetBuildingUnit();
-				} else {
-					String href = propertyElement.getValue().getHref();
-					if (href != null && href.length() != 0)
-						helper.logOrThrowUnsupportedXLinkMessage(parent, AbstractBuildingUnit.class, href);
-				}				
-			}
-		}
 	}
 
 	@Override

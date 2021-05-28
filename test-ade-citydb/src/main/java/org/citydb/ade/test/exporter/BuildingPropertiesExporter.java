@@ -25,7 +25,6 @@ import java.sql.SQLException;
 
 public class BuildingPropertiesExporter implements ADEExporter {
 	private final PreparedStatement ps;
-	private final BuildingUnitExporter buildingUnitExporter;
 	private final AttributeValueSplitter valueSplitter;
 	private final LodFilter lodFilter;
 
@@ -34,7 +33,6 @@ public class BuildingPropertiesExporter implements ADEExporter {
 				helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.BUILDING)) + " " +
 				"where id = ?");
 
-		buildingUnitExporter = manager.getExporter(BuildingUnitExporter.class);
 		valueSplitter = helper.getAttributeValueSplitter();
 		lodFilter = helper.getLodFilter();
 	}
@@ -78,10 +76,6 @@ public class BuildingPropertiesExporter implements ADEExporter {
 						parent.addGenericApplicationPropertyOfAbstractBuilding(propertyElement);
 					}
 				}
-
-				if (projectionFilter.containsProperty("buildingUnit", TestADEModule.v1_0.getNamespaceURI())
-						&& lodFilter.containsLodGreaterThanOrEuqalTo(1))
-					buildingUnitExporter.doExport(parent, parentId);
 			}
 		}
 	}
