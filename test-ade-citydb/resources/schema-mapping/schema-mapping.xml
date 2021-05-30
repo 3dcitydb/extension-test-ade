@@ -28,6 +28,8 @@
             <extension base="AbstractSiteType">
                 <join table="cityobject" fromColumn="id" toColumn="id" toRole="parent"/>
             </extension>
+            <geometryProperty lod="2" inlineColumn="lod2multicurve" type="MultiCurve" maxOccurs="1" path="lod2MultiCurve" schema="test"/>
+            <geometryProperty lod="2" refColumn="lod2solid_id" type="AbstractSolid" maxOccurs="1" path="lod2Solid" schema="test"/>
             <featureProperty target="AbstractBoundarySurfaceType" relationType="composition" path="boundedBy" schema="test">
                 <joinTable table="test_other_to_thema_surfa">
                     <join table="test_otherconstruction" fromColumn="otherconstruction_id" toColumn="id" toRole="parent"/>

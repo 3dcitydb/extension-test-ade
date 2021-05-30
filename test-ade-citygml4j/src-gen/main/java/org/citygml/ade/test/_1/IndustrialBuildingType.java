@@ -1,8 +1,8 @@
 //
-// Generated with ade-xjc - XML Schema binding compiler for CityGML ADEs, version 2.6.1
+// Generated with ade-xjc - XML Schema binding compiler for CityGML ADEs, version 2.10.0
 // ade-xjc is part of the citygml4j project, see https://github.com/citygml4j
 // Any modifications to this file will be lost upon recompilation of the source
-// Generated: Tue Feb 27 22:06:11 CET 2018
+// Generated: Sat May 29 23:25:10 CEST 2021
 //
 
 
@@ -20,15 +20,15 @@ import net.opengis.citygml.building._2.AbstractBuildingType;
  * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * 
  * <pre>
- * &lt;complexType name="IndustrialBuildingType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/citygml/building/2.0}AbstractBuildingType">
- *       &lt;sequence>
- *         &lt;element name="remark" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="IndustrialBuildingType"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.opengis.net/citygml/building/2.0}AbstractBuildingType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="remark" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

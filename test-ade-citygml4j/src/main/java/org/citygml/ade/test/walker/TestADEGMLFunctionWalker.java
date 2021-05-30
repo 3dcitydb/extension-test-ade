@@ -27,7 +27,19 @@ public class TestADEGMLFunctionWalker<T> implements ADEWalker<GMLFunctionWalker<
 		T object = walker.apply((AbstractSite)otherConstruction);
 		if (object != null)
 			return object;
-		
+
+		if (otherConstruction.isSetLod2Solid()) {
+			object = walker.apply(otherConstruction.getLod2Solid());
+			if (object != null)
+				return object;
+		}
+
+		if (otherConstruction.isSetLod2MultiCurve()) {
+			object = walker.apply(otherConstruction.getLod2MultiCurve());
+			if (object != null)
+				return object;
+		}
+
 		if (otherConstruction.isSetBoundedBySurface()) {
 			for (BoundarySurfaceProperty property : new ArrayList<BoundarySurfaceProperty>(otherConstruction.getBoundedBySurface())) {
 				object = walker.apply((FeatureProperty<?>)property);

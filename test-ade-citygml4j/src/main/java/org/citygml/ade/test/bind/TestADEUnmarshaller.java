@@ -92,7 +92,13 @@ public class TestADEUnmarshaller implements ADEUnmarshaller {
 	public OtherConstruction unmarshalOtherConstruction(OtherConstructionType src) throws MissingADESchemaException {
 		OtherConstruction dest = new OtherConstruction();
 		helper.getCore200Unmarshaller().unmarshalAbstractSite(src, dest);
-		
+
+		if (src.isSetLod2Solid())
+			dest.setLod2Solid(helper.getGMLUnmarshaller().unmarshalSolidProperty(src.getLod2Solid()));
+
+		if (src.isSetLod2MultiCurve())
+			dest.setLod2MultiCurve(helper.getGMLUnmarshaller().unmarshalMultiCurveProperty(src.getLod2MultiCurve()));
+
 		if (src.isSetBoundedBySurface()) {
 			for (BoundarySurfacePropertyType boundarySurfaceProperty : src.getBoundedBySurface())
 				dest.addBoundedBySurface(helper.getBuilding200Unmarshaller().unmarshalBoundarySurfaceProperty(boundarySurfaceProperty));

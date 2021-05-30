@@ -1,4 +1,4 @@
--- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2021-05-28 14:56:36 
+-- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2021-05-29 23:41:00 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 -- *********************************** Drop foreign keys ********************************** 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
@@ -28,6 +28,9 @@ ALTER TABLE test_other_to_thema_surfa
 -- -------------------------------------------------------------------- 
 ALTER TABLE test_otherconstruction
     DROP CONSTRAINT test_otherconstruction_fk;
+
+ALTER TABLE test_otherconstruction
+    DROP CONSTRAINT test_othercons_lod2soli_fk;
 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 -- *********************************** Drop tables *************************************** 

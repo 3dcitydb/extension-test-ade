@@ -25,7 +25,13 @@ public class TestADEGMLWalker implements ADEWalker<GMLWalker> {
 	
 	public void visit(OtherConstruction otherConstruction) {
 		walker.visit((AbstractSite)otherConstruction);
-		
+
+		if (otherConstruction.isSetLod2Solid())
+			walker.visit(otherConstruction.getLod2Solid());
+
+		if (otherConstruction.isSetLod2MultiCurve())
+			walker.visit(otherConstruction.getLod2MultiCurve());
+
 		if (otherConstruction.isSetBoundedBySurface()) {
 			for (BoundarySurfaceProperty property : new ArrayList<BoundarySurfaceProperty>(otherConstruction.getBoundedBySurface()))
 				walker.visit((FeatureProperty<?>)property);

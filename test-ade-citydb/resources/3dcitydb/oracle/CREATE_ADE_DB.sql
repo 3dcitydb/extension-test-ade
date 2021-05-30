@@ -1,4 +1,4 @@
--- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2021-05-28 14:56:36 
+-- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2021-05-29 23:41:00 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 -- *********************************** Create tables ************************************** 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
@@ -53,6 +53,8 @@ CREATE TABLE test_other_to_thema_surfa
 CREATE TABLE test_otherconstruction
 (
     id INTEGER NOT NULL,
+    lod2multicurve MDSYS.SDO_GEOMETRY,
+    lod2solid_id INTEGER,
     PRIMARY KEY (id)
 );
 
@@ -87,15 +89,44 @@ ON DELETE CASCADE;
 ALTER TABLE test_otherconstruction ADD CONSTRAINT test_otherconstruction_fk FOREIGN KEY (id)
 REFERENCES cityobject (id);
 
+ALTER TABLE test_otherconstruction ADD CONSTRAINT test_othercons_lod2soli_fk FOREIGN KEY (lod2solid_id)
+REFERENCES surface_geometry (id);
+
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 -- *********************************** Create Indexes ************************************* 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+SET SERVEROUTPUT ON
+SET FEEDBACK ON
+SET VER OFF
+VARIABLE SRID NUMBER;
+BEGIN
+  SELECT SRID INTO :SRID FROM DATABASE_SRS;
+END;
+/
+
+column mc new_value SRSNO print
+select :SRID mc from dual;
+
+prompt Used SRID for spatial indexes: &SRSNO; 
+
 -- -------------------------------------------------------------------- 
 -- test_other_to_thema_surfa 
 -- -------------------------------------------------------------------- 
 CREATE INDEX test_othe_to_them_surf_fk1 ON test_other_to_thema_surfa (otherconstruction_id);
 
 CREATE INDEX test_othe_to_them_surf_fk2 ON test_other_to_thema_surfa (thematic_surface_id);
+
+-- -------------------------------------------------------------------- 
+-- test_otherconstruction 
+-- -------------------------------------------------------------------- 
+DELETE FROM USER_SDO_GEOM_METADATA WHERE TABLE_NAME='TEST_OTHERCONSTRUCTION' AND COLUMN_NAME='LOD2MULTICURVE';
+INSERT INTO USER_SDO_GEOM_METADATA (TABLE_NAME, COLUMN_NAME, DIMINFO, SRID)
+VALUES ('TEST_OTHERCONSTRUCTION','LOD2MULTICURVE',
+MDSYS.SDO_DIM_ARRAY(MDSYS.SDO_DIM_ELEMENT('X', 0.000, 10000000.000, 0.0005), MDSYS.SDO_DIM_ELEMENT('Y', 0.000, 10000000.000, 0.0005),MDSYS.SDO_DIM_ELEMENT('Z', -1000, 10000, 0.0005)), &SRSNO);
+CREATE INDEX test_othercon_lod2mult_spx ON test_otherconstruction (lod2multicurve) INDEXTYPE IS MDSYS.SPATIAL_INDEX;
+
+CREATE INDEX test_othercon_lod2soli_fkx ON test_otherconstruction (lod2solid_id);
 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 -- *********************************** Create Sequences *********************************** 

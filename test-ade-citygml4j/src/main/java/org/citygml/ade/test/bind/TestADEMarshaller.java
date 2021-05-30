@@ -85,6 +85,12 @@ public class TestADEMarshaller implements ADEMarshaller {
 	public OtherConstructionType marshalOtherConstruction(OtherConstruction src) {
 		OtherConstructionType dest = factory.createOtherConstructionType();
 		helper.getCore200Marshaller().marshalAbstractSite(src, dest);
+
+		if (src.isSetLod2Solid())
+			dest.setLod2Solid(helper.getGMLMarshaller().marshalSolidProperty(src.getLod2Solid()));
+
+		if (src.isSetLod2MultiCurve())
+			dest.setLod2MultiCurve(helper.getGMLMarshaller().marshalMultiCurveProperty(src.getLod2MultiCurve()));
 		
 		if (src.isSetBoundedBySurface()) {
 			for (BoundarySurfaceProperty boundarySurfaceProperty : src.getBoundedBySurface())

@@ -69,7 +69,7 @@ public class ExportManager implements ADEExportManager {
 			if (type == IndustrialBuildingExporter.class)
 				exporter = new IndustrialBuildingExporter(connection, helper, this);
 			else if (type == OtherConstructionExporter.class)
-				exporter = new OtherConstructionExporter(helper);
+				exporter = new OtherConstructionExporter(connection, helper, this);
 			else if (type == BuildingPropertiesExporter.class)
 				exporter = new BuildingPropertiesExporter(connection, helper, this);
 

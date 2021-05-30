@@ -70,6 +70,8 @@
     <complexContent>
       <extension base="core:AbstractSiteType">
         <sequence>
+          <element minOccurs="0" name="lod2MultiCurve" type="gml:MultiCurvePropertyType"/>
+          <element minOccurs="0" name="lod2Solid" type="gml:SolidPropertyType"/>
           <element maxOccurs="unbounded" minOccurs="0" name="boundedBy" type="bldg:BoundarySurfacePropertyType">
             <annotation>
               <appinfo>
