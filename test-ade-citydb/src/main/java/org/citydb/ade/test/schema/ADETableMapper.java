@@ -27,6 +27,8 @@ public class ADETableMapper {
 			}});
 			put(schemaMapper.getTableName(ADETable.OTHERCONSTRUCTION).toUpperCase(), new LinkedHashSet<String>() {{
 				add("ID");
+				add("LOD2MULTICURVE");
+				add("LOD2SOLID_ID");
 			}});
 		}};
 	}

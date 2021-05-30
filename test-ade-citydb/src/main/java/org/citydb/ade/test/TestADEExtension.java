@@ -6,13 +6,11 @@ import org.citydb.ade.ADEExtensionException;
 import org.citydb.ade.ADEObjectMapper;
 import org.citydb.ade.exporter.ADEExportManager;
 import org.citydb.ade.importer.ADEImportManager;
+import org.citydb.ade.kmlExporter.ADEBalloonExtension;
 import org.citydb.ade.kmlExporter.ADEBalloonManager;
-import org.citydb.ade.kmlExporter.ADEKmlExportExtension;
-import org.citydb.ade.kmlExporter.ADEKmlExportManager;
 import org.citydb.ade.test.balloon.BalloonManager;
 import org.citydb.ade.test.exporter.ExportManager;
 import org.citydb.ade.test.importer.ImportManager;
-import org.citydb.ade.test.kmlExporter.KMLExportManager;
 import org.citydb.ade.test.schema.ADETableMapper;
 import org.citydb.ade.test.schema.ObjectMapper;
 import org.citydb.ade.test.schema.SchemaMapper;
@@ -24,7 +22,7 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
-public class TestADEExtension extends ADEExtension implements ADEKmlExportExtension {
+public class TestADEExtension extends ADEExtension implements ADEBalloonExtension {
 	private final ObjectMapper objectMapper = new ObjectMapper();
 	private final SchemaMapper schemaMapper = new SchemaMapper();
 	private final ADETableMapper tableMapper = new ADETableMapper();
@@ -67,11 +65,6 @@ public class TestADEExtension extends ADEExtension implements ADEKmlExportExtens
 	
 	public SchemaMapper getSchemaMapper() {
 		return schemaMapper;
-	}
-
-	@Override
-	public ADEKmlExportManager createADEKmlExportManager() {
-		return new KMLExportManager(schemaMapper);
 	}
 
 	@Override

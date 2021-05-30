@@ -124,6 +124,7 @@
       </test:energyPerformanceCertification>
       <test:floorArea uom="square meter">1234.33</test:floorArea>
       <test:ownerName>TUM</test:ownerName>
+      <test:remark>Test Remark</test:remark>
     </test:IndustrialBuilding>
   </core:cityObjectMember>
 </core:CityModel>

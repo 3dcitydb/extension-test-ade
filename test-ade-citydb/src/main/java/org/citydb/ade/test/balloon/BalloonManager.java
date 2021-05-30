@@ -32,10 +32,10 @@ public class BalloonManager implements ADEBalloonManager {
 		AbstractGML modelObject = Util.createObject(objectClassId, CityGMLVersion.v2_0_0);
 		ADEBalloonHandler balloonHandler = null;
 
-		if (modelObject instanceof AbstractBuilding) {
-			balloonHandler = getBalloonHandler(BuildingBalloonHandler.class);
-		} else if (modelObject instanceof IndustrialBuilding) {
+		if (modelObject instanceof IndustrialBuilding) {
 			balloonHandler = getBalloonHandler(IndustrialBuildingBalloonHandler.class);
+		} else if (modelObject instanceof AbstractBuilding) {
+			balloonHandler = getBalloonHandler(BuildingBalloonHandler.class);
 		} else if (modelObject instanceof OtherConstruction) {
 			balloonHandler = getBalloonHandler(OtherConstructionBalloonHandler.class);
 		}
@@ -52,11 +52,11 @@ public class BalloonManager implements ADEBalloonManager {
 
 		if (balloonHandler == null) {
 			if (type == BuildingBalloonHandler.class) {
-				balloonHandler = new BuildingBalloonHandler();
+				balloonHandler = new BuildingBalloonHandler(this);
 			} else if (type == IndustrialBuildingBalloonHandler.class) {
-				balloonHandler = new IndustrialBuildingBalloonHandler();
+				balloonHandler = new IndustrialBuildingBalloonHandler(this);
 			} else if (type == OtherConstructionBalloonHandler.class) {
-				balloonHandler = new OtherConstructionBalloonHandler();
+				balloonHandler = new OtherConstructionBalloonHandler(this);
 			}
 
 			if (balloonHandler == null)
