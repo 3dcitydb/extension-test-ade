@@ -11,7 +11,6 @@ import org.citygml.ade.test.model.IndustrialBuilding;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Types;
 
 public class IndustrialBuildingImporter implements ADEImporter {
 	private final CityGMLImportHelper helper;
@@ -30,15 +29,12 @@ public class IndustrialBuildingImporter implements ADEImporter {
 	
 	public void doImport(IndustrialBuilding building, long objectId, AbstractObjectType<?> objectType, ForeignKeys foreignKeys) throws CityGMLImportException, SQLException {
 		ps.setLong(1, objectId);
-		
-		if (building.isSetRemark())
-			ps.setString(2, building.getRemark());
-		else
-			ps.setNull(2, Types.VARCHAR);
-		
+		ps.setString(2, building.getRemark());
+
 		ps.addBatch();
-		if (++batchCounter == helper.getDatabaseAdapter().getMaxBatchSize())
+		if (++batchCounter == helper.getDatabaseAdapter().getMaxBatchSize()) {
 			helper.executeBatch(objectType);
+		}
 	}
 	
 	@Override
