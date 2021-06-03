@@ -120,11 +120,11 @@ public class OtherConstruction extends AbstractSite implements ADEModelObject {
 		LodRepresentation lodRepresentation = new LodRepresentation();
 
 		if (lod2Solid != null) {
-			lodRepresentation.getGeometry(2).add(lod2Solid);
+			lodRepresentation.addRepresentation(2, lod2Solid);
 		}
 
 		if (lod2MultiCurve != null) {
-			lodRepresentation.getGeometry(2).add(lod2MultiCurve);
+			lodRepresentation.addRepresentation(2, lod2MultiCurve);
 		}
 
 		return lodRepresentation;
