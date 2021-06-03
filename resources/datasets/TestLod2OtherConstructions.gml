@@ -120,7 +120,7 @@
       </test:lod2Solid>
       <test:boundedBy>
         <bldg:WallSurface gml:id="UUID_dd8c390f-7ab3-48c4-bcfc-fae362990ccd">
-          <bldg:lod3MultiSurface>
+          <bldg:lod2MultiSurface>
             <gml:MultiSurface>
               <gml:surfaceMember>
                 <gml:Polygon gml:id="DEBY_LOD2_4907139_5ed987fe-2353-4487-a349-ff0499ced355_poly">
@@ -132,12 +132,12 @@
                 </gml:Polygon>
               </gml:surfaceMember>
             </gml:MultiSurface>
-          </bldg:lod3MultiSurface>
+          </bldg:lod2MultiSurface>
         </bldg:WallSurface>
       </test:boundedBy>
       <test:boundedBy>
         <bldg:WallSurface gml:id="UUID_2e653144-8c84-4414-8105-dd7b56e88d11">
-          <bldg:lod3MultiSurface>
+          <bldg:lod2MultiSurface>
             <gml:MultiSurface>
               <gml:surfaceMember>
                 <gml:Polygon gml:id="DEBY_LOD2_4907139_2bc781b9-e6de-4f96-9502-6f553c3e2cad_poly">
@@ -149,12 +149,12 @@
                 </gml:Polygon>
               </gml:surfaceMember>
             </gml:MultiSurface>
-          </bldg:lod3MultiSurface>
+          </bldg:lod2MultiSurface>
         </bldg:WallSurface>
       </test:boundedBy>
       <test:boundedBy>
         <bldg:WallSurface gml:id="UUID_ed027a80-db21-4a9f-bab4-2722189a9d7d">
-          <bldg:lod3MultiSurface>
+          <bldg:lod2MultiSurface>
             <gml:MultiSurface>
               <gml:surfaceMember>
                 <gml:Polygon gml:id="DEBY_LOD2_4907139_02a066b1-348b-4215-8b00-673fdcfc604a_poly">
@@ -166,12 +166,12 @@
                 </gml:Polygon>
               </gml:surfaceMember>
             </gml:MultiSurface>
-          </bldg:lod3MultiSurface>
+          </bldg:lod2MultiSurface>
         </bldg:WallSurface>
       </test:boundedBy>
       <test:boundedBy>
         <bldg:WallSurface gml:id="UUID_3d358c62-75e8-410f-8132-e5602629d342">
-          <bldg:lod3MultiSurface>
+          <bldg:lod2MultiSurface>
             <gml:MultiSurface>
               <gml:surfaceMember>
                 <gml:Polygon gml:id="DEBY_LOD2_4907139_390b4e81-e17d-4ff5-a5cd-e2acc502df93_poly">
@@ -183,12 +183,12 @@
                 </gml:Polygon>
               </gml:surfaceMember>
             </gml:MultiSurface>
-          </bldg:lod3MultiSurface>
+          </bldg:lod2MultiSurface>
         </bldg:WallSurface>
       </test:boundedBy>
       <test:boundedBy>
         <bldg:WallSurface gml:id="UUID_7c18aeb7-ef50-4d3d-b92f-a8b703b1ac86">
-          <bldg:lod3MultiSurface>
+          <bldg:lod2MultiSurface>
             <gml:MultiSurface>
               <gml:surfaceMember>
                 <gml:Polygon gml:id="DEBY_LOD2_4907139_6450d6b0-1e67-4341-a05a-0792955be11d_poly">
@@ -200,12 +200,12 @@
                 </gml:Polygon>
               </gml:surfaceMember>
             </gml:MultiSurface>
-          </bldg:lod3MultiSurface>
+          </bldg:lod2MultiSurface>
         </bldg:WallSurface>
       </test:boundedBy>
       <test:boundedBy>
         <bldg:WallSurface gml:id="UUID_9c0ced40-fe16-43ec-854e-34df9e6803db">
-          <bldg:lod3MultiSurface>
+          <bldg:lod2MultiSurface>
             <gml:MultiSurface>
               <gml:surfaceMember>
                 <gml:Polygon gml:id="DEBY_LOD2_4907139_41f09b32-b700-4292-a385-d9447a6b051e_poly">
@@ -217,12 +217,12 @@
                 </gml:Polygon>
               </gml:surfaceMember>
             </gml:MultiSurface>
-          </bldg:lod3MultiSurface>
+          </bldg:lod2MultiSurface>
         </bldg:WallSurface>
       </test:boundedBy>
       <test:boundedBy>
         <bldg:WallSurface gml:id="UUID_35581de8-2825-4a12-902c-9f479eb4681c">
-          <bldg:lod3MultiSurface>
+          <bldg:lod2MultiSurface>
             <gml:MultiSurface>
               <gml:surfaceMember>
                 <gml:Polygon gml:id="DEBY_LOD2_4907139_f0f27360-0668-4713-87f7-bbb15d365b9f_poly">
@@ -234,12 +234,12 @@
                 </gml:Polygon>
               </gml:surfaceMember>
             </gml:MultiSurface>
-          </bldg:lod3MultiSurface>
+          </bldg:lod2MultiSurface>
         </bldg:WallSurface>
       </test:boundedBy>
       <test:boundedBy>
         <bldg:RoofSurface gml:id="UUID_8f685fc2-9b54-456f-b285-5d82e2f8d006">
-          <bldg:lod3MultiSurface>
+          <bldg:lod2MultiSurface>
             <gml:MultiSurface>
               <gml:surfaceMember>
                 <gml:Polygon gml:id="DEBY_LOD2_4907139_4ee49865-e895-4b54-9fe4-a090906537ed_poly">
@@ -251,12 +251,12 @@
                 </gml:Polygon>
               </gml:surfaceMember>
             </gml:MultiSurface>
-          </bldg:lod3MultiSurface>
+          </bldg:lod2MultiSurface>
         </bldg:RoofSurface>
       </test:boundedBy>
       <test:boundedBy>
         <bldg:RoofSurface gml:id="UUID_e8e9ada7-935f-4fb4-8c24-9b128aaf7d20">
-          <bldg:lod3MultiSurface>
+          <bldg:lod2MultiSurface>
             <gml:MultiSurface>
               <gml:surfaceMember>
                 <gml:Polygon gml:id="DEBY_LOD2_4907139_9d27b279-01bd-4bdb-a23d-418ac59056cd_poly">
@@ -268,12 +268,12 @@
                 </gml:Polygon>
               </gml:surfaceMember>
             </gml:MultiSurface>
-          </bldg:lod3MultiSurface>
+          </bldg:lod2MultiSurface>
         </bldg:RoofSurface>
       </test:boundedBy>
       <test:boundedBy>
         <bldg:GroundSurface gml:id="UUID_f2bfdd74-866b-4221-9501-453dfa90110c">
-          <bldg:lod3MultiSurface>
+          <bldg:lod2MultiSurface>
             <gml:MultiSurface>
               <gml:surfaceMember>
                 <gml:Polygon gml:id="DEBY_LOD2_4907139_a8c2080a-bc7d-4864-b07d-87f464cd5d39_poly">
@@ -285,7 +285,7 @@
                 </gml:Polygon>
               </gml:surfaceMember>
             </gml:MultiSurface>
-          </bldg:lod3MultiSurface>
+          </bldg:lod2MultiSurface>
         </bldg:GroundSurface>
       </test:boundedBy>
     </test:OtherConstruction>
