@@ -28,7 +28,7 @@
 
 package org.citydb.ade.test.balloon;
 
-import org.citydb.ade.kmlExporter.ADEBalloonHandler;
+import org.citydb.core.ade.visExporter.ADEBalloonHandler;
 
 public class BuildingBalloonHandler implements ADEBalloonHandler {
 

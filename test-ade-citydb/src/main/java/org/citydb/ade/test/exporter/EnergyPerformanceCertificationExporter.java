@@ -28,12 +28,12 @@
 
 package org.citydb.ade.test.exporter;
 
-import org.citydb.ade.exporter.ADEExporter;
-import org.citydb.ade.exporter.CityGMLExportHelper;
 import org.citydb.ade.test.schema.ADETable;
-import org.citydb.citygml.exporter.CityGMLExportException;
-import org.citydb.citygml.exporter.util.AttributeValueSplitter;
-import org.citydb.citygml.exporter.util.AttributeValueSplitter.SplitValue;
+import org.citydb.core.ade.exporter.ADEExporter;
+import org.citydb.core.ade.exporter.CityGMLExportHelper;
+import org.citydb.core.operation.exporter.CityGMLExportException;
+import org.citydb.core.operation.exporter.util.AttributeValueSplitter;
+import org.citydb.core.operation.exporter.util.SplitValue;
 import org.citygml.ade.test.model.AbstractBuildingUnit;
 import org.citygml.ade.test.model.EnergyPerformanceCertification;
 import org.citygml.ade.test.model.EnergyPerformanceCertificationProperty;

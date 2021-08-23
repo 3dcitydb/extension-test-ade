@@ -28,20 +28,16 @@
 
 package org.citydb.ade.test.exporter;
 
-import org.citydb.ade.exporter.ADEExporter;
-import org.citydb.ade.exporter.CityGMLExportHelper;
 import org.citydb.ade.test.schema.ADETable;
-import org.citydb.citygml.exporter.CityGMLExportException;
-import org.citydb.citygml.exporter.util.AttributeValueSplitter;
-import org.citydb.citygml.exporter.util.AttributeValueSplitter.SplitValue;
-import org.citydb.database.schema.mapping.FeatureType;
-import org.citydb.query.filter.lod.LodFilter;
-import org.citydb.query.filter.projection.ProjectionFilter;
-import org.citygml.ade.test.model.EnergyPerformanceCertification;
-import org.citygml.ade.test.model.EnergyPerformanceCertificationProperty;
-import org.citygml.ade.test.model.EnergyPerformanceCertificationPropertyElement;
-import org.citygml.ade.test.model.FloorAreaProperty;
-import org.citygml.ade.test.model.OwnerNameProperty;
+import org.citydb.core.ade.exporter.ADEExporter;
+import org.citydb.core.ade.exporter.CityGMLExportHelper;
+import org.citydb.core.database.schema.mapping.FeatureType;
+import org.citydb.core.operation.exporter.CityGMLExportException;
+import org.citydb.core.operation.exporter.util.AttributeValueSplitter;
+import org.citydb.core.operation.exporter.util.SplitValue;
+import org.citydb.core.query.filter.lod.LodFilter;
+import org.citydb.core.query.filter.projection.ProjectionFilter;
+import org.citygml.ade.test.model.*;
 import org.citygml.ade.test.model.module.TestADEModule;
 import org.citygml4j.model.citygml.building.AbstractBuilding;
 import org.citygml4j.model.gml.measures.Area;

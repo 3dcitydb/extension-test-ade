@@ -26,16 +26,16 @@
  * limitations under the License.
  */
 
-package org.citydb.ade.test.kmlExporter;
+package org.citydb.ade.test.visExporter;
 
-import org.citydb.ade.kmlExporter.ADEKmlExportHelper;
-import org.citydb.ade.kmlExporter.ADEKmlExporter;
+import org.citydb.core.ade.visExporter.ADEVisExportHelper;
+import org.citydb.core.ade.visExporter.ADEVisExporter;
 
-public class BuildingKmlExporter implements ADEKmlExporter {
-	private ADEKmlExportHelper helper;
+public class BuildingVisExporter implements ADEVisExporter {
+	private ADEVisExportHelper helper;
 	private final String schema;
 
-	public BuildingKmlExporter(ADEKmlExportHelper helper) {
+	public BuildingVisExporter(ADEVisExportHelper helper) {
 		this.helper = helper;
 		this.schema = helper.getDatabaseAdapter().getConnectionDetails().getSchema();
 	}

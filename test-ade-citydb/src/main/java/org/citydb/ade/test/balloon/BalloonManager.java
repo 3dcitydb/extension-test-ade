@@ -28,12 +28,12 @@
 
 package org.citydb.ade.test.balloon;
 
-import org.citydb.ade.kmlExporter.ADEBalloonException;
-import org.citydb.ade.kmlExporter.ADEBalloonHandler;
-import org.citydb.ade.kmlExporter.ADEBalloonManager;
 import org.citydb.ade.test.schema.ADETableMapper;
 import org.citydb.ade.test.schema.SchemaMapper;
-import org.citydb.util.Util;
+import org.citydb.core.ade.visExporter.ADEBalloonException;
+import org.citydb.core.ade.visExporter.ADEBalloonHandler;
+import org.citydb.core.ade.visExporter.ADEBalloonManager;
+import org.citydb.core.util.Util;
 import org.citygml.ade.test.model.IndustrialBuilding;
 import org.citygml.ade.test.model.OtherConstruction;
 import org.citygml4j.model.citygml.building.AbstractBuilding;

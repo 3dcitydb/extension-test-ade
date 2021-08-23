@@ -28,20 +28,11 @@
 
 package org.citydb.ade.test.schema;
 
-import org.citydb.ade.ADEExtensionException;
-import org.citydb.ade.ADEObjectMapper;
-import org.citydb.database.schema.mapping.AbstractObjectType;
-import org.citydb.database.schema.mapping.SchemaMapping;
-import org.citygml.ade.test.model.AbstractBuildingUnit;
-import org.citygml.ade.test.model.AbstractFacilities;
-import org.citygml.ade.test.model.BuildingUnit;
-import org.citygml.ade.test.model.BuildingUnitPart;
-import org.citygml.ade.test.model.DHWFacilities;
-import org.citygml.ade.test.model.IndustrialBuilding;
-import org.citygml.ade.test.model.IndustrialBuildingPart;
-import org.citygml.ade.test.model.IndustrialBuildingRoofSurface;
-import org.citygml.ade.test.model.LightingFacilities;
-import org.citygml.ade.test.model.OtherConstruction;
+import org.citydb.core.ade.ADEExtensionException;
+import org.citydb.core.ade.ADEObjectMapper;
+import org.citydb.core.database.schema.mapping.AbstractObjectType;
+import org.citydb.core.database.schema.mapping.SchemaMapping;
+import org.citygml.ade.test.model.*;
 import org.citygml4j.model.gml.base.AbstractGML;
 import org.citygml4j.model.module.citygml.CityGMLVersion;
 

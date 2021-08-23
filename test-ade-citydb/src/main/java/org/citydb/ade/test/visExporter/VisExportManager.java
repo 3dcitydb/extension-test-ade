@@ -26,14 +26,14 @@
  * limitations under the License.
  */
 
-package org.citydb.ade.test.kmlExporter;
+package org.citydb.ade.test.visExporter;
 
-import org.citydb.ade.kmlExporter.ADEKmlExportException;
-import org.citydb.ade.kmlExporter.ADEKmlExportHelper;
-import org.citydb.ade.kmlExporter.ADEKmlExportManager;
-import org.citydb.ade.kmlExporter.ADEKmlExporter;
 import org.citydb.ade.test.schema.SchemaMapper;
-import org.citydb.util.Util;
+import org.citydb.core.ade.visExporter.ADEVisExportException;
+import org.citydb.core.ade.visExporter.ADEVisExportHelper;
+import org.citydb.core.ade.visExporter.ADEVisExportManager;
+import org.citydb.core.ade.visExporter.ADEVisExporter;
+import org.citydb.core.util.Util;
 import org.citygml.ade.test.model.IndustrialBuilding;
 import org.citygml.ade.test.model.OtherConstruction;
 import org.citygml4j.model.citygml.building.Building;
@@ -43,32 +43,32 @@ import org.citygml4j.model.module.citygml.CityGMLVersion;
 import java.util.HashMap;
 import java.util.Map;
 
-public class KMLExportManager implements ADEKmlExportManager {
+public class VisExportManager implements ADEVisExportManager {
 	private final SchemaMapper schemaMapper;
-	private final Map<Class<? extends ADEKmlExporter>, ADEKmlExporter> exporters;
-	private ADEKmlExportHelper helper;
+	private final Map<Class<? extends ADEVisExporter>, ADEVisExporter> exporters;
+	private ADEVisExportHelper helper;
 
-	public KMLExportManager(SchemaMapper schemaMapper) {
+	public VisExportManager(SchemaMapper schemaMapper) {
 		this.schemaMapper = schemaMapper;
 		exporters = new HashMap<>();
 	}
 
 	@Override
-	public void init(ADEKmlExportHelper helper) {
+	public void init(ADEVisExportHelper helper) {
 		this.helper = helper;
 	}
 
 	@Override
-	public ADEKmlExporter getKmlExporter(int objectClassId) throws ADEKmlExportException {
+	public ADEVisExporter getVisExporter(int objectClassId) throws ADEVisExportException {
 		AbstractGML modelObject = Util.createObject(objectClassId, CityGMLVersion.v2_0_0);
-		ADEKmlExporter exporter = null;
+		ADEVisExporter exporter = null;
 
 		if (modelObject instanceof Building) {
-			exporter = getKmlExporter(BuildingKmlExporter.class);
+			exporter = getVisExporter(BuildingVisExporter.class);
 		} else if (modelObject instanceof OtherConstruction) {
-			exporter = getKmlExporter(OtherConstructionKmlExporter.class);
+			exporter = getVisExporter(OtherConstructionVisExporter.class);
 		} else if (modelObject instanceof IndustrialBuilding) {
-			exporter = getKmlExporter(IndustrialBuildingKmlExporter.class);
+			exporter = getVisExporter(IndustrialBuildingVisExporter.class);
 		}
 
 		return exporter;
@@ -78,20 +78,20 @@ public class KMLExportManager implements ADEKmlExportManager {
 		return schemaMapper;
 	}
 
-	private <T extends ADEKmlExporter> T getKmlExporter(Class<T> type) throws ADEKmlExportException {
-		ADEKmlExporter exporter = exporters.get(type);
+	private <T extends ADEVisExporter> T getVisExporter(Class<T> type) throws ADEVisExportException {
+		ADEVisExporter exporter = exporters.get(type);
 
 		if (exporter == null) {
-			if (type == BuildingKmlExporter.class) {
-				exporter = new BuildingKmlExporter(helper);
-			} else if (type == OtherConstructionKmlExporter.class) {
-				exporter = new OtherConstructionKmlExporter(helper);
-			} else if (type == IndustrialBuildingKmlExporter.class) {
-				exporter = new IndustrialBuildingKmlExporter(helper);
+			if (type == BuildingVisExporter.class) {
+				exporter = new BuildingVisExporter(helper);
+			} else if (type == OtherConstructionVisExporter.class) {
+				exporter = new OtherConstructionVisExporter(helper);
+			} else if (type == IndustrialBuildingVisExporter.class) {
+				exporter = new IndustrialBuildingVisExporter(helper);
 			}
 
 			if (exporter == null)
-				throw new ADEKmlExportException("Failed to build ADE KML exporter of type " + type.getName() + ".");
+				throw new ADEVisExportException("Failed to build ADE KML exporter of type " + type.getName() + ".");
 
 			exporters.put(type, exporter);
 		}

@@ -2,5 +2,5 @@ group 'org.citydb.ade'
 
 dependencies {
     implementation project(':test-ade-citygml4j')
-    api 'org.citydb:impexp-client:4.3.0'
+    api 'org.citydb:impexp-client-gui:4.4.0-SNAPSHOT'
 }

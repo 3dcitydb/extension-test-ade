@@ -26,20 +26,20 @@
  * limitations under the License.
  */
 
-package org.citydb.ade.test.kmlExporter;
+package org.citydb.ade.test.visExporter;
 
-import org.citydb.ade.kmlExporter.ADEKmlExportHelper;
-import org.citydb.ade.kmlExporter.ADEKmlExporter;
-import org.citydb.config.project.kmlExporter.DisplayForm;
-import org.citydb.config.project.kmlExporter.DisplayFormType;
-import org.citydb.config.project.kmlExporter.Lod0FootprintMode;
-import org.citydb.util.Util;
+import org.citydb.config.project.visExporter.DisplayForm;
+import org.citydb.config.project.visExporter.DisplayFormType;
+import org.citydb.config.project.visExporter.Lod0FootprintMode;
+import org.citydb.core.ade.visExporter.ADEVisExportHelper;
+import org.citydb.core.ade.visExporter.ADEVisExporter;
+import org.citydb.core.util.Util;
 import org.citygml4j.model.citygml.building.Building;
 
-public class IndustrialBuildingKmlExporter implements ADEKmlExporter {
-	private ADEKmlExportHelper helper;
+public class IndustrialBuildingVisExporter implements ADEVisExporter {
+	private ADEVisExportHelper helper;
 
-	public IndustrialBuildingKmlExporter(ADEKmlExportHelper helper) {
+	public IndustrialBuildingVisExporter(ADEVisExportHelper helper) {
 		this.helper = helper;
 	}
 

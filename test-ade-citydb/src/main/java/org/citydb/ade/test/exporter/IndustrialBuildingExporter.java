@@ -28,12 +28,12 @@
 
 package org.citydb.ade.test.exporter;
 
-import org.citydb.ade.exporter.ADEExporter;
-import org.citydb.ade.exporter.CityGMLExportHelper;
 import org.citydb.ade.test.schema.ADETable;
-import org.citydb.citygml.exporter.CityGMLExportException;
-import org.citydb.database.schema.mapping.AbstractType;
-import org.citydb.query.filter.projection.ProjectionFilter;
+import org.citydb.core.ade.exporter.ADEExporter;
+import org.citydb.core.ade.exporter.CityGMLExportHelper;
+import org.citydb.core.database.schema.mapping.AbstractType;
+import org.citydb.core.operation.exporter.CityGMLExportException;
+import org.citydb.core.query.filter.projection.ProjectionFilter;
 import org.citygml.ade.test.model.IndustrialBuilding;
 
 import java.sql.Connection;

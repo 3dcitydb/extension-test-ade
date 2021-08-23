@@ -28,13 +28,13 @@
 
 package org.citydb.ade.test.importer;
 
-import org.citydb.ade.importer.ADEImporter;
-import org.citydb.ade.importer.CityGMLImportHelper;
 import org.citydb.ade.test.schema.ADESequence;
 import org.citydb.ade.test.schema.ADETable;
 import org.citydb.ade.test.schema.SchemaMapper;
-import org.citydb.citygml.importer.CityGMLImportException;
-import org.citydb.citygml.importer.util.AttributeValueJoiner;
+import org.citydb.core.ade.importer.ADEImporter;
+import org.citydb.core.ade.importer.CityGMLImportHelper;
+import org.citydb.core.operation.importer.CityGMLImportException;
+import org.citydb.core.operation.importer.util.AttributeValueJoiner;
 import org.citygml.ade.test.model.EnergyPerformanceCertification;
 
 import java.sql.Connection;

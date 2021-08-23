@@ -28,23 +28,23 @@
 
 package org.citydb.ade.test;
 
-import org.citydb.ImpExpLauncher;
-import org.citydb.ade.ADEExtension;
-import org.citydb.ade.ADEExtensionException;
-import org.citydb.ade.ADEObjectMapper;
-import org.citydb.ade.exporter.ADEExportManager;
-import org.citydb.ade.importer.ADEImportManager;
-import org.citydb.ade.kmlExporter.ADEBalloonManager;
-import org.citydb.ade.kmlExporter.ADEKmlExportExtension;
-import org.citydb.ade.kmlExporter.ADEKmlExportManager;
 import org.citydb.ade.test.balloon.BalloonManager;
 import org.citydb.ade.test.exporter.ExportManager;
 import org.citydb.ade.test.importer.ImportManager;
-import org.citydb.ade.test.kmlExporter.KMLExportManager;
 import org.citydb.ade.test.schema.ADETableMapper;
 import org.citydb.ade.test.schema.ObjectMapper;
 import org.citydb.ade.test.schema.SchemaMapper;
-import org.citydb.database.schema.mapping.SchemaMapping;
+import org.citydb.ade.test.visExporter.VisExportManager;
+import org.citydb.core.ade.ADEExtension;
+import org.citydb.core.ade.ADEExtensionException;
+import org.citydb.core.ade.ADEObjectMapper;
+import org.citydb.core.ade.exporter.ADEExportManager;
+import org.citydb.core.ade.importer.ADEImportManager;
+import org.citydb.core.ade.visExporter.ADEBalloonManager;
+import org.citydb.core.ade.visExporter.ADEVisExportExtension;
+import org.citydb.core.ade.visExporter.ADEVisExportManager;
+import org.citydb.core.database.schema.mapping.SchemaMapping;
+import org.citydb.gui.ImpExpLauncher;
 import org.citygml.ade.test.TestADEContext;
 import org.citygml4j.model.citygml.ade.binding.ADEContext;
 
@@ -52,7 +52,7 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
-public class TestADEExtension extends ADEExtension implements ADEKmlExportExtension {
+public class TestADEExtension extends ADEExtension implements ADEVisExportExtension {
 	private final ObjectMapper objectMapper = new ObjectMapper();
 	private final SchemaMapper schemaMapper = new SchemaMapper();
 	private final ADETableMapper tableMapper = new ADETableMapper();
@@ -98,8 +98,8 @@ public class TestADEExtension extends ADEExtension implements ADEKmlExportExtens
 	}
 
 	@Override
-	public ADEKmlExportManager createADEKmlExportManager() {
-		return new KMLExportManager(schemaMapper);
+	public ADEVisExportManager createADEVisExportManager() {
+		return new VisExportManager(schemaMapper);
 	}
 
 	@Override

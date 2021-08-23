@@ -28,26 +28,21 @@
 
 package org.citydb.ade.test.exporter;
 
-import org.citydb.ade.exporter.ADEExporter;
-import org.citydb.ade.exporter.CityGMLExportHelper;
 import org.citydb.ade.test.schema.ADETable;
-import org.citydb.citygml.exporter.CityGMLExportException;
-import org.citydb.citygml.exporter.database.content.GMLConverter;
-import org.citydb.citygml.exporter.database.content.SurfaceGeometryExporter;
-import org.citydb.citygml.exporter.util.AttributeValueSplitter;
-import org.citydb.citygml.exporter.util.AttributeValueSplitter.SplitValue;
 import org.citydb.config.geometry.GeometryObject;
-import org.citydb.database.schema.mapping.FeatureProperty;
-import org.citydb.database.schema.mapping.FeatureType;
-import org.citydb.query.filter.lod.LodFilter;
-import org.citydb.query.filter.lod.LodIterator;
-import org.citydb.query.filter.projection.ProjectionFilter;
-import org.citygml.ade.test.model.AbstractBuildingUnit;
-import org.citygml.ade.test.model.BuildingUnit;
-import org.citygml.ade.test.model.BuildingUnitPart;
-import org.citygml.ade.test.model.BuildingUnitPartProperty;
-import org.citygml.ade.test.model.BuildingUnitProperty;
-import org.citygml.ade.test.model.BuildingUnitPropertyElement;
+import org.citydb.core.ade.exporter.ADEExporter;
+import org.citydb.core.ade.exporter.CityGMLExportHelper;
+import org.citydb.core.database.schema.mapping.FeatureProperty;
+import org.citydb.core.database.schema.mapping.FeatureType;
+import org.citydb.core.operation.exporter.CityGMLExportException;
+import org.citydb.core.operation.exporter.database.content.GMLConverter;
+import org.citydb.core.operation.exporter.database.content.SurfaceGeometryExporter;
+import org.citydb.core.operation.exporter.util.AttributeValueSplitter;
+import org.citydb.core.operation.exporter.util.SplitValue;
+import org.citydb.core.query.filter.lod.LodFilter;
+import org.citydb.core.query.filter.lod.LodIterator;
+import org.citydb.core.query.filter.projection.ProjectionFilter;
+import org.citygml.ade.test.model.*;
 import org.citygml.ade.test.model.module.TestADEModule;
 import org.citygml4j.model.citygml.building.AbstractBuilding;
 import org.citygml4j.model.citygml.core.Address;
@@ -149,7 +144,7 @@ public class BuildingUnitExporter implements ADEExporter {
 				if (projectionFilter.containsProperty("address")) {
 					FeatureProperty property = featureType.getFeatureProperty("address", TestADEModule.v1_0.getNamespaceURI(), true);
 					if (property != null) {
-						for (Address address : helper.exportNestedCityGMLObjects(property, buildingUnitId, Address.class))
+						for (Address address : helper.exportNestedFeatures(property, buildingUnitId, Address.class))
 							buildingUnit.addAddress(new AddressProperty(address));
 					}
 				}
