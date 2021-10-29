@@ -23,31 +23,31 @@
                 <join table="cityobject" fromColumn="id" toColumn="id" toRole="parent"/>
             </extension>
             <complexAttribute maxOccurs="1" path="class" schema="test">
-                <attribute column="class_codespace" type="string" path="@codespace" schema="test"/>
+                <attribute column="class_codespace" type="string" path="@codespace" schema="gml"/>
                 <attribute column="class" type="string" path="." schema="test"/>
             </complexAttribute>
             <complexAttribute path="usage" schema="test">
-                <attribute column="usage_codespace" type="string" path="@codespace" schema="test"/>
+                <attribute column="usage_codespace" type="string" path="@codespace" schema="gml"/>
                 <attribute column="usage" type="string" path="." schema="test"/>
             </complexAttribute>
             <complexAttribute path="function" schema="test">
-                <attribute column="function_codespace" type="string" path="@codespace" schema="test"/>
+                <attribute column="function_codespace" type="string" path="@codespace" schema="gml"/>
                 <attribute column="function" type="string" path="." schema="test"/>
             </complexAttribute>
             <complexProperty refType="test_EnergyPerformanceCertificationType" path="energyPerformanceCertification" schema="test">
                 <join table="test_energyperformancecer" fromColumn="id" toColumn="buildingunit_energyperfor_id" toRole="child"/>
             </complexProperty>
-            <geometryProperty inlineColumn="lod2multicurve" type="MultiCurve" maxOccurs="1" path="lod2MultiCurve" schema="test"/>
-            <geometryProperty inlineColumn="lod3multicurve" type="MultiCurve" maxOccurs="1" path="lod3MultiCurve" schema="test"/>
-            <geometryProperty inlineColumn="lod4multicurve" type="MultiCurve" maxOccurs="1" path="lod4MultiCurve" schema="test"/>
-            <geometryProperty refColumn="lod1multisurface_id" type="MultiSurface" maxOccurs="1" path="lod1MultiSurface" schema="test"/>
-            <geometryProperty refColumn="lod2multisurface_id" type="MultiSurface" maxOccurs="1" path="lod2MultiSurface" schema="test"/>
-            <geometryProperty refColumn="lod3multisurface_id" type="MultiSurface" maxOccurs="1" path="lod3MultiSurface" schema="test"/>
-            <geometryProperty refColumn="lod4multisurface_id" type="MultiSurface" maxOccurs="1" path="lod4MultiSurface" schema="test"/>
-            <geometryProperty refColumn="lod1solid_id" type="AbstractSolid" maxOccurs="1" path="lod1Solid" schema="test"/>
-            <geometryProperty refColumn="lod2solid_id" type="AbstractSolid" maxOccurs="1" path="lod2Solid" schema="test"/>
-            <geometryProperty refColumn="lod3solid_id" type="AbstractSolid" maxOccurs="1" path="lod3Solid" schema="test"/>
-            <geometryProperty refColumn="lod4solid_id" type="AbstractSolid" maxOccurs="1" path="lod4Solid" schema="test"/>
+            <geometryProperty lod="2" inlineColumn="lod2multicurve" type="MultiCurve" maxOccurs="1" path="lod2MultiCurve" schema="test"/>
+            <geometryProperty lod="3" inlineColumn="lod3multicurve" type="MultiCurve" maxOccurs="1" path="lod3MultiCurve" schema="test"/>
+            <geometryProperty lod="4" inlineColumn="lod4multicurve" type="MultiCurve" maxOccurs="1" path="lod4MultiCurve" schema="test"/>
+            <geometryProperty lod="1" refColumn="lod1multisurface_id" type="MultiSurface" maxOccurs="1" path="lod1MultiSurface" schema="test"/>
+            <geometryProperty lod="2" refColumn="lod2multisurface_id" type="MultiSurface" maxOccurs="1" path="lod2MultiSurface" schema="test"/>
+            <geometryProperty lod="3" refColumn="lod3multisurface_id" type="MultiSurface" maxOccurs="1" path="lod3MultiSurface" schema="test"/>
+            <geometryProperty lod="4" refColumn="lod4multisurface_id" type="MultiSurface" maxOccurs="1" path="lod4MultiSurface" schema="test"/>
+            <geometryProperty lod="1" refColumn="lod1solid_id" type="AbstractSolid" maxOccurs="1" path="lod1Solid" schema="test"/>
+            <geometryProperty lod="2" refColumn="lod2solid_id" type="AbstractSolid" maxOccurs="1" path="lod2Solid" schema="test"/>
+            <geometryProperty lod="3" refColumn="lod3solid_id" type="AbstractSolid" maxOccurs="1" path="lod3Solid" schema="test"/>
+            <geometryProperty lod="4" refColumn="lod4solid_id" type="AbstractSolid" maxOccurs="1" path="lod4Solid" schema="test"/>
             <featureProperty target="AddressType" relationType="aggregation" path="address" schema="test">
                 <joinTable table="test_buildingu_to_address">
                     <join table="test_buildingunit" fromColumn="buildingunit_id" toColumn="id" toRole="parent">
@@ -73,7 +73,7 @@
                 <join table="cityobject" fromColumn="id" toColumn="id" toRole="parent"/>
             </extension>
             <complexAttribute minOccurs="1" maxOccurs="1" path="totalValue" schema="test">
-                <attribute column="totalvalue_uom" type="string" path="@uom" schema="test"/>
+                <attribute column="totalvalue_uom" type="string" path="@uom" schema="gml"/>
                 <attribute column="totalvalue" type="double" path="." schema="test"/>
             </complexAttribute>
         </featureType>
@@ -124,7 +124,7 @@
             <join table="test_building" fromColumn="ID" toColumn="ID" toRole="child"/>
             <attribute column="ownername" type="string" maxOccurs="1" path="ownerName" schema="test"/>
             <complexAttribute maxOccurs="1" path="floorArea" schema="test">
-                <attribute column="floorarea_uom" type="string" path="@uom" schema="test"/>
+                <attribute column="floorarea_uom" type="string" path="@uom" schema="gml"/>
                 <attribute column="floorarea" type="double" path="." schema="test"/>
             </complexAttribute>
             <complexProperty minOccurs="1" maxOccurs="1" path="energyPerformanceCertification" schema="test">

@@ -1,4 +1,4 @@
--- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2018-06-05 16:43:56 
+-- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2021-10-04 09:46:58 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 -- *********************************** Create tables ************************************** 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
@@ -7,7 +7,7 @@
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_building
 (
-    id INTEGER NOT NULL,
+    id NUMBER(38) NOT NULL,
     energyperform_certificatio_1 VARCHAR2(1000),
     energyperforma_certification VARCHAR2(1000),
     floorarea NUMBER,
@@ -21,8 +21,8 @@ CREATE TABLE test_building
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_buildingu_to_address
 (
-    address_id INTEGER NOT NULL,
-    buildingunit_id INTEGER NOT NULL,
+    address_id NUMBER(38) NOT NULL,
+    buildingunit_id NUMBER(38) NOT NULL,
     PRIMARY KEY (address_id, buildingunit_id)
 );
 
@@ -31,25 +31,25 @@ CREATE TABLE test_buildingu_to_address
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_buildingunit
 (
-    id INTEGER NOT NULL,
-    building_buildingunit_id INTEGER,
-    buildingunit_parent_id INTEGER,
-    buildingunit_root_id INTEGER,
+    id NUMBER(38) NOT NULL,
+    building_buildingunit_id NUMBER(38),
+    buildingunit_parent_id NUMBER(38),
+    buildingunit_root_id NUMBER(38),
     class VARCHAR2(1000),
     class_codespace VARCHAR2(1000),
     function VARCHAR2(1000),
     function_codespace VARCHAR2(1000),
-    lod1multisurface_id INTEGER,
-    lod1solid_id INTEGER,
+    lod1multisurface_id NUMBER(38),
+    lod1solid_id NUMBER(38),
     lod2multicurve MDSYS.SDO_GEOMETRY,
-    lod2multisurface_id INTEGER,
-    lod2solid_id INTEGER,
+    lod2multisurface_id NUMBER(38),
+    lod2solid_id NUMBER(38),
     lod3multicurve MDSYS.SDO_GEOMETRY,
-    lod3multisurface_id INTEGER,
-    lod3solid_id INTEGER,
+    lod3multisurface_id NUMBER(38),
+    lod3solid_id NUMBER(38),
     lod4multicurve MDSYS.SDO_GEOMETRY,
-    lod4multisurface_id INTEGER,
-    lod4solid_id INTEGER,
+    lod4multisurface_id NUMBER(38),
+    lod4solid_id NUMBER(38),
     objectclass_id INTEGER,
     usage VARCHAR2(1000),
     usage_codespace VARCHAR2(1000),
@@ -61,8 +61,8 @@ CREATE TABLE test_buildingunit
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_energyperformancecer
 (
-    id INTEGER NOT NULL,
-    buildingunit_energyperfor_id INTEGER,
+    id NUMBER(38) NOT NULL,
+    buildingunit_energyperfor_id NUMBER(38),
     certificationid VARCHAR2(1000),
     certificationname VARCHAR2(1000),
     PRIMARY KEY (id)
@@ -73,8 +73,8 @@ CREATE TABLE test_energyperformancecer
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_facilities
 (
-    id INTEGER NOT NULL,
-    buildingunit_equippedwith_id INTEGER,
+    id NUMBER(38) NOT NULL,
+    buildingunit_equippedwith_id NUMBER(38),
     objectclass_id INTEGER,
     totalvalue NUMBER,
     totalvalue_uom VARCHAR2(1000),
@@ -86,7 +86,7 @@ CREATE TABLE test_facilities
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_industrialbuilding
 (
-    id INTEGER NOT NULL,
+    id NUMBER(38) NOT NULL,
     remark VARCHAR2(1000),
     PRIMARY KEY (id)
 );
@@ -96,7 +96,7 @@ CREATE TABLE test_industrialbuilding
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_industrialbuildingpa
 (
-    id INTEGER NOT NULL,
+    id NUMBER(38) NOT NULL,
     remark VARCHAR2(1000),
     PRIMARY KEY (id)
 );
@@ -106,7 +106,7 @@ CREATE TABLE test_industrialbuildingpa
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_industrialbuildingro
 (
-    id INTEGER NOT NULL,
+    id NUMBER(38) NOT NULL,
     remark VARCHAR2(1000),
     PRIMARY KEY (id)
 );
@@ -116,8 +116,8 @@ CREATE TABLE test_industrialbuildingro
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_other_to_thema_surfa
 (
-    otherconstruction_id INTEGER NOT NULL,
-    thematic_surface_id INTEGER NOT NULL,
+    otherconstruction_id NUMBER(38) NOT NULL,
+    thematic_surface_id NUMBER(38) NOT NULL,
     PRIMARY KEY (otherconstruction_id, thematic_surface_id)
 );
 
@@ -126,7 +126,7 @@ CREATE TABLE test_other_to_thema_surfa
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_otherconstruction
 (
-    id INTEGER NOT NULL,
+    id NUMBER(38) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -158,14 +158,14 @@ REFERENCES objectclass (id);
 ALTER TABLE test_buildingunit ADD CONSTRAINT test_buildingunit_fk FOREIGN KEY (id)
 REFERENCES cityobject (id);
 
+ALTER TABLE test_buildingunit ADD CONSTRAINT test_buildi_build_build_fk FOREIGN KEY (building_buildingunit_id)
+REFERENCES test_building (id);
+
 ALTER TABLE test_buildingunit ADD CONSTRAINT test_buildinguni_parent_fk FOREIGN KEY (buildingunit_parent_id)
 REFERENCES test_buildingunit (id);
 
 ALTER TABLE test_buildingunit ADD CONSTRAINT test_buildingunit_root_fk FOREIGN KEY (buildingunit_root_id)
 REFERENCES test_buildingunit (id);
-
-ALTER TABLE test_buildingunit ADD CONSTRAINT test_buildi_build_build_fk FOREIGN KEY (building_buildingunit_id)
-REFERENCES test_building (id);
 
 ALTER TABLE test_buildingunit ADD CONSTRAINT test_buildingu_lod1mult_fk FOREIGN KEY (lod1multisurface_id)
 REFERENCES surface_geometry (id);
@@ -200,11 +200,11 @@ REFERENCES test_buildingunit (id);
 -- -------------------------------------------------------------------- 
 -- test_facilities 
 -- -------------------------------------------------------------------- 
-ALTER TABLE test_facilities ADD CONSTRAINT test_facilitie_objectcl_fk FOREIGN KEY (objectclass_id)
-REFERENCES objectclass (id);
-
 ALTER TABLE test_facilities ADD CONSTRAINT test_facilities_fk FOREIGN KEY (id)
 REFERENCES cityobject (id);
+
+ALTER TABLE test_facilities ADD CONSTRAINT test_facilitie_objectcl_fk FOREIGN KEY (objectclass_id)
+REFERENCES objectclass (id);
 
 ALTER TABLE test_facilities ADD CONSTRAINT test_facili_build_equip_fk FOREIGN KEY (buildingunit_equippedwith_id)
 REFERENCES test_buildingunit (id);

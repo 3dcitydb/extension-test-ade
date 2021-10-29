@@ -1,4 +1,4 @@
--- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2018-06-05 16:43:56 
+-- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2021-10-04 09:46:58 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 -- *********************************** Drop foreign keys ********************************** 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
@@ -27,13 +27,13 @@ ALTER TABLE test_buildingunit
     DROP CONSTRAINT test_buildingunit_fk;
 
 ALTER TABLE test_buildingunit
+    DROP CONSTRAINT test_buildi_build_build_fk;
+
+ALTER TABLE test_buildingunit
     DROP CONSTRAINT test_buildinguni_parent_fk;
 
 ALTER TABLE test_buildingunit
     DROP CONSTRAINT test_buildingunit_root_fk;
-
-ALTER TABLE test_buildingunit
-    DROP CONSTRAINT test_buildi_build_build_fk;
 
 ALTER TABLE test_buildingunit
     DROP CONSTRAINT test_buildingu_lod1mult_fk;
@@ -69,10 +69,10 @@ ALTER TABLE test_energyperformancecer
 -- test_facilities 
 -- -------------------------------------------------------------------- 
 ALTER TABLE test_facilities
-    DROP CONSTRAINT test_facilitie_objectcl_fk;
+    DROP CONSTRAINT test_facilities_fk;
 
 ALTER TABLE test_facilities
-    DROP CONSTRAINT test_facilities_fk;
+    DROP CONSTRAINT test_facilitie_objectcl_fk;
 
 ALTER TABLE test_facilities
     DROP CONSTRAINT test_facili_build_equip_fk;

@@ -1,4 +1,4 @@
--- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2018-06-05 16:43:56 
+-- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2021-10-04 09:46:58 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 -- *********************************** Create tables ************************************** 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
@@ -7,7 +7,7 @@
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_building
 (
-    id INTEGER NOT NULL,
+    id BIGINT NOT NULL,
     energyperform_certificatio_1 VARCHAR(1000),
     energyperforma_certification VARCHAR(1000),
     floorarea NUMERIC,
@@ -21,8 +21,8 @@ CREATE TABLE test_building
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_buildingu_to_address
 (
-    address_id INTEGER NOT NULL,
-    buildingunit_id INTEGER NOT NULL,
+    address_id BIGINT NOT NULL,
+    buildingunit_id BIGINT NOT NULL,
     PRIMARY KEY (address_id, buildingunit_id)
 );
 
@@ -31,25 +31,25 @@ CREATE TABLE test_buildingu_to_address
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_buildingunit
 (
-    id INTEGER NOT NULL,
-    building_buildingunit_id INTEGER,
-    buildingunit_parent_id INTEGER,
-    buildingunit_root_id INTEGER,
+    id BIGINT NOT NULL,
+    building_buildingunit_id BIGINT,
+    buildingunit_parent_id BIGINT,
+    buildingunit_root_id BIGINT,
     class VARCHAR(1000),
     class_codespace VARCHAR(1000),
     function VARCHAR(1000),
     function_codespace VARCHAR(1000),
-    lod1multisurface_id INTEGER,
-    lod1solid_id INTEGER,
+    lod1multisurface_id BIGINT,
+    lod1solid_id BIGINT,
     lod2multicurve geometry(GEOMETRYZ),
-    lod2multisurface_id INTEGER,
-    lod2solid_id INTEGER,
+    lod2multisurface_id BIGINT,
+    lod2solid_id BIGINT,
     lod3multicurve geometry(GEOMETRYZ),
-    lod3multisurface_id INTEGER,
-    lod3solid_id INTEGER,
+    lod3multisurface_id BIGINT,
+    lod3solid_id BIGINT,
     lod4multicurve geometry(GEOMETRYZ),
-    lod4multisurface_id INTEGER,
-    lod4solid_id INTEGER,
+    lod4multisurface_id BIGINT,
+    lod4solid_id BIGINT,
     objectclass_id INTEGER,
     usage VARCHAR(1000),
     usage_codespace VARCHAR(1000),
@@ -61,8 +61,8 @@ CREATE TABLE test_buildingunit
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_energyperformancecer
 (
-    id INTEGER NOT NULL,
-    buildingunit_energyperfor_id INTEGER,
+    id BIGINT NOT NULL,
+    buildingunit_energyperfor_id BIGINT,
     certificationid VARCHAR(1000),
     certificationname VARCHAR(1000),
     PRIMARY KEY (id)
@@ -73,8 +73,8 @@ CREATE TABLE test_energyperformancecer
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_facilities
 (
-    id INTEGER NOT NULL,
-    buildingunit_equippedwith_id INTEGER,
+    id BIGINT NOT NULL,
+    buildingunit_equippedwith_id BIGINT,
     objectclass_id INTEGER,
     totalvalue NUMERIC,
     totalvalue_uom VARCHAR(1000),
@@ -86,7 +86,7 @@ CREATE TABLE test_facilities
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_industrialbuilding
 (
-    id INTEGER NOT NULL,
+    id BIGINT NOT NULL,
     remark VARCHAR(1000),
     PRIMARY KEY (id)
 );
@@ -96,7 +96,7 @@ CREATE TABLE test_industrialbuilding
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_industrialbuildingpa
 (
-    id INTEGER NOT NULL,
+    id BIGINT NOT NULL,
     remark VARCHAR(1000),
     PRIMARY KEY (id)
 );
@@ -106,7 +106,7 @@ CREATE TABLE test_industrialbuildingpa
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_industrialbuildingro
 (
-    id INTEGER NOT NULL,
+    id BIGINT NOT NULL,
     remark VARCHAR(1000),
     PRIMARY KEY (id)
 );
@@ -116,8 +116,8 @@ CREATE TABLE test_industrialbuildingro
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_other_to_thema_surfa
 (
-    otherconstruction_id INTEGER NOT NULL,
-    thematic_surface_id INTEGER NOT NULL,
+    otherconstruction_id BIGINT NOT NULL,
+    thematic_surface_id BIGINT NOT NULL,
     PRIMARY KEY (otherconstruction_id, thematic_surface_id)
 );
 
@@ -126,7 +126,7 @@ CREATE TABLE test_other_to_thema_surfa
 -- -------------------------------------------------------------------- 
 CREATE TABLE test_otherconstruction
 (
-    id INTEGER NOT NULL,
+    id BIGINT NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -158,14 +158,14 @@ REFERENCES objectclass (id);
 ALTER TABLE test_buildingunit ADD CONSTRAINT test_buildingunit_fk FOREIGN KEY (id)
 REFERENCES cityobject (id);
 
+ALTER TABLE test_buildingunit ADD CONSTRAINT test_buildi_build_build_fk FOREIGN KEY (building_buildingunit_id)
+REFERENCES test_building (id);
+
 ALTER TABLE test_buildingunit ADD CONSTRAINT test_buildinguni_parent_fk FOREIGN KEY (buildingunit_parent_id)
 REFERENCES test_buildingunit (id);
 
 ALTER TABLE test_buildingunit ADD CONSTRAINT test_buildingunit_root_fk FOREIGN KEY (buildingunit_root_id)
 REFERENCES test_buildingunit (id);
-
-ALTER TABLE test_buildingunit ADD CONSTRAINT test_buildi_build_build_fk FOREIGN KEY (building_buildingunit_id)
-REFERENCES test_building (id);
 
 ALTER TABLE test_buildingunit ADD CONSTRAINT test_buildingu_lod1mult_fk FOREIGN KEY (lod1multisurface_id)
 REFERENCES surface_geometry (id);
@@ -200,11 +200,11 @@ REFERENCES test_buildingunit (id);
 -- -------------------------------------------------------------------- 
 -- test_facilities 
 -- -------------------------------------------------------------------- 
-ALTER TABLE test_facilities ADD CONSTRAINT test_facilitie_objectcl_fk FOREIGN KEY (objectclass_id)
-REFERENCES objectclass (id);
-
 ALTER TABLE test_facilities ADD CONSTRAINT test_facilities_fk FOREIGN KEY (id)
 REFERENCES cityobject (id);
+
+ALTER TABLE test_facilities ADD CONSTRAINT test_facilitie_objectcl_fk FOREIGN KEY (objectclass_id)
+REFERENCES objectclass (id);
 
 ALTER TABLE test_facilities ADD CONSTRAINT test_facili_build_equip_fk FOREIGN KEY (buildingunit_equippedwith_id)
 REFERENCES test_buildingunit (id);
@@ -400,7 +400,7 @@ CREATE INDEX test_othe_to_them_surf_fk2 ON test_other_to_thema_surfa
 CREATE SEQUENCE test_energyperformanc_seq
 INCREMENT BY 1
 MINVALUE 0
-MAXVALUE 2147483647
+MAXVALUE 9223372036854775807
 START WITH 1
 CACHE 1
 NO CYCLE
