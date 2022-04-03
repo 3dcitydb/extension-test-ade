@@ -7,7 +7,7 @@
     
   <input>
     <parameter name="inputModelType" value="EA7"/>
-    <parameter name="inputFile" value="CityGML_3.0_TestADE.eap"/>
+    <parameter name="inputFile" value="CityGML-TestADE.eap"/>
     <parameter name="appSchemaName" value="TestADE"/>
     <parameter name="checkingConstraints" value="disabled"/>
     <parameter name="addTaggedValues" value="itemType"/>
@@ -21,7 +21,7 @@
   
   <log>
     <parameter name="reportLevel" value="INFO"/>
-    <parameter name="logFile" value="Log_CityGML_3.0_UrbanPlanningADE.xml"/>
+    <parameter name="logFile" value="Log_CityGML_3.0_TestADE.xml"/>
   </log>
   
   <targets>

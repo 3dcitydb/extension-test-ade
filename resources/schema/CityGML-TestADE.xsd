@@ -4,24 +4,25 @@
   <import namespace="http://www.opengis.net/citygml/construction/3.0" schemaLocation="../schema/construction.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <element abstract="true" name="AbstractBuildingUnderground" substitutionGroup="gml:AbstractFeature" type="TestADE:AbstractBuildingUndergroundType"/>
+  <element abstract="true" name="AbstractBuildingUnderground" substitutionGroup="core:AbstractOccupiedSpace" type="TestADE:AbstractBuildingUndergroundType"/>
   <complexType abstract="true" name="AbstractBuildingUndergroundType">
     <complexContent>
-      <extension base="gml:AbstractFeatureType">
+      <extension base="core:AbstractOccupiedSpaceType">
         <sequence>
           <element minOccurs="0" name="class" type="gml:CodeType"/>
           <element maxOccurs="unbounded" minOccurs="0" name="usage" type="gml:CodeType"/>
           <element maxOccurs="unbounded" minOccurs="0" name="energyPerformanceCertification" type="TestADE:EnergyPerformanceCertificationPropertyType"/>
           <element minOccurs="0" name="extent" type="gml:SurfacePropertyType"/>
+          <element minOccurs="0" name="genericGeometry" type="gml:GeometryPropertyType"/>
           <element minOccurs="0" name="reliefPoints" type="gml:MultiPointPropertyType"/>
           <element minOccurs="0" name="breaklines" type="gml:MultiCurvePropertyType"/>
-          <element maxOccurs="unbounded" minOccurs="0" name="adress" type="core:AddressPropertyType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="address" type="core:AddressPropertyType"/>
           <element maxOccurs="unbounded" minOccurs="0" name="equippedWith">
             <complexType>
               <complexContent>
                 <extension base="gml:AbstractFeatureMemberType">
                   <sequence minOccurs="0">
-                    <element ref="TestADE:Facilities"/>
+                    <element ref="TestADE:Facility"/>
                   </sequence>
                   <attributeGroup ref="gml:AssociationAttributeGroup"/>
                 </extension>
@@ -112,17 +113,17 @@
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
   </complexType>
-  <element name="DHWFacilities" substitutionGroup="TestADE:Facilities" type="TestADE:DHWFacilitiesType"/>
-  <complexType name="DHWFacilitiesType">
+  <element name="ElectricalAppliance" substitutionGroup="TestADE:Facility" type="TestADE:ElectricalApplianceType"/>
+  <complexType name="ElectricalApplianceType">
     <complexContent>
-      <extension base="TestADE:FacilitiesType">
+      <extension base="TestADE:FacilityType">
         <sequence/>
       </extension>
     </complexContent>
   </complexType>
-  <complexType name="DHWFacilitiesPropertyType">
+  <complexType name="ElectricalAppliancePropertyType">
     <sequence minOccurs="0">
-      <element ref="TestADE:DHWFacilities"/>
+      <element ref="TestADE:ElectricalAppliance"/>
     </sequence>
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
@@ -130,8 +131,8 @@
   <element name="EnergyPerformanceCertification" substitutionGroup="gml:AbstractObject" type="TestADE:EnergyPerformanceCertificationType"/>
   <complexType name="EnergyPerformanceCertificationType">
     <sequence>
-      <element maxOccurs="unbounded" name="certificationname" type="string"/>
-      <element name="certificationid" type="string"/>
+      <element maxOccurs="unbounded" name="certificationName" type="string"/>
+      <element name="certificationId" type="string"/>
     </sequence>
   </complexType>
   <complexType name="EnergyPerformanceCertificationPropertyType">
@@ -139,19 +140,19 @@
       <element ref="TestADE:EnergyPerformanceCertification"/>
     </sequence>
   </complexType>
-  <element name="Facilities" substitutionGroup="gml:AbstractFeature" type="TestADE:FacilitiesType"/>
-  <complexType name="FacilitiesType">
+  <element name="Facility" substitutionGroup="gml:AbstractFeature" type="TestADE:FacilityType"/>
+  <complexType name="FacilityType">
     <complexContent>
       <extension base="gml:AbstractFeatureType">
         <sequence>
-          <element name="totalValue" type="gml:MeasureType"/>
+          <element name="electricalPower" type="gml:MeasureType"/>
         </sequence>
       </extension>
     </complexContent>
   </complexType>
-  <complexType name="FacilitiesPropertyType">
+  <complexType name="FacilityPropertyType">
     <sequence minOccurs="0">
-      <element ref="TestADE:Facilities"/>
+      <element ref="TestADE:Facility"/>
     </sequence>
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
@@ -190,17 +191,17 @@
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
   </complexType>
-  <element name="LightingFacilities" substitutionGroup="TestADE:Facilities" type="TestADE:LightingFacilitiesType"/>
-  <complexType name="LightingFacilitiesType">
+  <element name="LightingFacility" substitutionGroup="TestADE:Facility" type="TestADE:LightingFacilityType"/>
+  <complexType name="LightingFacilityType">
     <complexContent>
-      <extension base="TestADE:FacilitiesType">
+      <extension base="TestADE:FacilityType">
         <sequence/>
       </extension>
     </complexContent>
   </complexType>
-  <complexType name="LightingFacilitiesPropertyType">
+  <complexType name="LightingFacilityPropertyType">
     <sequence minOccurs="0">
-      <element ref="TestADE:LightingFacilities"/>
+      <element ref="TestADE:LightingFacility"/>
     </sequence>
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
