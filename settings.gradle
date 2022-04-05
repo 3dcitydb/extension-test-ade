@@ -1,2 +1,3 @@
-include 'test-ade-citydb'
 include 'test-ade-citygml4j'
+include 'test-ade-samples'
+

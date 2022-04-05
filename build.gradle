@@ -4,7 +4,7 @@ plugins {
 }
 
 allprojects {
-    version '2.0.0'
+    version '3.0.0'
 }
 
 subprojects {
@@ -13,9 +13,6 @@ subprojects {
     java {
         toolchain {
             languageVersion = JavaLanguageVersion.of(11)
-        }
-        compileJava {
-            options.release = 8
         }
     }
 
@@ -33,12 +30,5 @@ subprojects {
 distributions.main.contents {
     into('lib') {
         from tasks.getByPath(':test-ade-citygml4j:jar')
-        from tasks.getByPath(':test-ade-citydb:jar')
-    }
-    into('schema-mapping') {
-        from "${project('test-ade-citydb').projectDir}/resources/schema-mapping"
-    }
-    into('3dcitydb') {
-        from "${project('test-ade-citydb').projectDir}/resources/3dcitydb"
     }
 }

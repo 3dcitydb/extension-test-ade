@@ -1,9 +1,12 @@
 group 'org.citygml4j.ade'
 
 sourceSets {
-    main.java.srcDir 'src-gen/main/java'
+    main {
+        output.setResourcesDir(java.classesDirectory)
+    }
 }
 
 dependencies {
-    api 'org.citygml4j:citygml4j:2.11.4'
+    api 'org.citygml4j:citygml4j-xml:3.0.0-rc.4'
+    annotationProcessor 'org.citygml4j:citygml4j-xml:3.0.0-rc.4'
 }
