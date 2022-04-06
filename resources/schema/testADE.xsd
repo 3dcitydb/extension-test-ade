@@ -12,12 +12,12 @@
           <element minOccurs="0" name="class" type="gml:CodeType"/>
           <element maxOccurs="unbounded" minOccurs="0" name="usage" type="gml:CodeType"/>
           <element maxOccurs="unbounded" minOccurs="0" name="energyPerformanceCertification" type="test:EnergyPerformanceCertificationPropertyType"/>
-          <element minOccurs="0" name="genericGeometry" type="gml:GeometryPropertyType"/>
+          <element minOccurs="0" name="lod0GenericGeometry" type="gml:GeometryPropertyType"/>
           <element maxOccurs="unbounded" minOccurs="0" name="address" type="core:AddressPropertyType"/>
           <element maxOccurs="unbounded" minOccurs="0" name="equippedWith">
             <complexType>
               <complexContent>
-                <extension base="gml:AbstractFeatureMemberType">
+                <extension base="gml:AbstractMemberType">
                   <sequence minOccurs="0">
                     <element ref="test:Facility"/>
                   </sequence>
@@ -137,10 +137,10 @@
       <element ref="test:EnergyPerformanceCertification"/>
     </sequence>
   </complexType>
-  <element name="Facility" substitutionGroup="gml:AbstractFeature" type="test:FacilityType"/>
+  <element name="Facility" substitutionGroup="gml:AbstractGML" type="test:FacilityType"/>
   <complexType name="FacilityType">
     <complexContent>
-      <extension base="gml:AbstractFeatureType">
+      <extension base="gml:AbstractGMLType">
         <sequence>
           <element name="electricalPower" type="gml:MeasureType"/>
         </sequence>

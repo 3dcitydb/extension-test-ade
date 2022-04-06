@@ -79,7 +79,7 @@ public class createADE {
 
         GeometryFactory factory = GeometryFactory.newInstance();
         Polygon polygon = factory.createPolygon(new double[]{6.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.0, 0.0, 6.0, 8.0, 0.0, 6.0, 0.0, 0.0}, 3);
-        buildingUnderground.setGenericGeometry(new GeometryProperty<>(polygon));
+        buildingUnderground.setLod0GenericGeometry(new GeometryProperty<>(polygon));
 
         LightingFacility lightingFacility = new LightingFacility();
         lightingFacility.setElectricalPower(new Measure(4000.0, "W"));

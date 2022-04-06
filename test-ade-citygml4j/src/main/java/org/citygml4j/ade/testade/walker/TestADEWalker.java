@@ -6,8 +6,8 @@ import org.citygml4j.core.model.building.BuildingPart;
 import org.citygml4j.core.model.construction.OtherConstruction;
 import org.citygml4j.core.model.construction.RoofSurface;
 import org.citygml4j.core.model.core.AbstractCityObject;
-import org.citygml4j.core.model.core.AbstractFeature;
 import org.citygml4j.core.visitor.ADEWalker;
+import org.xmlobjects.gml.model.base.AbstractGML;
 
 public class TestADEWalker extends ADEWalker {
 
@@ -28,7 +28,7 @@ public class TestADEWalker extends ADEWalker {
     }
 
     public void visit(Facility facility) {
-        walker.visit((AbstractFeature) facility);
+        walker.visit((AbstractGML) facility);
     }
 
     public void visit(IndustrialBuilding building) {

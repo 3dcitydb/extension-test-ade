@@ -1,13 +1,9 @@
 package org.citygml4j.ade.testade.model;
 
 import org.citygml4j.core.model.ade.ADEObject;
-import org.citygml4j.core.model.common.LevelOfDetail;
 import org.citygml4j.core.model.core.*;
 import org.xmlobjects.gml.model.basictypes.Code;
 import org.xmlobjects.gml.model.geometry.GeometryProperty;
-import org.xmlobjects.gml.model.geometry.aggregates.MultiCurveProperty;
-import org.xmlobjects.gml.model.geometry.aggregates.MultiSurfaceProperty;
-import org.xmlobjects.gml.model.geometry.primitives.SolidProperty;
 import org.xmlobjects.model.ChildList;
 
 import java.util.List;
@@ -17,7 +13,7 @@ public abstract class AbstractBuildingUnderground extends AbstractOccupiedSpace 
     private List<Code> functions;
     private List<Code> usages;
     private List<EnergyPerformanceCertificationProperty> energyPerformanceCertifications;
-    private GeometryProperty<?> genericGeometry;
+    private GeometryProperty<?> lod0GenericGeometry;
     private List<AddressProperty> addresses;
     private List<FacilityProperty> equippedWith;
 
@@ -83,12 +79,12 @@ public abstract class AbstractBuildingUnderground extends AbstractOccupiedSpace 
         this.energyPerformanceCertifications = asChild(energyPerformanceCertifications);
     }
 
-    public GeometryProperty<?> getGenericGeometry() {
-        return genericGeometry;
+    public GeometryProperty<?> getLod0GenericGeometry() {
+        return lod0GenericGeometry;
     }
 
-    public void setGenericGeometry(GeometryProperty<?> genericGeometry) {
-        this.genericGeometry = asChild(genericGeometry);
+    public void setLod0GenericGeometry(GeometryProperty<?> lod0GenericGeometry) {
+        this.lod0GenericGeometry = asChild(lod0GenericGeometry);
     }
 
     public List<AddressProperty> getAddresses() {

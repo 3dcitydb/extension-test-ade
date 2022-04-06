@@ -5,7 +5,6 @@ import org.citygml4j.ade.testade.model.EnergyPerformanceCertificationProperty;
 import org.citygml4j.ade.testade.model.FacilityProperty;
 import org.citygml4j.ade.testade.module.TestADEModule;
 import org.citygml4j.core.model.core.AddressProperty;
-import org.citygml4j.xml.adapter.core.AbstractCityObjectAdapter;
 import org.citygml4j.xml.adapter.core.AbstractOccupiedSpaceAdapter;
 import org.citygml4j.xml.adapter.core.AddressPropertyAdapter;
 import org.xmlobjects.builder.ObjectBuildException;
@@ -41,8 +40,8 @@ public abstract class AbstractBuildingUndergroundAdapter<T extends AbstractBuild
                 case "energyPerformanceCertification":
                     object.getEnergyPerformanceCertifications().add(reader.getObjectUsingBuilder(EnergyPerformanceCertificationPropertyAdapter.class));
                     break;
-                case "genericGeometry":
-                    object.setGenericGeometry(reader.getObjectUsingBuilder(GeometryPropertyAdapter.class));
+                case "lod0GenericGeometry":
+                    object.setLod0GenericGeometry(reader.getObjectUsingBuilder(GeometryPropertyAdapter.class));
                     break;
                 case "address":
                     object.getAddresses().add(reader.getObjectUsingBuilder(AddressPropertyAdapter.class));
@@ -75,8 +74,8 @@ public abstract class AbstractBuildingUndergroundAdapter<T extends AbstractBuild
         for (EnergyPerformanceCertificationProperty property : object.getEnergyPerformanceCertifications())
             writer.writeElementUsingSerializer(Element.of(TestADEModule.TESTADE_NAMESPACE, "energyPerformanceCertification"), property, EnergyPerformanceCertificationPropertyAdapter.class, namespaces);
 
-        if (object.getGenericGeometry() != null)
-            writer.writeElementUsingSerializer(Element.of(TestADEModule.TESTADE_NAMESPACE, "genericGeometry"), object.getGenericGeometry(), GeometryPropertyAdapter.class, namespaces);
+        if (object.getLod0GenericGeometry() != null)
+            writer.writeElementUsingSerializer(Element.of(TestADEModule.TESTADE_NAMESPACE, "lod0GenericGeometry"), object.getLod0GenericGeometry(), GeometryPropertyAdapter.class, namespaces);
 
         for (AddressProperty property : object.getAddresses())
             writer.writeElementUsingSerializer(Element.of(TestADEModule.TESTADE_NAMESPACE, "address"), property, AddressPropertyAdapter.class, namespaces);

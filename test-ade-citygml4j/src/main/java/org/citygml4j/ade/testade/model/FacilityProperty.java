@@ -1,9 +1,9 @@
 package org.citygml4j.ade.testade.model;
 
 import org.citygml4j.core.model.ade.ADEObject;
-import org.xmlobjects.gml.model.feature.FeatureProperty;
+import org.xmlobjects.gml.model.base.AbstractProperty;
 
-public class FacilityProperty extends FeatureProperty<Facility> implements ADEObject {
+public class FacilityProperty extends AbstractProperty<Facility> implements ADEObject {
 
     public FacilityProperty() {
     }
