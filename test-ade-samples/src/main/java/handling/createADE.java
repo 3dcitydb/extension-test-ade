@@ -35,7 +35,7 @@ public class createADE {
         CityGMLInputFactory in = context.createCityGMLInputFactory()
                 .withChunking(ChunkOptions.defaults());
 
-        Path file = Util.SAMPLE_DATA_DIR.resolve("lod2_buildings_v3.gml");
+        Path file = Util.SAMPLE_DATA_DIR.resolve("raw.gml");
         log.print("Reading the first building from the file " + file + " by using a filtered reader");
 
         Building building;
@@ -91,7 +91,7 @@ public class createADE {
         CityGMLVersion version = CityGMLVersion.v3_0;
         CityGMLOutputFactory out = context.createCityGMLOutputFactory(version);
 
-        Path output = Util.getGMLOutputFile();
+        Path output = Util.SAMPLE_DATA_DIR.resolve("industrialBuildings_ade_v3.gml");
         log.print("Writing the ADE-enriched building as CityGML " + version + " file " + output);
 
         try (CityGMLChunkWriter writer = out.createCityGMLChunkWriter(output, StandardCharsets.UTF_8.name())) {
