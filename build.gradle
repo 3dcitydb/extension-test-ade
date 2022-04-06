@@ -31,4 +31,6 @@ distributions.main.contents {
     into('lib') {
         from tasks.getByPath(':test-ade-citygml4j:jar')
     }
+    from 'resources'
+    from 'LICENSE'
 }
