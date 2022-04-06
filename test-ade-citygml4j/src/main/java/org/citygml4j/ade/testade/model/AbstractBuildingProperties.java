@@ -10,7 +10,7 @@ public class AbstractBuildingProperties extends ADEOfAbstractBuilding {
     private String ownerName;
     private Area floorArea;
     private EnergyPerformanceCertificationProperty energyPerformanceCertification;
-    private List<AbstractBuildingUndergroundProperty> buildingUnderground;
+    private List<BuildingUndergroundProperty> buildingUnderground;
 
     public String getOwnerName() {
         return ownerName;
@@ -36,14 +36,14 @@ public class AbstractBuildingProperties extends ADEOfAbstractBuilding {
         this.energyPerformanceCertification = energyPerformanceCertification;
     }
 
-    public List<AbstractBuildingUndergroundProperty> getBuildingUnderground() {
+    public List<BuildingUndergroundProperty> getBuildingUnderground() {
         if (buildingUnderground == null)
             buildingUnderground = new ChildList<>(this);
 
         return buildingUnderground;
     }
 
-    public void setBuildingUnderground(List<AbstractBuildingUndergroundProperty> buildingUnderground) {
+    public void setBuildingUnderground(List<BuildingUndergroundProperty> buildingUnderground) {
         this.buildingUnderground = asChild(buildingUnderground);
     }
 }

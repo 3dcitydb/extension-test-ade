@@ -32,7 +32,7 @@ public class EnergyPerformanceCertificationAdapter implements ObjectBuilder<Ener
                 case "certificationName":
                     reader.getTextContent().ifPresent(object.getCertificationNames()::add);
                     break;
-                case "certificationid":
+                case "certificationId":
                     reader.getTextContent().ifPresent(object::setCertificationId);
                     break;
             }
@@ -50,6 +50,6 @@ public class EnergyPerformanceCertificationAdapter implements ObjectBuilder<Ener
             writer.writeElement(Element.of(TestADEModule.TESTADE_NAMESPACE, "certificationName").addTextContent(certificationName));
 
         if (object.getCertificationId() != null)
-            writer.writeElement(Element.of(TestADEModule.TESTADE_NAMESPACE, "certificationid").addTextContent(object.getCertificationId()));
+            writer.writeElement(Element.of(TestADEModule.TESTADE_NAMESPACE, "certificationId").addTextContent(object.getCertificationId()));
     }
 }

@@ -1,7 +1,7 @@
 package org.citygml4j.ade.testade.adapter;
 
 import org.citygml4j.ade.testade.model.AbstractBuildingProperties;
-import org.citygml4j.ade.testade.model.AbstractBuildingUndergroundProperty;
+import org.citygml4j.ade.testade.model.BuildingUndergroundProperty;
 import org.citygml4j.ade.testade.module.TestADEModule;
 import org.citygml4j.xml.adapter.ade.SingletonADEProperty;
 import org.xmlobjects.annotation.XMLElement;
@@ -49,7 +49,7 @@ public class AbstractBuildingPropertiesAdapter implements ObjectBuilder<Abstract
                     object.setEnergyPerformanceCertification(reader.getObjectUsingBuilder(EnergyPerformanceCertificationPropertyAdapter.class));
                     break;
                 case "buildingUnderground":
-                    object.getBuildingUnderground().add(reader.getObjectUsingBuilder(AbstractBuildingUndergroundPropertyAdapter.class));
+                    object.getBuildingUnderground().add(reader.getObjectUsingBuilder(BuildingUndergroundPropertyAdapter.class));
                     break;
             }
         }
@@ -66,7 +66,7 @@ public class AbstractBuildingPropertiesAdapter implements ObjectBuilder<Abstract
         if (object.getEnergyPerformanceCertification() != null)
             writer.writeElementUsingSerializer(Element.of(TestADEModule.TESTADE_NAMESPACE, "energyPerformanceCertification"), object.getEnergyPerformanceCertification(), EnergyPerformanceCertificationPropertyAdapter.class, namespaces);
 
-        for (AbstractBuildingUndergroundProperty property : object.getBuildingUnderground())
-            writer.writeElementUsingSerializer(Element.of(TestADEModule.TESTADE_NAMESPACE, "buildingUnderground"), property, AbstractBuildingUndergroundPropertyAdapter.class, namespaces);
+        for (BuildingUndergroundProperty property : object.getBuildingUnderground())
+            writer.writeElementUsingSerializer(Element.of(TestADEModule.TESTADE_NAMESPACE, "buildingUnderground"), property, BuildingUndergroundPropertyAdapter.class, namespaces);
     }
 }

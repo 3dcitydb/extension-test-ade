@@ -14,6 +14,6 @@ public class TestADEModule extends ADEModule {
 
     @Override
     public URL getSchemaResource() {
-        return TestADEModule.class.getResource("/org/citygml4j/ade/testade/schemas/CityGML-TestADE.xsd");
+        return TestADEModule.class.getResource("/org/citygml4j/ade/testade/schemas/testADE.xsd");
     }
 }
