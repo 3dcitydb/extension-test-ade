@@ -14,17 +14,14 @@ subprojects {
         toolchain {
             languageVersion = JavaLanguageVersion.of(11)
         }
-        compileJava {
-            options.release = 8
-        }
     }
 
     repositories {
-        maven{
-            url 'https://citydb.jfrog.io/artifactory/maven'
-        }
         maven {
             url 'https://repo.osgeo.org/repository/release'
+        }
+        maven {
+            url 'https://3dcitydb.org/maven'
         }
         mavenCentral()
     }

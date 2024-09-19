@@ -5,5 +5,5 @@ sourceSets {
 }
 
 dependencies {
-    api 'org.citygml4j:citygml4j:2.11.4'
+    api 'org.citygml4j:citygml4j:2.13.0'
 }
