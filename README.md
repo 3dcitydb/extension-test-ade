@@ -1,7 +1,7 @@
 Test ADE extension
 ==================
 
-The _Test ADE_ is an artificial CityGML Application Domain Extension (ADE) for testing and 
+The _Test ADE_ is an artificial CityGML Application Domain Extension (ADE) for testing and
 demonstrating the ADE support of the 3D City Database that has been introduced with version 4.0. It has been designed
 to cover the most relevant UML modelling elements and techniques that occur in real-world CityGML ADEs such as
 subtyping or property injection.
@@ -18,7 +18,7 @@ Adding support for a CityGML ADE to the 3DCityDB generally involves three steps:
 
 1. Mapping the XML Schema definition of the ADE to a relational schema that integrates with the 3DCityDB core schema
    (for instance, by reusing `SURFACE_GEOMETRY` to store surface-based spatial properties of features).
-2. Creating an XML-based schema mapping file that captures the mapping between elements of the XML schema and elements 
+2. Creating an XML-based schema mapping file that captures the mapping between elements of the XML schema and elements
    of the relational schema (see the [schema mapping](https://github.com/3dcitydb/importer-exporter/blob/master/impexp-core/src/main/resources/org/citydb/core/database/schema/3dcitydb-schema.xml) between the CityGML XML schemas and the 3DCityDB core schema).
 3. Registering the ADE with the metadata tables of the 3DCityDB.
 
@@ -36,7 +36,7 @@ against its ADE API because it does not provide generic ADE support yet. This in
 
 These steps are not automated yet and thus require coding. Check this repository for a reference implementation of the
 Test ADE. ADE extensions have to be copied into the `ade-extensions` folder within the installation directory of the
-Importer/Exporter to be automatically loaded at program startup. 
+Importer/Exporter to be automatically loaded at program startup.
 
 UML data model
 --------------
