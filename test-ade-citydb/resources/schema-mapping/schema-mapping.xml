@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <schemaMapping xmlns="http://www.3dcitydb.org/database/schema/1.0">
     <metadata>
-        <name>TestADE</name>
+        <name>Test ADE</name>
         <version>1.0</version>
         <description>Test ADE</description>
         <dbPrefix>test</dbPrefix>

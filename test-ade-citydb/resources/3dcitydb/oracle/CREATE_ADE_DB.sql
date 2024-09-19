@@ -1,4 +1,10 @@
--- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2021-10-04 09:46:58 
+-- This document was automatically created by the ADE-Manager tool of 3DCityDB (https://www.3dcitydb.org) on 2024-09-19 16:52:21 
+-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+-- *********************************** Create Sequences *********************************** 
+-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+CREATE SEQUENCE test_energyperformanc_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 CACHE 10000;
+
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 -- *********************************** Create tables ************************************** 
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
@@ -152,11 +158,11 @@ ON DELETE CASCADE;
 -- -------------------------------------------------------------------- 
 -- test_buildingunit 
 -- -------------------------------------------------------------------- 
-ALTER TABLE test_buildingunit ADD CONSTRAINT test_buildingu_objectcl_fk FOREIGN KEY (objectclass_id)
-REFERENCES objectclass (id);
-
 ALTER TABLE test_buildingunit ADD CONSTRAINT test_buildingunit_fk FOREIGN KEY (id)
 REFERENCES cityobject (id);
+
+ALTER TABLE test_buildingunit ADD CONSTRAINT test_buildingu_objectcl_fk FOREIGN KEY (objectclass_id)
+REFERENCES objectclass (id);
 
 ALTER TABLE test_buildingunit ADD CONSTRAINT test_buildi_build_build_fk FOREIGN KEY (building_buildingunit_id)
 REFERENCES test_building (id);
@@ -200,11 +206,11 @@ REFERENCES test_buildingunit (id);
 -- -------------------------------------------------------------------- 
 -- test_facilities 
 -- -------------------------------------------------------------------- 
-ALTER TABLE test_facilities ADD CONSTRAINT test_facilities_fk FOREIGN KEY (id)
-REFERENCES cityobject (id);
-
 ALTER TABLE test_facilities ADD CONSTRAINT test_facilitie_objectcl_fk FOREIGN KEY (objectclass_id)
 REFERENCES objectclass (id);
+
+ALTER TABLE test_facilities ADD CONSTRAINT test_facilities_fk FOREIGN KEY (id)
+REFERENCES cityobject (id);
 
 ALTER TABLE test_facilities ADD CONSTRAINT test_facili_build_equip_fk FOREIGN KEY (buildingunit_equippedwith_id)
 REFERENCES test_buildingunit (id);
@@ -331,10 +337,4 @@ CREATE INDEX test_faciliti_objectcl_fkx ON test_facilities (objectclass_id);
 CREATE INDEX test_othe_to_them_surf_fk1 ON test_other_to_thema_surfa (otherconstruction_id);
 
 CREATE INDEX test_othe_to_them_surf_fk2 ON test_other_to_thema_surfa (thematic_surface_id);
-
--- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
--- *********************************** Create Sequences *********************************** 
--- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-CREATE SEQUENCE test_energyperformanc_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 CACHE 10000;
 
