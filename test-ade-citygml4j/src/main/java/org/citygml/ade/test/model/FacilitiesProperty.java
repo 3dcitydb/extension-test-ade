@@ -34,47 +34,47 @@ import org.citygml4j.model.gml.feature.FeatureProperty;
 
 public class FacilitiesProperty extends FeatureProperty<AbstractFacilities> implements ADEModelObject {
 
-	public FacilitiesProperty() {
-	}
-	
-	public FacilitiesProperty(AbstractFacilities abstractFacilities) {
-		super(abstractFacilities);
-	}
-	
-	public FacilitiesProperty(String href) {
-		super(href);
-	}
-	
-	public AbstractFacilities getFacilities() {
-		return super.getObject();
-	}
+    public FacilitiesProperty() {
+    }
 
-	public boolean isSetFacilities() {
-		return super.isSetObject();
-	}
+    public FacilitiesProperty(AbstractFacilities abstractFacilities) {
+        super(abstractFacilities);
+    }
 
-	public void setFacilities(AbstractFacilities facilities) {
-		super.setObject(facilities);
-	}
+    public FacilitiesProperty(String href) {
+        super(href);
+    }
 
-	public void unsetFacilities() {
-		super.unsetObject();
-	}
+    public AbstractFacilities getFacilities() {
+        return super.getObject();
+    }
 
-	@Override
-	public Class<AbstractFacilities> getAssociableClass() {
-		return AbstractFacilities.class;
-	}
+    public boolean isSetFacilities() {
+        return super.isSetObject();
+    }
 
-	@Override
-	public Object copy(CopyBuilder copyBuilder) {
-		return copyTo(new FacilitiesProperty(), copyBuilder);
-	}
+    public void setFacilities(AbstractFacilities facilities) {
+        super.setObject(facilities);
+    }
 
-	@Override
-	public Object copyTo(Object target, CopyBuilder copyBuilder) {
-		FacilitiesProperty copy = (target == null) ? new FacilitiesProperty() : (FacilitiesProperty)target;
-		return super.copyTo(copy, copyBuilder);
-	}
+    public void unsetFacilities() {
+        super.unsetObject();
+    }
+
+    @Override
+    public Class<AbstractFacilities> getAssociableClass() {
+        return AbstractFacilities.class;
+    }
+
+    @Override
+    public Object copy(CopyBuilder copyBuilder) {
+        return copyTo(new FacilitiesProperty(), copyBuilder);
+    }
+
+    @Override
+    public Object copyTo(Object target, CopyBuilder copyBuilder) {
+        FacilitiesProperty copy = (target == null) ? new FacilitiesProperty() : (FacilitiesProperty) target;
+        return super.copyTo(copy, copyBuilder);
+    }
 
 }

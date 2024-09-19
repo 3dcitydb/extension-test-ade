@@ -38,57 +38,57 @@ import org.citygml4j.model.gml.basicTypes.Measure;
 import org.citygml4j.model.gml.feature.AbstractFeature;
 
 public abstract class AbstractFacilities extends AbstractFeature implements ADEModelObject {
-	private Measure totalValue;
-	
-	public Measure getTotalValue() {
-		return totalValue;
-	}
+    private Measure totalValue;
 
-	public boolean isSetTotalValue() {
-		return totalValue != null;
-	}
-	
-	public void setTotalValue(Measure totalValue) {
-		if (totalValue != null)
-			totalValue.setParent(this);
-		
-		this.totalValue = totalValue;
-	}
+    public Measure getTotalValue() {
+        return totalValue;
+    }
 
-	@Override
-	public Object copyTo(Object target, CopyBuilder copyBuilder) {
-		if (target == null)
-			throw new IllegalArgumentException("Target argument must not be null for abstract copyable classes.");
-		
-		AbstractFacilities copy = (AbstractFacilities)target;
-		super.copyTo(copy, copyBuilder);
-		
-		if (isSetTotalValue()) {
-			copy.setTotalValue((Measure)copyBuilder.copy(totalValue));
-			if (copy.getTotalValue() == totalValue)
-				totalValue.setParent(this);
-		}
-		
-		return copy;
-	}
-	
-	@Override
-	public void accept(FeatureVisitor visitor) {
-		visitor.visit((ADEModelObject)this);
-	}
+    public boolean isSetTotalValue() {
+        return totalValue != null;
+    }
 
-	@Override
-	public <T> T accept(FeatureFunctor<T> visitor) {
-		return visitor.apply((ADEModelObject)this);
-	}
+    public void setTotalValue(Measure totalValue) {
+        if (totalValue != null)
+            totalValue.setParent(this);
 
-	@Override
-	public void accept(GMLVisitor visitor) {
-		visitor.visit((ADEModelObject)this);
-	}
+        this.totalValue = totalValue;
+    }
 
-	@Override
-	public <T> T accept(GMLFunctor<T> visitor) {
-		return visitor.apply((ADEModelObject)this);
-	}
+    @Override
+    public Object copyTo(Object target, CopyBuilder copyBuilder) {
+        if (target == null)
+            throw new IllegalArgumentException("Target argument must not be null for abstract copyable classes.");
+
+        AbstractFacilities copy = (AbstractFacilities) target;
+        super.copyTo(copy, copyBuilder);
+
+        if (isSetTotalValue()) {
+            copy.setTotalValue((Measure) copyBuilder.copy(totalValue));
+            if (copy.getTotalValue() == totalValue)
+                totalValue.setParent(this);
+        }
+
+        return copy;
+    }
+
+    @Override
+    public void accept(FeatureVisitor visitor) {
+        visitor.visit((ADEModelObject) this);
+    }
+
+    @Override
+    public <T> T accept(FeatureFunctor<T> visitor) {
+        return visitor.apply((ADEModelObject) this);
+    }
+
+    @Override
+    public void accept(GMLVisitor visitor) {
+        visitor.visit((ADEModelObject) this);
+    }
+
+    @Override
+    public <T> T accept(GMLFunctor<T> visitor) {
+        return visitor.apply((ADEModelObject) this);
+    }
 }

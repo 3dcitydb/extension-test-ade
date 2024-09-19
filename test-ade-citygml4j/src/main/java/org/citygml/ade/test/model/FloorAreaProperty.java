@@ -34,16 +34,16 @@ import org.citygml4j.model.gml.measures.Area;
 
 public class FloorAreaProperty extends ADEGenericApplicationProperty<Area> {
 
-	public FloorAreaProperty() {
-	}
-	
-	public FloorAreaProperty(Area value) {
-		super(value);
-	}
-	
-	@Override
-	public Object copy(CopyBuilder copyBuilder) {
-		return copyTo(new FloorAreaProperty(), copyBuilder);
-	}
-	
+    public FloorAreaProperty() {
+    }
+
+    public FloorAreaProperty(Area value) {
+        super(value);
+    }
+
+    @Override
+    public Object copy(CopyBuilder copyBuilder) {
+        return copyTo(new FloorAreaProperty(), copyBuilder);
+    }
+
 }

@@ -43,58 +43,58 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class OtherConstructionImporter implements ADEImporter {
-	private final CityGMLImportHelper helper;
-	private final SchemaMapper schemaMapper;
-	private final OtherConstructionToThematicSurfaceImporter boundarySurfaceImporter;
-	private final PreparedStatement ps;
+    private final CityGMLImportHelper helper;
+    private final SchemaMapper schemaMapper;
+    private final OtherConstructionToThematicSurfaceImporter boundarySurfaceImporter;
+    private final PreparedStatement ps;
 
-	private int batchCounter;
-	
-	public OtherConstructionImporter(Connection connection, CityGMLImportHelper helper, ImportManager manager) throws CityGMLImportException, SQLException {
-		this.helper = helper;
-		this.schemaMapper = manager.getSchemaMapper();
+    private int batchCounter;
 
-		ps = connection.prepareStatement("insert into " +
-				helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.OTHERCONSTRUCTION)) + " " +
-				"(id) " +
-				"values (?)");
-		
-		boundarySurfaceImporter = manager.getImporter(OtherConstructionToThematicSurfaceImporter.class);
-	}
-	
-	public void doImport(OtherConstruction otherConstruction, long objectId, AbstractObjectType<?> objectType) throws CityGMLImportException, SQLException {
-		ps.setLong(1, objectId);
-			
-		ps.addBatch();
-		if (++batchCounter == helper.getDatabaseAdapter().getMaxBatchSize())
-			helper.executeBatch(objectType);
-		
-		if (otherConstruction.isSetBoundedBySurface()) {
-			for (BoundarySurfaceProperty property : otherConstruction.getBoundedBySurface()) {
-				AbstractBoundarySurface boundarySurface = property.getBoundarySurface();
-				
-				if (boundarySurface != null) {
-					long boundarySurfaceId = helper.importObject(boundarySurface);
-					boundarySurfaceImporter.doImport(objectId, boundarySurfaceId);
-				} else {
-					String href = property.getHref();
-					if (href != null && href.length() != 0)
-						helper.propagateObjectXlink(schemaMapper.getTableName(ADETable.OTHER_TO_THEMA_SURFA), objectId, "otherconstruction_id", href, "thematic_surface_id");
-				}
-			}
-		}
-	}
-	
-	@Override
-	public void executeBatch() throws CityGMLImportException, SQLException {
-		if (batchCounter > 0) {
-			ps.executeBatch();
-			batchCounter = 0;
-		}
-	}
-	
-	@Override
-	public void close() throws SQLException {
-		ps.close();
-	}
+    public OtherConstructionImporter(Connection connection, CityGMLImportHelper helper, ImportManager manager) throws CityGMLImportException, SQLException {
+        this.helper = helper;
+        this.schemaMapper = manager.getSchemaMapper();
+
+        ps = connection.prepareStatement("insert into " +
+                helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.OTHERCONSTRUCTION)) + " " +
+                "(id) " +
+                "values (?)");
+
+        boundarySurfaceImporter = manager.getImporter(OtherConstructionToThematicSurfaceImporter.class);
+    }
+
+    public void doImport(OtherConstruction otherConstruction, long objectId, AbstractObjectType<?> objectType) throws CityGMLImportException, SQLException {
+        ps.setLong(1, objectId);
+
+        ps.addBatch();
+        if (++batchCounter == helper.getDatabaseAdapter().getMaxBatchSize())
+            helper.executeBatch(objectType);
+
+        if (otherConstruction.isSetBoundedBySurface()) {
+            for (BoundarySurfaceProperty property : otherConstruction.getBoundedBySurface()) {
+                AbstractBoundarySurface boundarySurface = property.getBoundarySurface();
+
+                if (boundarySurface != null) {
+                    long boundarySurfaceId = helper.importObject(boundarySurface);
+                    boundarySurfaceImporter.doImport(objectId, boundarySurfaceId);
+                } else {
+                    String href = property.getHref();
+                    if (href != null && href.length() != 0)
+                        helper.propagateObjectXlink(schemaMapper.getTableName(ADETable.OTHER_TO_THEMA_SURFA), objectId, "otherconstruction_id", href, "thematic_surface_id");
+                }
+            }
+        }
+    }
+
+    @Override
+    public void executeBatch() throws CityGMLImportException, SQLException {
+        if (batchCounter > 0) {
+            ps.executeBatch();
+            batchCounter = 0;
+        }
+    }
+
+    @Override
+    public void close() throws SQLException {
+        ps.close();
+    }
 }

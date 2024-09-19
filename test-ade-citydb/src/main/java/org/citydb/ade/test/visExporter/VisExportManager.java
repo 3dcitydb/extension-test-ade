@@ -44,58 +44,58 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VisExportManager implements ADEVisExportManager {
-	private final SchemaMapper schemaMapper;
-	private final Map<Class<? extends ADEVisExporter>, ADEVisExporter> exporters;
-	private ADEVisExportHelper helper;
+    private final SchemaMapper schemaMapper;
+    private final Map<Class<? extends ADEVisExporter>, ADEVisExporter> exporters;
+    private ADEVisExportHelper helper;
 
-	public VisExportManager(SchemaMapper schemaMapper) {
-		this.schemaMapper = schemaMapper;
-		exporters = new HashMap<>();
-	}
+    public VisExportManager(SchemaMapper schemaMapper) {
+        this.schemaMapper = schemaMapper;
+        exporters = new HashMap<>();
+    }
 
-	@Override
-	public void init(ADEVisExportHelper helper) {
-		this.helper = helper;
-	}
+    @Override
+    public void init(ADEVisExportHelper helper) {
+        this.helper = helper;
+    }
 
-	@Override
-	public ADEVisExporter getVisExporter(int objectClassId) throws ADEVisExportException {
-		AbstractGML modelObject = Util.createObject(objectClassId, CityGMLVersion.v2_0_0);
-		ADEVisExporter exporter = null;
+    @Override
+    public ADEVisExporter getVisExporter(int objectClassId) throws ADEVisExportException {
+        AbstractGML modelObject = Util.createObject(objectClassId, CityGMLVersion.v2_0_0);
+        ADEVisExporter exporter = null;
 
-		if (modelObject instanceof Building) {
-			exporter = getVisExporter(BuildingVisExporter.class);
-		} else if (modelObject instanceof OtherConstruction) {
-			exporter = getVisExporter(OtherConstructionVisExporter.class);
-		} else if (modelObject instanceof IndustrialBuilding) {
-			exporter = getVisExporter(IndustrialBuildingVisExporter.class);
-		}
+        if (modelObject instanceof Building) {
+            exporter = getVisExporter(BuildingVisExporter.class);
+        } else if (modelObject instanceof OtherConstruction) {
+            exporter = getVisExporter(OtherConstructionVisExporter.class);
+        } else if (modelObject instanceof IndustrialBuilding) {
+            exporter = getVisExporter(IndustrialBuildingVisExporter.class);
+        }
 
-		return exporter;
-	}
+        return exporter;
+    }
 
-	public SchemaMapper getSchemaMapper() {
-		return schemaMapper;
-	}
+    public SchemaMapper getSchemaMapper() {
+        return schemaMapper;
+    }
 
-	private <T extends ADEVisExporter> T getVisExporter(Class<T> type) throws ADEVisExportException {
-		ADEVisExporter exporter = exporters.get(type);
+    private <T extends ADEVisExporter> T getVisExporter(Class<T> type) throws ADEVisExportException {
+        ADEVisExporter exporter = exporters.get(type);
 
-		if (exporter == null) {
-			if (type == BuildingVisExporter.class) {
-				exporter = new BuildingVisExporter(helper);
-			} else if (type == OtherConstructionVisExporter.class) {
-				exporter = new OtherConstructionVisExporter(helper);
-			} else if (type == IndustrialBuildingVisExporter.class) {
-				exporter = new IndustrialBuildingVisExporter(helper);
-			}
+        if (exporter == null) {
+            if (type == BuildingVisExporter.class) {
+                exporter = new BuildingVisExporter(helper);
+            } else if (type == OtherConstructionVisExporter.class) {
+                exporter = new OtherConstructionVisExporter(helper);
+            } else if (type == IndustrialBuildingVisExporter.class) {
+                exporter = new IndustrialBuildingVisExporter(helper);
+            }
 
-			if (exporter == null)
-				throw new ADEVisExportException("Failed to build ADE KML exporter of type " + type.getName() + ".");
+            if (exporter == null)
+                throw new ADEVisExportException("Failed to build ADE KML exporter of type " + type.getName() + ".");
 
-			exporters.put(type, exporter);
-		}
+            exporters.put(type, exporter);
+        }
 
-		return type.cast(exporter);
-	}
+        return type.cast(exporter);
+    }
 }

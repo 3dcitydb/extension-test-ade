@@ -49,46 +49,46 @@ import java.util.Collections;
 import java.util.List;
 
 public class TestADEContext implements ADEContext {
-	private final List<ADEModule> modules = Collections.singletonList(TestADEModule.v1_0);
+    private final List<ADEModule> modules = Collections.singletonList(TestADEModule.v1_0);
 
-	@Override
-	public List<ADEModule> getADEModules() {
-		return modules;
-	}
+    @Override
+    public List<ADEModule> getADEModules() {
+        return modules;
+    }
 
-	@Override
-	public List<String> getModelPackageNames() {
-		return Collections.singletonList("org.citygml.ade.test.model");
-	}
+    @Override
+    public List<String> getModelPackageNames() {
+        return Collections.singletonList("org.citygml.ade.test.model");
+    }
 
-	@Override
-	public ADEMarshaller createADEMarshaller() {
-		return new TestADEMarshaller();
-	}
+    @Override
+    public ADEMarshaller createADEMarshaller() {
+        return new TestADEMarshaller();
+    }
 
-	@Override
-	public ADEUnmarshaller createADEUnmarshaller() {
-		return new TestADEUnmarshaller();
-	}
+    @Override
+    public ADEUnmarshaller createADEUnmarshaller() {
+        return new TestADEUnmarshaller();
+    }
 
-	@Override
-	public ADEWalker<FeatureWalker> createDefaultFeatureWalker() {
-		return new TestADEFeatureWalker();
-	}
+    @Override
+    public ADEWalker<FeatureWalker> createDefaultFeatureWalker() {
+        return new TestADEFeatureWalker();
+    }
 
-	@Override
-	public ADEWalker<GMLWalker> createDefaultGMLWalker() {
-		return new TestADEGMLWalker();
-	}
+    @Override
+    public ADEWalker<GMLWalker> createDefaultGMLWalker() {
+        return new TestADEGMLWalker();
+    }
 
-	@Override
-	public <T> ADEWalker<FeatureFunctionWalker<T>> createDefaultFeatureFunctionWalker() {
-		return new TestADEFeatureFunctionWalker<>();
-	}
+    @Override
+    public <T> ADEWalker<FeatureFunctionWalker<T>> createDefaultFeatureFunctionWalker() {
+        return new TestADEFeatureFunctionWalker<>();
+    }
 
-	@Override
-	public <T> ADEWalker<GMLFunctionWalker<T>> createDefaultGMLFunctionWalker() {
-		return new TestADEGMLFunctionWalker<>();
-	}
+    @Override
+    public <T> ADEWalker<GMLFunctionWalker<T>> createDefaultGMLFunctionWalker() {
+        return new TestADEGMLFunctionWalker<>();
+    }
 
 }

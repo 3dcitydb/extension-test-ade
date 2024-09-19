@@ -48,71 +48,71 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class BuildingPropertiesExporter implements ADEExporter {
-	private final PreparedStatement ps;
-	private final BuildingUnitExporter buildingUnitExporter;
-	private final AttributeValueSplitter valueSplitter;
-	private final LodFilter lodFilter;
+    private final PreparedStatement ps;
+    private final BuildingUnitExporter buildingUnitExporter;
+    private final AttributeValueSplitter valueSplitter;
+    private final LodFilter lodFilter;
 
-	public BuildingPropertiesExporter(Connection connection, CityGMLExportHelper helper, ExportManager manager) throws CityGMLExportException, SQLException {
-		ps = connection.prepareStatement("select ownername, floorarea, floorarea_uom, energyperforma_certification, energyperform_certificatio_1 from " +
-				helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.BUILDING)) + " " +
-				"where id = ?");
+    public BuildingPropertiesExporter(Connection connection, CityGMLExportHelper helper, ExportManager manager) throws CityGMLExportException, SQLException {
+        ps = connection.prepareStatement("select ownername, floorarea, floorarea_uom, energyperforma_certification, energyperform_certificatio_1 from " +
+                helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.BUILDING)) + " " +
+                "where id = ?");
 
-		buildingUnitExporter = manager.getExporter(BuildingUnitExporter.class);
-		valueSplitter = helper.getAttributeValueSplitter();
-		lodFilter = helper.getLodFilter();
-	}
+        buildingUnitExporter = manager.getExporter(BuildingUnitExporter.class);
+        valueSplitter = helper.getAttributeValueSplitter();
+        lodFilter = helper.getLodFilter();
+    }
 
-	public void doExport(AbstractBuilding parent, long parentId, FeatureType parentType, ProjectionFilter projectionFilter) throws CityGMLExportException, SQLException {
-		ps.setLong(1, parentId);
+    public void doExport(AbstractBuilding parent, long parentId, FeatureType parentType, ProjectionFilter projectionFilter) throws CityGMLExportException, SQLException {
+        ps.setLong(1, parentId);
 
-		try (ResultSet rs = ps.executeQuery()) {
-			if (rs.next()) {
-				if (projectionFilter.containsProperty("ownerName", TestADEModule.v1_0.getNamespaceURI())) {
-					String ownerName = rs.getString(1);
-					if (!rs.wasNull()) {
-						OwnerNameProperty property = new OwnerNameProperty(ownerName);
-						parent.addGenericApplicationPropertyOfAbstractBuilding(property);
-					}
-				}
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                if (projectionFilter.containsProperty("ownerName", TestADEModule.v1_0.getNamespaceURI())) {
+                    String ownerName = rs.getString(1);
+                    if (!rs.wasNull()) {
+                        OwnerNameProperty property = new OwnerNameProperty(ownerName);
+                        parent.addGenericApplicationPropertyOfAbstractBuilding(property);
+                    }
+                }
 
-				if (projectionFilter.containsProperty("floorArea", TestADEModule.v1_0.getNamespaceURI())) {
-					double floorArea = rs.getDouble(2);
-					if (!rs.wasNull()) {
-						Area area = new Area(floorArea);
-						area.setUom(rs.getString(3));
-						FloorAreaProperty property = new FloorAreaProperty(area);						
-						parent.addGenericApplicationPropertyOfAbstractBuilding(property);
-					}
-				}
+                if (projectionFilter.containsProperty("floorArea", TestADEModule.v1_0.getNamespaceURI())) {
+                    double floorArea = rs.getDouble(2);
+                    if (!rs.wasNull()) {
+                        Area area = new Area(floorArea);
+                        area.setUom(rs.getString(3));
+                        FloorAreaProperty property = new FloorAreaProperty(area);
+                        parent.addGenericApplicationPropertyOfAbstractBuilding(property);
+                    }
+                }
 
-				if (projectionFilter.containsProperty("energyPerformanceCertification", TestADEModule.v1_0.getNamespaceURI())) {
-					String id = rs.getString(5);
-					String name = rs.getString(4);
-					
-					if (id != null && name != null) {
-						EnergyPerformanceCertification energyCertification = new EnergyPerformanceCertification();
-						energyCertification.setCertificationId(id);
-						for (SplitValue splitValue : valueSplitter.split(name))
-							energyCertification.addCertificationName(splitValue.result(0));
+                if (projectionFilter.containsProperty("energyPerformanceCertification", TestADEModule.v1_0.getNamespaceURI())) {
+                    String id = rs.getString(5);
+                    String name = rs.getString(4);
 
-						EnergyPerformanceCertificationProperty property = new EnergyPerformanceCertificationProperty(energyCertification);
-						EnergyPerformanceCertificationPropertyElement propertyElement = new EnergyPerformanceCertificationPropertyElement(property);
+                    if (id != null && name != null) {
+                        EnergyPerformanceCertification energyCertification = new EnergyPerformanceCertification();
+                        energyCertification.setCertificationId(id);
+                        for (SplitValue splitValue : valueSplitter.split(name))
+                            energyCertification.addCertificationName(splitValue.result(0));
 
-						parent.addGenericApplicationPropertyOfAbstractBuilding(propertyElement);
-					}
-				}
+                        EnergyPerformanceCertificationProperty property = new EnergyPerformanceCertificationProperty(energyCertification);
+                        EnergyPerformanceCertificationPropertyElement propertyElement = new EnergyPerformanceCertificationPropertyElement(property);
 
-				if (projectionFilter.containsProperty("buildingUnit", TestADEModule.v1_0.getNamespaceURI())
-						&& lodFilter.containsLodGreaterThanOrEuqalTo(1))
-					buildingUnitExporter.doExport(parent, parentId);
-			}
-		}
-	}
+                        parent.addGenericApplicationPropertyOfAbstractBuilding(propertyElement);
+                    }
+                }
 
-	@Override
-	public void close() throws CityGMLExportException, SQLException {
-		ps.close();
-	}
+                if (projectionFilter.containsProperty("buildingUnit", TestADEModule.v1_0.getNamespaceURI())
+                        && lodFilter.containsLodGreaterThanOrEuqalTo(1))
+                    buildingUnitExporter.doExport(parent, parentId);
+            }
+        }
+    }
+
+    @Override
+    public void close() throws CityGMLExportException, SQLException {
+        ps.close();
+    }
 
 }

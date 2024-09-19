@@ -43,47 +43,47 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class FacilitiesExporter implements ADEExporter {
-	private final CityGMLExportHelper helper;
-	private final PreparedStatement ps;
+    private final CityGMLExportHelper helper;
+    private final PreparedStatement ps;
 
-	public FacilitiesExporter(Connection connection, CityGMLExportHelper helper, ExportManager manager) throws SQLException {
-		this.helper = helper;
+    public FacilitiesExporter(Connection connection, CityGMLExportHelper helper, ExportManager manager) throws SQLException {
+        this.helper = helper;
 
-		ps = connection.prepareStatement("select id, objectclass_id, totalvalue, totalvalue_uom from " +
-				helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.FACILITIES)) + " " +
-				"where buildingunit_equippedwith_id = ?");
-	}
+        ps = connection.prepareStatement("select id, objectclass_id, totalvalue, totalvalue_uom from " +
+                helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.FACILITIES)) + " " +
+                "where buildingunit_equippedwith_id = ?");
+    }
 
-	public void doExport(AbstractBuildingUnit parent, long parentId) throws CityGMLExportException, SQLException {
-		ps.setLong(1, parentId);
+    public void doExport(AbstractBuildingUnit parent, long parentId) throws CityGMLExportException, SQLException {
+        ps.setLong(1, parentId);
 
-		try (ResultSet rs = ps.executeQuery()) {
-			while (rs.next()) {
-				double totalValue = rs.getDouble(3);
-				if (rs.wasNull())
-					continue;				
-				
-				long facilitiesId = rs.getLong(1);
-				int objectClassId = rs.getInt(2);
-				
-				AbstractFacilities facilities = helper.createObject(facilitiesId, objectClassId, AbstractFacilities.class);
-				if (facilities == null) {
-					helper.logOrThrowErrorMessage("Failed to instantiate " + helper.getObjectSignature(objectClassId, facilitiesId) + " as facilities object.");
-					continue;
-				}
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                double totalValue = rs.getDouble(3);
+                if (rs.wasNull())
+                    continue;
 
-				Measure measure = new Measure(totalValue);
-				measure.setUom(rs.getString(4));
-				facilities.setTotalValue(measure);
-				
-				parent.addEquippedWith(new FacilitiesProperty(facilities));
-			}
-		}
-	}
+                long facilitiesId = rs.getLong(1);
+                int objectClassId = rs.getInt(2);
 
-	@Override
-	public void close() throws CityGMLExportException, SQLException {
-		ps.close();	
-	}
+                AbstractFacilities facilities = helper.createObject(facilitiesId, objectClassId, AbstractFacilities.class);
+                if (facilities == null) {
+                    helper.logOrThrowErrorMessage("Failed to instantiate " + helper.getObjectSignature(objectClassId, facilitiesId) + " as facilities object.");
+                    continue;
+                }
+
+                Measure measure = new Measure(totalValue);
+                measure.setUom(rs.getString(4));
+                facilities.setTotalValue(measure);
+
+                parent.addEquippedWith(new FacilitiesProperty(facilities));
+            }
+        }
+    }
+
+    @Override
+    public void close() throws CityGMLExportException, SQLException {
+        ps.close();
+    }
 
 }

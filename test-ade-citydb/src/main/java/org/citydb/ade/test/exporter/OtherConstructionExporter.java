@@ -42,25 +42,25 @@ import org.citygml4j.model.citygml.building.BoundarySurfaceProperty;
 import java.sql.SQLException;
 
 public class OtherConstructionExporter implements ADEExporter {
-	private final CityGMLExportHelper helper;
+    private final CityGMLExportHelper helper;
 
-	public OtherConstructionExporter(CityGMLExportHelper helper) {
-		this.helper = helper;
-	}
+    public OtherConstructionExporter(CityGMLExportHelper helper) {
+        this.helper = helper;
+    }
 
-	public void doExport(OtherConstruction otherConstruction, long objectId, AbstractType<?> objectType, ProjectionFilter projectionFilter) throws CityGMLExportException, SQLException {
-		if (projectionFilter.containsProperty("boundedBy")) {
-			FeatureProperty property = objectType.getFeatureProperty("boundedBy", TestADEModule.v1_0.getNamespaceURI(), false);
-			if (property != null) {
-				for (AbstractBoundarySurface surface : helper.exportNestedFeatures(property, objectId, AbstractBoundarySurface.class))
-					otherConstruction.addBoundedBySurface(new BoundarySurfaceProperty(surface));
-			}
-		}
-	}
+    public void doExport(OtherConstruction otherConstruction, long objectId, AbstractType<?> objectType, ProjectionFilter projectionFilter) throws CityGMLExportException, SQLException {
+        if (projectionFilter.containsProperty("boundedBy")) {
+            FeatureProperty property = objectType.getFeatureProperty("boundedBy", TestADEModule.v1_0.getNamespaceURI(), false);
+            if (property != null) {
+                for (AbstractBoundarySurface surface : helper.exportNestedFeatures(property, objectId, AbstractBoundarySurface.class))
+                    otherConstruction.addBoundedBySurface(new BoundarySurfaceProperty(surface));
+            }
+        }
+    }
 
-	@Override
-	public void close() throws CityGMLExportException, SQLException {
-		// nothing to do
-	}
+    @Override
+    public void close() throws CityGMLExportException, SQLException {
+        // nothing to do
+    }
 
 }

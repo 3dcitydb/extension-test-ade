@@ -44,43 +44,43 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class EnergyPerformanceCertificationExporter implements ADEExporter {
-	private final PreparedStatement ps;
-	private final AttributeValueSplitter valueSplitter;
+    private final PreparedStatement ps;
+    private final AttributeValueSplitter valueSplitter;
 
-	public EnergyPerformanceCertificationExporter(Connection connection, CityGMLExportHelper helper, ExportManager manager) throws SQLException {
-		ps = connection.prepareStatement("select certificationname, certificationid from " +
-				helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.ENERGYPERFORMANCECER)) + " " +
-				"where buildingunit_energyperfor_id = ?");
+    public EnergyPerformanceCertificationExporter(Connection connection, CityGMLExportHelper helper, ExportManager manager) throws SQLException {
+        ps = connection.prepareStatement("select certificationname, certificationid from " +
+                helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.ENERGYPERFORMANCECER)) + " " +
+                "where buildingunit_energyperfor_id = ?");
 
-		valueSplitter = helper.getAttributeValueSplitter();
-	}
+        valueSplitter = helper.getAttributeValueSplitter();
+    }
 
-	public void doExport(AbstractBuildingUnit parent, long parentId) throws CityGMLExportException, SQLException {
-		ps.setLong(1, parentId);
+    public void doExport(AbstractBuildingUnit parent, long parentId) throws CityGMLExportException, SQLException {
+        ps.setLong(1, parentId);
 
-		try (ResultSet rs = ps.executeQuery()) {
-			while (rs.next()) {
-				String id = rs.getString(2);
-				if (rs.wasNull())
-					continue;
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                String id = rs.getString(2);
+                if (rs.wasNull())
+                    continue;
 
-				String name = rs.getString(1);
-				if (rs.wasNull())
-					continue;
+                String name = rs.getString(1);
+                if (rs.wasNull())
+                    continue;
 
-				EnergyPerformanceCertification energyCertification = new EnergyPerformanceCertification();
-				energyCertification.setCertificationId(id);
-				for (SplitValue splitValue : valueSplitter.split(name))
-					energyCertification.addCertificationName(splitValue.result(0));
+                EnergyPerformanceCertification energyCertification = new EnergyPerformanceCertification();
+                energyCertification.setCertificationId(id);
+                for (SplitValue splitValue : valueSplitter.split(name))
+                    energyCertification.addCertificationName(splitValue.result(0));
 
-				parent.addEnergyPerformanceCertification(new EnergyPerformanceCertificationProperty(energyCertification));
-			}
-		}
-	}
+                parent.addEnergyPerformanceCertification(new EnergyPerformanceCertificationProperty(energyCertification));
+            }
+        }
+    }
 
-	@Override
-	public void close() throws CityGMLExportException, SQLException {
-		ps.close();	
-	}
+    @Override
+    public void close() throws CityGMLExportException, SQLException {
+        ps.close();
+    }
 
 }

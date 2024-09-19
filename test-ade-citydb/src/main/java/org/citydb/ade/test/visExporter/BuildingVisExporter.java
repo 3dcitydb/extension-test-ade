@@ -32,36 +32,36 @@ import org.citydb.core.ade.visExporter.ADEVisExportHelper;
 import org.citydb.core.ade.visExporter.ADEVisExporter;
 
 public class BuildingVisExporter implements ADEVisExporter {
-	private ADEVisExportHelper helper;
-	private final String schema;
+    private ADEVisExportHelper helper;
+    private final String schema;
 
-	public BuildingVisExporter(ADEVisExportHelper helper) {
-		this.helper = helper;
-		this.schema = helper.getDatabaseAdapter().getConnectionDetails().getSchema();
-	}
+    public BuildingVisExporter(ADEVisExportHelper helper) {
+        this.helper = helper;
+        this.schema = helper.getDatabaseAdapter().getConnectionDetails().getSchema();
+    }
 
-	@Override
-	public String getPointAndCurveQuery(int lod) {
-		return null;
-	}
+    @Override
+    public String getPointAndCurveQuery(int lod) {
+        return null;
+    }
 
-	@Override
-	public String getSurfaceGeometryQuery(int lod) {
-		return new StringBuilder("select sg.geometry, ")
-				.append(helper.getSQLQueryHelper().getImplicitGeometryNullColumns())
-				.append("from ").append(schema).append(".surface_geometry sg ")
-				.append("where sg.root_id in (")
-				.append("select tbu.lod").append(lod).append("multisurface_id ")
-				.append("FROM ").append(schema).append(".test_buildingunit tbu ")
-				.append("WHERE tbu.building_buildingunit_id=?) and sg.geometry is not null").toString();
-	}
+    @Override
+    public String getSurfaceGeometryQuery(int lod) {
+        return new StringBuilder("select sg.geometry, ")
+                .append(helper.getSQLQueryHelper().getImplicitGeometryNullColumns())
+                .append("from ").append(schema).append(".surface_geometry sg ")
+                .append("where sg.root_id in (")
+                .append("select tbu.lod").append(lod).append("multisurface_id ")
+                .append("FROM ").append(schema).append(".test_buildingunit tbu ")
+                .append("WHERE tbu.building_buildingunit_id=?) and sg.geometry is not null").toString();
+    }
 
-	@Override
-	public String getSurfaceGeometryRefIdsQuery(int lod) {
-		return new StringBuilder("select tbu.lod").append(lod).append("multisurface_id, tbu.objectclass_id, ")
-				.append(helper.getSQLQueryHelper().getImplicitGeometryNullColumns())
-				.append("FROM ").append(schema).append(".test_buildingunit tbu ")
-				.append("WHERE tbu.building_buildingunit_id=? ")
-				.append("AND tbu.lod").append(lod).append("multisurface_id is not null").toString();
-	}
+    @Override
+    public String getSurfaceGeometryRefIdsQuery(int lod) {
+        return new StringBuilder("select tbu.lod").append(lod).append("multisurface_id, tbu.objectclass_id, ")
+                .append(helper.getSQLQueryHelper().getImplicitGeometryNullColumns())
+                .append("FROM ").append(schema).append(".test_buildingunit tbu ")
+                .append("WHERE tbu.building_buildingunit_id=? ")
+                .append("AND tbu.lod").append(lod).append("multisurface_id is not null").toString();
+    }
 }

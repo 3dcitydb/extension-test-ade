@@ -34,47 +34,47 @@ import org.citygml4j.model.gml.feature.FeatureProperty;
 
 public class BuildingUnitPartProperty extends FeatureProperty<BuildingUnitPart> implements ADEModelObject {
 
-	public BuildingUnitPartProperty() {
-	}
-	
-	public BuildingUnitPartProperty(BuildingUnitPart buildingUnitPart) {
-		super(buildingUnitPart);
-	}
-	
-	public BuildingUnitPartProperty(String href) {
-		super(href);
-	}
-	
-	public BuildingUnitPart getBuildingUnitPart() {
-		return super.getObject();
-	}
+    public BuildingUnitPartProperty() {
+    }
 
-	public boolean isSetBuildingUnitPart() {
-		return super.isSetObject();
-	}
+    public BuildingUnitPartProperty(BuildingUnitPart buildingUnitPart) {
+        super(buildingUnitPart);
+    }
 
-	public void setBuildingUnitPart(BuildingUnitPart buildingUnitPart) {
-		super.setObject(buildingUnitPart);
-	}
+    public BuildingUnitPartProperty(String href) {
+        super(href);
+    }
 
-	public void unsetBuildingUnitPart() {
-		super.unsetObject();
-	}
+    public BuildingUnitPart getBuildingUnitPart() {
+        return super.getObject();
+    }
 
-	@Override
-	public Class<BuildingUnitPart> getAssociableClass() {
-		return BuildingUnitPart.class;
-	}
+    public boolean isSetBuildingUnitPart() {
+        return super.isSetObject();
+    }
 
-	@Override
-	public Object copy(CopyBuilder copyBuilder) {
-		return copyTo(new BuildingUnitPartProperty(), copyBuilder);
-	}
+    public void setBuildingUnitPart(BuildingUnitPart buildingUnitPart) {
+        super.setObject(buildingUnitPart);
+    }
 
-	@Override
-	public Object copyTo(Object target, CopyBuilder copyBuilder) {
-		BuildingUnitPartProperty copy = (target == null) ? new BuildingUnitPartProperty() : (BuildingUnitPartProperty)target;
-		return super.copyTo(copy, copyBuilder);
-	}
+    public void unsetBuildingUnitPart() {
+        super.unsetObject();
+    }
+
+    @Override
+    public Class<BuildingUnitPart> getAssociableClass() {
+        return BuildingUnitPart.class;
+    }
+
+    @Override
+    public Object copy(CopyBuilder copyBuilder) {
+        return copyTo(new BuildingUnitPartProperty(), copyBuilder);
+    }
+
+    @Override
+    public Object copyTo(Object target, CopyBuilder copyBuilder) {
+        BuildingUnitPartProperty copy = (target == null) ? new BuildingUnitPartProperty() : (BuildingUnitPartProperty) target;
+        return super.copyTo(copy, copyBuilder);
+    }
 
 }

@@ -32,25 +32,25 @@ import org.citydb.ade.test.importer.*;
 import org.citydb.core.ade.importer.ADEImporter;
 
 public enum ADETable {
-	INDUSTRIALBUILDING(IndustrialBuildingImporter.class),
-	INDUSTRIALBUILDINGPA(IndustrialBuildingPartImporter.class),
-	INDUSTRIALBUILDINGRO(IndustrialBuildingRoofSurfaceImporter.class),
-	BUILDINGUNIT(BuildingUnitImporter.class),
-	BUILDINGU_TO_ADDRESS(BuildingUnitToAddressImporter.class),
-	FACILITIES(FacilitiesImporter.class),
-	BUILDING(BuildingPropertiesImporter.class),
-	ENERGYPERFORMANCECER(EnergyPerformanceCertificationImporter.class),
-	OTHERCONSTRUCTION(OtherConstructionImporter.class),
-	OTHER_TO_THEMA_SURFA(OtherConstructionToThematicSurfaceImporter.class);	
-	
-	private final Class<? extends ADEImporter> importerClass;
-	
-	ADETable(Class<? extends ADEImporter> importerClass) {
-		this.importerClass = importerClass;
-	}
-	
-	public Class<? extends ADEImporter> getImporterClass() {
-		return importerClass;
-	}
-	
+    INDUSTRIALBUILDING(IndustrialBuildingImporter.class),
+    INDUSTRIALBUILDINGPA(IndustrialBuildingPartImporter.class),
+    INDUSTRIALBUILDINGRO(IndustrialBuildingRoofSurfaceImporter.class),
+    BUILDINGUNIT(BuildingUnitImporter.class),
+    BUILDINGU_TO_ADDRESS(BuildingUnitToAddressImporter.class),
+    FACILITIES(FacilitiesImporter.class),
+    BUILDING(BuildingPropertiesImporter.class),
+    ENERGYPERFORMANCECER(EnergyPerformanceCertificationImporter.class),
+    OTHERCONSTRUCTION(OtherConstructionImporter.class),
+    OTHER_TO_THEMA_SURFA(OtherConstructionToThematicSurfaceImporter.class);
+
+    private final Class<? extends ADEImporter> importerClass;
+
+    ADETable(Class<? extends ADEImporter> importerClass) {
+        this.importerClass = importerClass;
+    }
+
+    public Class<? extends ADEImporter> getImporterClass() {
+        return importerClass;
+    }
+
 }

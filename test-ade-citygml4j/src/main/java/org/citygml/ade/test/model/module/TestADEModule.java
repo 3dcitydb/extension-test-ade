@@ -40,79 +40,79 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class TestADEModule extends ADEModule {
-	public static final TestADEModule v1_0 = new TestADEModule();
-	
-	private HashMap<String, Class<? extends AbstractFeature>> features;
-	private HashSet<String> featureProperties;
+    public static final TestADEModule v1_0 = new TestADEModule();
 
-	private TestADEModule() {
-		super("http://www.citygml.org/ade/TestADE/1.0", 
-				"test", 
-				CityGMLVersion.v2_0_0);
+    private HashMap<String, Class<? extends AbstractFeature>> features;
+    private HashSet<String> featureProperties;
 
-		features = new HashMap<>();
-		features.put("_AbstractBuildingUnit", AbstractBuildingUnit.class);
-		features.put("BuildingUnit", BuildingUnit.class);
-		features.put("BuildingUnitPart", BuildingUnitPart.class);
-		features.put("Facilities", AbstractFacilities.class);
-		features.put("DHWFacilities", DHWFacilities.class);
-		features.put("LightingFacilities", LightingFacilities.class);
-		features.put("IndustrialBuilding", IndustrialBuilding.class);		
-		features.put("IndustrialBuildingPart", IndustrialBuildingPart.class);
-		features.put("IndustrialBuildingRoofSurface", IndustrialBuildingRoofSurface.class);
-		features.put("OtherConstruction", OtherConstruction.class);
+    private TestADEModule() {
+        super("http://www.citygml.org/ade/TestADE/1.0",
+                "test",
+                CityGMLVersion.v2_0_0);
 
-		featureProperties = new HashSet<>();
-		featureProperties.add("buildingUnit");
-		featureProperties.add("boundedBy");
-		featureProperties.add("equippedWith");
-		featureProperties.add("consistsOf");
-	}
+        features = new HashMap<>();
+        features.put("_AbstractBuildingUnit", AbstractBuildingUnit.class);
+        features.put("BuildingUnit", BuildingUnit.class);
+        features.put("BuildingUnitPart", BuildingUnitPart.class);
+        features.put("Facilities", AbstractFacilities.class);
+        features.put("DHWFacilities", DHWFacilities.class);
+        features.put("LightingFacilities", LightingFacilities.class);
+        features.put("IndustrialBuilding", IndustrialBuilding.class);
+        features.put("IndustrialBuildingPart", IndustrialBuildingPart.class);
+        features.put("IndustrialBuildingRoofSurface", IndustrialBuildingRoofSurface.class);
+        features.put("OtherConstruction", OtherConstruction.class);
 
-	@Override
-	public URL getSchemaResource() {
-		return TestADEContext.class.getResource("/org/citygml/ade/test/schema/CityGML-TestADE.xsd");
-	}
+        featureProperties = new HashSet<>();
+        featureProperties.add("buildingUnit");
+        featureProperties.add("boundedBy");
+        featureProperties.add("equippedWith");
+        featureProperties.add("consistsOf");
+    }
 
-	@Override
-	public List<String> getJAXBPackageNames() {
-		return Collections.singletonList("org.citygml.ade.test._1");
-	}
+    @Override
+    public URL getSchemaResource() {
+        return TestADEContext.class.getResource("/org/citygml/ade/test/schema/CityGML-TestADE.xsd");
+    }
 
-	@Override
-	public boolean hasFeatureProperty(String name) {
-		return featureProperties.contains(name);
-	}
+    @Override
+    public List<String> getJAXBPackageNames() {
+        return Collections.singletonList("org.citygml.ade.test._1");
+    }
 
-	@Override
-	public boolean hasFeature(String name) {
-		return features.containsKey(name);
-	}
+    @Override
+    public boolean hasFeatureProperty(String name) {
+        return featureProperties.contains(name);
+    }
 
-	@Override
-	public Class<? extends AbstractFeature> getFeatureClass(String name) {
-		return features.get(name);
-	}
+    @Override
+    public boolean hasFeature(String name) {
+        return features.containsKey(name);
+    }
 
-	@Override
-	public QName getFeatureName(Class<? extends AbstractFeature> featureClass) {
-		for (Entry<String, Class<? extends AbstractFeature>> entry : features.entrySet()) {
-			if (entry.getValue() == featureClass)
-				return new QName(getNamespaceURI(), entry.getKey());
-		}
+    @Override
+    public Class<? extends AbstractFeature> getFeatureClass(String name) {
+        return features.get(name);
+    }
 
-		return null;
-	}
+    @Override
+    public QName getFeatureName(Class<? extends AbstractFeature> featureClass) {
+        for (Entry<String, Class<? extends AbstractFeature>> entry : features.entrySet()) {
+            if (entry.getValue() == featureClass)
+                return new QName(getNamespaceURI(), entry.getKey());
+        }
 
-	@Override
-	public Map<String, Class<? extends AbstractFeature>> getFeatures() {
-		return new HashMap<>(features);
-	}
+        return null;
+    }
 
-	@Override
-	public boolean isTopLevelFeature(String name) {
-		return "IndustrialBuilding".equals(name)
-				|| "OtherConstruction".equals(name);
-	}
+    @Override
+    public Map<String, Class<? extends AbstractFeature>> getFeatures() {
+        return new HashMap<>(features);
+    }
+
+    @Override
+    public boolean isTopLevelFeature(String name) {
+        return "IndustrialBuilding".equals(name)
+                || "OtherConstruction".equals(name);
+    }
 
 }

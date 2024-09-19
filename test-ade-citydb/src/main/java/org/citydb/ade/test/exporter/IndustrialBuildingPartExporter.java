@@ -42,31 +42,31 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class IndustrialBuildingPartExporter implements ADEExporter {
-	private final PreparedStatement ps;
+    private final PreparedStatement ps;
 
-	public IndustrialBuildingPartExporter(Connection connection, CityGMLExportHelper helper, ExportManager manager) throws SQLException {
-		ps = connection.prepareStatement("select remark from " +
-				helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.INDUSTRIALBUILDINGPA)) + " " +
-				"where id = ?");
-	}
+    public IndustrialBuildingPartExporter(Connection connection, CityGMLExportHelper helper, ExportManager manager) throws SQLException {
+        ps = connection.prepareStatement("select remark from " +
+                helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.INDUSTRIALBUILDINGPA)) + " " +
+                "where id = ?");
+    }
 
-	public void doExport(IndustrialBuildingPart buildingPart, long objectId, AbstractType<?> objectType, ProjectionFilter projectionFilter) throws CityGMLExportException, SQLException {
-		// we only have one attribute, so only issue a query if this attribute
-		// shall be exported
-		if (projectionFilter.containsProperty("remark")) {
-			ps.setLong(1, objectId);
+    public void doExport(IndustrialBuildingPart buildingPart, long objectId, AbstractType<?> objectType, ProjectionFilter projectionFilter) throws CityGMLExportException, SQLException {
+        // we only have one attribute, so only issue a query if this attribute
+        // shall be exported
+        if (projectionFilter.containsProperty("remark")) {
+            ps.setLong(1, objectId);
 
-			try (ResultSet rs = ps.executeQuery()) {
-				if (rs.next()) {
-					buildingPart.setRemark(rs.getString(1));
-				}
-			}
-		}
-	}
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    buildingPart.setRemark(rs.getString(1));
+                }
+            }
+        }
+    }
 
-	@Override
-	public void close() throws CityGMLExportException, SQLException {
-		ps.close();
-	}
+    @Override
+    public void close() throws CityGMLExportException, SQLException {
+        ps.close();
+    }
 
 }

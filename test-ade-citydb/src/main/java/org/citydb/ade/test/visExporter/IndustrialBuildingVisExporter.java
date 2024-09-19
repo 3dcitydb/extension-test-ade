@@ -37,26 +37,26 @@ import org.citydb.core.util.Util;
 import org.citygml4j.model.citygml.building.Building;
 
 public class IndustrialBuildingVisExporter implements ADEVisExporter {
-	private ADEVisExportHelper helper;
+    private ADEVisExportHelper helper;
 
-	public IndustrialBuildingVisExporter(ADEVisExportHelper helper) {
-		this.helper = helper;
-	}
+    public IndustrialBuildingVisExporter(ADEVisExportHelper helper) {
+        this.helper = helper;
+    }
 
-	@Override
-	public String getPointAndCurveQuery(int lod) {
-		return null;
-	}
+    @Override
+    public String getPointAndCurveQuery(int lod) {
+        return null;
+    }
 
-	@Override
-	public String getSurfaceGeometryQuery(int lod) {
-		DisplayForm displayForm = DisplayForm.of(DisplayFormType.FOOTPRINT);
-		return helper.getSQLQueryHelper().getBuildingPartQuery(lod, Lod0FootprintMode.ROOFPRINT_PRIOR_FOOTPRINT, displayForm, false, Util.getObjectClassId(Building.class));
-	}
+    @Override
+    public String getSurfaceGeometryQuery(int lod) {
+        DisplayForm displayForm = DisplayForm.of(DisplayFormType.FOOTPRINT);
+        return helper.getSQLQueryHelper().getBuildingPartQuery(lod, Lod0FootprintMode.ROOFPRINT_PRIOR_FOOTPRINT, displayForm, false, Util.getObjectClassId(Building.class));
+    }
 
-	@Override
-	public String getSurfaceGeometryRefIdsQuery(int lod) {
-		DisplayForm displayForm = DisplayForm.of(DisplayFormType.GEOMETRY);
-		return helper.getSQLQueryHelper().getBuildingPartQuery(lod, Lod0FootprintMode.ROOFPRINT_PRIOR_FOOTPRINT, displayForm, false, Util.getObjectClassId(Building.class));
-	}
+    @Override
+    public String getSurfaceGeometryRefIdsQuery(int lod) {
+        DisplayForm displayForm = DisplayForm.of(DisplayFormType.GEOMETRY);
+        return helper.getSQLQueryHelper().getBuildingPartQuery(lod, Lod0FootprintMode.ROOFPRINT_PRIOR_FOOTPRINT, displayForm, false, Util.getObjectClassId(Building.class));
+    }
 }

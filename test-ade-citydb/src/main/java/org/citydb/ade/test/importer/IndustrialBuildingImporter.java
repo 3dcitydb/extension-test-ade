@@ -42,43 +42,43 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 public class IndustrialBuildingImporter implements ADEImporter {
-	private final CityGMLImportHelper helper;
-	private final PreparedStatement ps;
+    private final CityGMLImportHelper helper;
+    private final PreparedStatement ps;
 
-	private int batchCounter;
-	
-	public IndustrialBuildingImporter(Connection connection, CityGMLImportHelper helper, ImportManager manager) throws SQLException {
-		this.helper = helper;
+    private int batchCounter;
 
-		ps = connection.prepareStatement("insert into " +
-				helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.INDUSTRIALBUILDING)) + " " +
-				"(id, remark) " +
-				"values (?, ?)");
-	}
-	
-	public void doImport(IndustrialBuilding building, long objectId, AbstractObjectType<?> objectType, ForeignKeys foreignKeys) throws CityGMLImportException, SQLException {
-		ps.setLong(1, objectId);
-		
-		if (building.isSetRemark())
-			ps.setString(2, building.getRemark());
-		else
-			ps.setNull(2, Types.VARCHAR);
-		
-		ps.addBatch();
-		if (++batchCounter == helper.getDatabaseAdapter().getMaxBatchSize())
-			helper.executeBatch(objectType);
-	}
-	
-	@Override
-	public void executeBatch() throws CityGMLImportException, SQLException {
-		if (batchCounter > 0) {
-			ps.executeBatch();
-			batchCounter = 0;
-		}
-	}
-	
-	@Override
-	public void close() throws SQLException {
-		ps.close();
-	}
+    public IndustrialBuildingImporter(Connection connection, CityGMLImportHelper helper, ImportManager manager) throws SQLException {
+        this.helper = helper;
+
+        ps = connection.prepareStatement("insert into " +
+                helper.getTableNameWithSchema(manager.getSchemaMapper().getTableName(ADETable.INDUSTRIALBUILDING)) + " " +
+                "(id, remark) " +
+                "values (?, ?)");
+    }
+
+    public void doImport(IndustrialBuilding building, long objectId, AbstractObjectType<?> objectType, ForeignKeys foreignKeys) throws CityGMLImportException, SQLException {
+        ps.setLong(1, objectId);
+
+        if (building.isSetRemark())
+            ps.setString(2, building.getRemark());
+        else
+            ps.setNull(2, Types.VARCHAR);
+
+        ps.addBatch();
+        if (++batchCounter == helper.getDatabaseAdapter().getMaxBatchSize())
+            helper.executeBatch(objectType);
+    }
+
+    @Override
+    public void executeBatch() throws CityGMLImportException, SQLException {
+        if (batchCounter > 0) {
+            ps.executeBatch();
+            batchCounter = 0;
+        }
+    }
+
+    @Override
+    public void close() throws SQLException {
+        ps.close();
+    }
 }

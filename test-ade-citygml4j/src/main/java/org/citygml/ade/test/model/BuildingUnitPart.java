@@ -31,14 +31,14 @@ import org.citygml4j.builder.copy.CopyBuilder;
 
 public class BuildingUnitPart extends AbstractBuildingUnit {
 
-	public Object copy(CopyBuilder copyBuilder) {
-		return copyTo(new BuildingUnitPart(), copyBuilder);
-	}
+    public Object copy(CopyBuilder copyBuilder) {
+        return copyTo(new BuildingUnitPart(), copyBuilder);
+    }
 
-	@Override
-	public Object copyTo(Object target, CopyBuilder copyBuilder) {
-		BuildingUnitPart copy = (target == null) ? new BuildingUnitPart() : (BuildingUnitPart)target;
-		return super.copyTo(copy, copyBuilder);
-	}
+    @Override
+    public Object copyTo(Object target, CopyBuilder copyBuilder) {
+        BuildingUnitPart copy = (target == null) ? new BuildingUnitPart() : (BuildingUnitPart) target;
+        return super.copyTo(copy, copyBuilder);
+    }
 
 }

@@ -34,43 +34,43 @@ import org.citygml4j.model.gml.base.AssociationByRep;
 
 public class EnergyPerformanceCertificationProperty extends AssociationByRep<EnergyPerformanceCertification> implements ADEModelObject {
 
-	public EnergyPerformanceCertificationProperty() {
-	}
-	
-	public EnergyPerformanceCertificationProperty(EnergyPerformanceCertification energyPerformanceCertification) {
-		super(energyPerformanceCertification);
-	}
-	
-	public EnergyPerformanceCertification getEnergyPerformanceCertification() {
-		return super.getObject();
-	}
+    public EnergyPerformanceCertificationProperty() {
+    }
 
-	public boolean isSetEnergyPerformanceCertification() {
-		return super.isSetObject();
-	}
+    public EnergyPerformanceCertificationProperty(EnergyPerformanceCertification energyPerformanceCertification) {
+        super(energyPerformanceCertification);
+    }
 
-	public void setEnergyPerformanceCertification(EnergyPerformanceCertification energyPerformanceCertification) {
-		super.setObject(energyPerformanceCertification);
-	}
+    public EnergyPerformanceCertification getEnergyPerformanceCertification() {
+        return super.getObject();
+    }
 
-	public void unsetEnergyPerformanceCertification() {
-		super.unsetObject();
-	}
-	
-	@Override
-	public Class<EnergyPerformanceCertification> getAssociableClass() {
-		return EnergyPerformanceCertification.class;
-	}
+    public boolean isSetEnergyPerformanceCertification() {
+        return super.isSetObject();
+    }
 
-	@Override
-	public Object copy(CopyBuilder copyBuilder) {
-		return copyTo(new EnergyPerformanceCertificationProperty(), copyBuilder);
-	}
+    public void setEnergyPerformanceCertification(EnergyPerformanceCertification energyPerformanceCertification) {
+        super.setObject(energyPerformanceCertification);
+    }
 
-	@Override
-	public Object copyTo(Object target, CopyBuilder copyBuilder) {
-		EnergyPerformanceCertificationProperty copy = (target == null) ? new EnergyPerformanceCertificationProperty() : (EnergyPerformanceCertificationProperty)target;
-		return super.copyTo(copy, copyBuilder);
-	}
+    public void unsetEnergyPerformanceCertification() {
+        super.unsetObject();
+    }
+
+    @Override
+    public Class<EnergyPerformanceCertification> getAssociableClass() {
+        return EnergyPerformanceCertification.class;
+    }
+
+    @Override
+    public Object copy(CopyBuilder copyBuilder) {
+        return copyTo(new EnergyPerformanceCertificationProperty(), copyBuilder);
+    }
+
+    @Override
+    public Object copyTo(Object target, CopyBuilder copyBuilder) {
+        EnergyPerformanceCertificationProperty copy = (target == null) ? new EnergyPerformanceCertificationProperty() : (EnergyPerformanceCertificationProperty) target;
+        return super.copyTo(copy, copyBuilder);
+    }
 
 }

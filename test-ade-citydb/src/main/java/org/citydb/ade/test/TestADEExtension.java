@@ -53,58 +53,58 @@ import java.util.Collections;
 import java.util.List;
 
 public class TestADEExtension extends ADEExtension implements ADEVisExportExtension {
-	private final ObjectMapper objectMapper = new ObjectMapper();
-	private final SchemaMapper schemaMapper = new SchemaMapper();
-	private final ADETableMapper tableMapper = new ADETableMapper();
-	private final TestADEContext context = new TestADEContext();
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final SchemaMapper schemaMapper = new SchemaMapper();
+    private final ADETableMapper tableMapper = new ADETableMapper();
+    private final TestADEContext context = new TestADEContext();
 
-	public static void main(String[] args) {
-		TestADEExtension adeExtension = new TestADEExtension();
-		adeExtension.setBasePath(Paths.get("resources").toAbsolutePath());
-		new ImpExpLauncher().withArgs(args)
-				.withADEExtension(adeExtension)
-				.start();
-	}
-	
-	@Override
-	public void init(SchemaMapping schemaMapping) throws ADEExtensionException {
-		objectMapper.populateObjectClassIds(schemaMapping);
-		schemaMapper.populateSchemaNames(schemaMapping.getMetadata().getDBPrefix().toLowerCase());
-		tableMapper.populateTableColumns(schemaMapper);
-	}
+    public static void main(String[] args) {
+        TestADEExtension adeExtension = new TestADEExtension();
+        adeExtension.setBasePath(Paths.get("resources").toAbsolutePath());
+        new ImpExpLauncher().withArgs(args)
+                .withADEExtension(adeExtension)
+                .start();
+    }
 
-	@Override
-	public List<ADEContext> getADEContexts() {
-		return Collections.singletonList(context);
-	}
+    @Override
+    public void init(SchemaMapping schemaMapping) throws ADEExtensionException {
+        objectMapper.populateObjectClassIds(schemaMapping);
+        schemaMapper.populateSchemaNames(schemaMapping.getMetadata().getDBPrefix().toLowerCase());
+        tableMapper.populateTableColumns(schemaMapper);
+    }
 
-	@Override
-	public ADEObjectMapper getADEObjectMapper() {
-		return objectMapper;
-	}
-	
-	@Override
-	public ADEImportManager createADEImportManager() {
-		return new ImportManager(this, schemaMapper);
-	}
+    @Override
+    public List<ADEContext> getADEContexts() {
+        return Collections.singletonList(context);
+    }
 
-	@Override
-	public ADEExportManager createADEExportManager() {
-		return new ExportManager(schemaMapper);
-	}
-	
-	public SchemaMapper getSchemaMapper() {
-		return schemaMapper;
-	}
+    @Override
+    public ADEObjectMapper getADEObjectMapper() {
+        return objectMapper;
+    }
 
-	@Override
-	public ADEVisExportManager createADEVisExportManager() {
-		return new VisExportManager(schemaMapper);
-	}
+    @Override
+    public ADEImportManager createADEImportManager() {
+        return new ImportManager(this, schemaMapper);
+    }
 
-	@Override
-	public ADEBalloonManager createBalloonManager() {
-		return new BalloonManager(tableMapper, schemaMapper);
-	}
+    @Override
+    public ADEExportManager createADEExportManager() {
+        return new ExportManager(schemaMapper);
+    }
+
+    public SchemaMapper getSchemaMapper() {
+        return schemaMapper;
+    }
+
+    @Override
+    public ADEVisExportManager createADEVisExportManager() {
+        return new VisExportManager(schemaMapper);
+    }
+
+    @Override
+    public ADEBalloonManager createBalloonManager() {
+        return new BalloonManager(tableMapper, schemaMapper);
+    }
 
 }

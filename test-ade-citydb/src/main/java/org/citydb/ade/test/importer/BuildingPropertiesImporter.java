@@ -46,84 +46,84 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 public class BuildingPropertiesImporter implements ADEImporter {
-	private final CityGMLImportHelper helper;
-	private final SchemaMapper schemaMapper;
-	private final AttributeValueJoiner valueJoiner;
-	private final PreparedStatement ps;
+    private final CityGMLImportHelper helper;
+    private final SchemaMapper schemaMapper;
+    private final AttributeValueJoiner valueJoiner;
+    private final PreparedStatement ps;
 
-	private int batchCounter;
+    private int batchCounter;
 
-	public BuildingPropertiesImporter(Connection connection, CityGMLImportHelper helper, ImportManager manager) throws CityGMLImportException, SQLException {
-		this.helper = helper;
-		this.schemaMapper = manager.getSchemaMapper();
+    public BuildingPropertiesImporter(Connection connection, CityGMLImportHelper helper, ImportManager manager) throws CityGMLImportException, SQLException {
+        this.helper = helper;
+        this.schemaMapper = manager.getSchemaMapper();
 
-		ps = connection.prepareStatement("insert into " +
-				helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.BUILDING)) + " " +
-				"(id, ownername, energyperforma_certification, energyperform_certificatio_1, floorarea, floorarea_uom) " +
-				"values (?, ?, ?, ?, ?, ?)");
+        ps = connection.prepareStatement("insert into " +
+                helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.BUILDING)) + " " +
+                "(id, ownername, energyperforma_certification, energyperform_certificatio_1, floorarea, floorarea_uom) " +
+                "values (?, ?, ?, ?, ?, ?)");
 
-		valueJoiner = helper.getAttributeValueJoiner();
-	}
+        valueJoiner = helper.getAttributeValueJoiner();
+    }
 
-	public void doImport(ADEPropertyCollection properties, AbstractBuilding parent, long parentId, FeatureType parentType) throws CityGMLImportException, SQLException {
-		ps.setLong(1, parentId);
+    public void doImport(ADEPropertyCollection properties, AbstractBuilding parent, long parentId, FeatureType parentType) throws CityGMLImportException, SQLException {
+        ps.setLong(1, parentId);
 
-		OwnerNameProperty ownerName = properties.getFirst(OwnerNameProperty.class);
-		if (ownerName != null && ownerName.isSetValue())
-			ps.setString(2, ownerName.getValue());
-		else
-			ps.setNull(2, Types.VARCHAR);
+        OwnerNameProperty ownerName = properties.getFirst(OwnerNameProperty.class);
+        if (ownerName != null && ownerName.isSetValue())
+            ps.setString(2, ownerName.getValue());
+        else
+            ps.setNull(2, Types.VARCHAR);
 
-		EnergyPerformanceCertificationPropertyElement energyCertificationElement = properties.getFirst(EnergyPerformanceCertificationPropertyElement.class);			
-		if (energyCertificationElement != null 
-				&& energyCertificationElement.getValue().isSetEnergyPerformanceCertification()) {
-			EnergyPerformanceCertification energyCertification = energyCertificationElement.getValue().getEnergyPerformanceCertification();
-			ps.setString(3, valueJoiner.join(energyCertification.getCertificationName()));
-			ps.setString(4, energyCertification.getCertificationId());
-		} else {
-			ps.setNull(3, Types.VARCHAR);
-			ps.setNull(4, Types.VARCHAR);
-		}
+        EnergyPerformanceCertificationPropertyElement energyCertificationElement = properties.getFirst(EnergyPerformanceCertificationPropertyElement.class);
+        if (energyCertificationElement != null
+                && energyCertificationElement.getValue().isSetEnergyPerformanceCertification()) {
+            EnergyPerformanceCertification energyCertification = energyCertificationElement.getValue().getEnergyPerformanceCertification();
+            ps.setString(3, valueJoiner.join(energyCertification.getCertificationName()));
+            ps.setString(4, energyCertification.getCertificationId());
+        } else {
+            ps.setNull(3, Types.VARCHAR);
+            ps.setNull(4, Types.VARCHAR);
+        }
 
-		FloorAreaProperty floorArea = properties.getFirst(FloorAreaProperty.class);
-		if (floorArea != null && floorArea.getValue().isSetValue()) {
-			ps.setDouble(5, floorArea.getValue().getValue());
-			ps.setString(6, floorArea.getValue().getUom());
-		} else {
-			ps.setNull(5, Types.DOUBLE);
-			ps.setNull(6, Types.VARCHAR);
-		}
+        FloorAreaProperty floorArea = properties.getFirst(FloorAreaProperty.class);
+        if (floorArea != null && floorArea.getValue().isSetValue()) {
+            ps.setDouble(5, floorArea.getValue().getValue());
+            ps.setString(6, floorArea.getValue().getUom());
+        } else {
+            ps.setNull(5, Types.DOUBLE);
+            ps.setNull(6, Types.VARCHAR);
+        }
 
-		ps.addBatch();
-		if (++batchCounter == helper.getDatabaseAdapter().getMaxBatchSize())
-			helper.executeBatch(schemaMapper.getTableName(ADETable.BUILDING));
+        ps.addBatch();
+        if (++batchCounter == helper.getDatabaseAdapter().getMaxBatchSize())
+            helper.executeBatch(schemaMapper.getTableName(ADETable.BUILDING));
 
-		if (properties.contains(BuildingUnitPropertyElement.class)) {
-			for (BuildingUnitPropertyElement propertyElement : properties.getAll(BuildingUnitPropertyElement.class)) {
-				AbstractBuildingUnit buildingUnit = propertyElement.getValue().getBuildingUnit();
-				if (buildingUnit != null) {
-					helper.importObject(buildingUnit, ForeignKeys.create().with("buildingId", parentId));
-					propertyElement.getValue().unsetBuildingUnit();
-				} else {
-					String href = propertyElement.getValue().getHref();
-					if (href != null && href.length() != 0)
-						helper.logOrThrowUnsupportedXLinkMessage(parent, AbstractBuildingUnit.class, href);
-				}				
-			}
-		}
-	}
+        if (properties.contains(BuildingUnitPropertyElement.class)) {
+            for (BuildingUnitPropertyElement propertyElement : properties.getAll(BuildingUnitPropertyElement.class)) {
+                AbstractBuildingUnit buildingUnit = propertyElement.getValue().getBuildingUnit();
+                if (buildingUnit != null) {
+                    helper.importObject(buildingUnit, ForeignKeys.create().with("buildingId", parentId));
+                    propertyElement.getValue().unsetBuildingUnit();
+                } else {
+                    String href = propertyElement.getValue().getHref();
+                    if (href != null && href.length() != 0)
+                        helper.logOrThrowUnsupportedXLinkMessage(parent, AbstractBuildingUnit.class, href);
+                }
+            }
+        }
+    }
 
-	@Override
-	public void executeBatch() throws CityGMLImportException, SQLException {
-		if (batchCounter > 0) {
-			ps.executeBatch();
-			batchCounter = 0;
-		}
-	}
+    @Override
+    public void executeBatch() throws CityGMLImportException, SQLException {
+        if (batchCounter > 0) {
+            ps.executeBatch();
+            batchCounter = 0;
+        }
+    }
 
-	@Override
-	public void close() throws CityGMLImportException, SQLException {
-		ps.close();
-	}
+    @Override
+    public void close() throws CityGMLImportException, SQLException {
+        ps.close();
+    }
 
 }

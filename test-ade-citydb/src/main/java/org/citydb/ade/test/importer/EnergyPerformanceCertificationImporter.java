@@ -43,58 +43,58 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 public class EnergyPerformanceCertificationImporter implements ADEImporter {
-	private final CityGMLImportHelper helper;
-	private final SchemaMapper schemaMapper;
-	private final AttributeValueJoiner valueJoiner;
-	private final PreparedStatement ps;
+    private final CityGMLImportHelper helper;
+    private final SchemaMapper schemaMapper;
+    private final AttributeValueJoiner valueJoiner;
+    private final PreparedStatement ps;
 
-	private int batchCounter;
-	
-	public EnergyPerformanceCertificationImporter(Connection connection, CityGMLImportHelper helper, ImportManager manager) throws SQLException {
-		this.helper = helper;
-		this.schemaMapper = manager.getSchemaMapper();
+    private int batchCounter;
 
-		ps = connection.prepareStatement("insert into " +
-				helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.ENERGYPERFORMANCECER)) + " " +
-				"(id, buildingunit_energyperfor_id, certificationname, certificationid) " +
-				"values (?, ?, ?, ?)");
-		
-		valueJoiner = helper.getAttributeValueJoiner();
-	}
-	
-	public void doImport(EnergyPerformanceCertification energyCertification, long parentId) throws CityGMLImportException, SQLException {
-		long objectId = helper.getNextSequenceValue(schemaMapper.getSequenceName(ADESequence.ENERGYPERFORMANC_SEQ));
-		ps.setLong(1, objectId);
-		
-		if (parentId != 0)
-			ps.setLong(2, parentId);
-		else
-			ps.setNull(2, Types.NULL);
-		
-		if (energyCertification.isSetCertificationName())
-			ps.setString(3, valueJoiner.join(energyCertification.getCertificationName()));
-		else
-			ps.setNull(3, Types.VARCHAR);
-		
-		ps.setString(4, energyCertification.getCertificationId());
-		
-		ps.addBatch();
-		if (++batchCounter == helper.getDatabaseAdapter().getMaxBatchSize())
-			helper.executeBatch(schemaMapper.getTableName(ADETable.ENERGYPERFORMANCECER));
-	}
+    public EnergyPerformanceCertificationImporter(Connection connection, CityGMLImportHelper helper, ImportManager manager) throws SQLException {
+        this.helper = helper;
+        this.schemaMapper = manager.getSchemaMapper();
+
+        ps = connection.prepareStatement("insert into " +
+                helper.getTableNameWithSchema(schemaMapper.getTableName(ADETable.ENERGYPERFORMANCECER)) + " " +
+                "(id, buildingunit_energyperfor_id, certificationname, certificationid) " +
+                "values (?, ?, ?, ?)");
+
+        valueJoiner = helper.getAttributeValueJoiner();
+    }
+
+    public void doImport(EnergyPerformanceCertification energyCertification, long parentId) throws CityGMLImportException, SQLException {
+        long objectId = helper.getNextSequenceValue(schemaMapper.getSequenceName(ADESequence.ENERGYPERFORMANC_SEQ));
+        ps.setLong(1, objectId);
+
+        if (parentId != 0)
+            ps.setLong(2, parentId);
+        else
+            ps.setNull(2, Types.NULL);
+
+        if (energyCertification.isSetCertificationName())
+            ps.setString(3, valueJoiner.join(energyCertification.getCertificationName()));
+        else
+            ps.setNull(3, Types.VARCHAR);
+
+        ps.setString(4, energyCertification.getCertificationId());
+
+        ps.addBatch();
+        if (++batchCounter == helper.getDatabaseAdapter().getMaxBatchSize())
+            helper.executeBatch(schemaMapper.getTableName(ADETable.ENERGYPERFORMANCECER));
+    }
 
 
-	@Override
-	public void executeBatch() throws CityGMLImportException, SQLException {
-		if (batchCounter > 0) {
-			ps.executeBatch();
-			batchCounter = 0;
-		}
-	}
+    @Override
+    public void executeBatch() throws CityGMLImportException, SQLException {
+        if (batchCounter > 0) {
+            ps.executeBatch();
+            batchCounter = 0;
+        }
+    }
 
-	@Override
-	public void close() throws CityGMLImportException, SQLException {
-		ps.close();
-	}
-	
+    @Override
+    public void close() throws CityGMLImportException, SQLException {
+        ps.close();
+    }
+
 }
